@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Visitor;
+use App\Visit;
 use Illuminate\Http\Request;
 
-class VisitorController extends Controller
+class VisitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class VisitorController extends Controller
      */
     public function index()
     {
-        return view('visitors.index');
+        return view('visits.index');
     }
 
     /**

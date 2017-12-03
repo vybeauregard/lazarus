@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Visitor::class, function (Faker $faker) {
+$factory->define(App\Visit::class, function (Faker $faker) {
     return [
         //
     ];

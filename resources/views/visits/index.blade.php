@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-Visitors
+Visits
 <div class="panel">
     @include('partials.nav')
 </div>

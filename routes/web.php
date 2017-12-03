@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::resource('visitors', 'VisitorController');
+    Route::resource('visits', 'VisitController');
 
     Route::resource('clients', 'ClientController');
 
