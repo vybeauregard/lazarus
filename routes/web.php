@@ -21,28 +21,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('visitors', function(){
-        return "visitors";
-    })->name('visitors');
+    Route::resource('visitors', 'VisitorController');
 
-    Route::get('clients', function(){
-        return "clients";
-    })->name('clients');
+    Route::resource('clients', 'ClientController');
 
-    Route::get('programs', function(){
-        return "programs";
-    })->name('programs');
+    Route::resource('programs', 'ProgramController');
 
-    Route::get('loans', function(){
-        return "loans";
-    })->name('loans');
+    Route::resource('loans', 'LoanController');
 
-    Route::get('parishes', function(){
-        return "parishes";
-    })->name('parishes');
+    Route::resource('parishes', 'ParishController');
 
     Route::get('reports', function(){
-        return "reports";
+        return view("reports.index");
     })->name('reports');
 
 });

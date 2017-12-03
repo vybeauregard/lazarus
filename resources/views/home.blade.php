@@ -18,12 +18,7 @@
                 </div>
             </div>
             <div class="panel">
-                <a class="btn btn-link" href="{{ route('visitors') }}">Visitors</a>
-                <a class="btn btn-link" href="{{ route('clients') }}">Clients</a>
-                <a class="btn btn-link" href="{{ route('programs') }}">Programs</a>
-                <a class="btn btn-link" href="{{ route('loans') }}">Loans</a>
-                <a class="btn btn-link" href="{{ route('parishes') }}">Parishes</a>
-                <a class="btn btn-link" href="{{ route('reports') }}">Reports</a>
+                @include('partials.nav')
             </div>
         </div>
     </div>

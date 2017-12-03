@@ -84,11 +84,7 @@
 
                 @if(Auth::check())
                 <div class="links">
-                    <a href="{{ route('visitors') }}">Visitors</a>
-                    <a href="{{ route('clients') }}">Clients</a>
-                    <a href="{{ route('programs') }}">Programs</a>
-                    <a href="{{ route('loans') }}">Loans</a>
-                    <a href="{{ route('parishes') }}">Parishes</a>
+                    @include('partials.nav')
                 </div>
                 @endif
             </div>
