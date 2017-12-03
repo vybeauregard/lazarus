@@ -14,7 +14,8 @@ class VisitController extends Controller
      */
     public function index()
     {
-        return view('visits.index');
+        $visits = Visit::all();
+        return view('visits.index', compact('visits'));
     }
 
     /**

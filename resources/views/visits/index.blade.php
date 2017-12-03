@@ -4,6 +4,23 @@
 Visits
 <div class="panel">
     @include('partials.nav')
+
+    @if($visits->count())
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($visits as $visit)
+            <tr>
+                <td>{{ $visit }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    @endif
 </div>
 
 @endsection
