@@ -4,7 +4,9 @@
 Visits
 <div class="panel">
     @include('partials.nav')
+</div>
 
+<div>
     @if($visits->count())
     <table class="table">
         <thead>

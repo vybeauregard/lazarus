@@ -14,7 +14,8 @@ class ParishController extends Controller
      */
     public function index()
     {
-        return view('parishes.index');
+        $parishes = Parish::all();
+        return view('parishes.index', compact('parishes'));
     }
 
     /**
