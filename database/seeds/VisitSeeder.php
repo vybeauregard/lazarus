@@ -1,5 +1,6 @@
 <?php
 
+use App\Visit;
 use Illuminate\Database\Seeder;
 
 class VisitSeeder extends Seeder
@@ -11,6 +12,6 @@ class VisitSeeder extends Seeder
      */
     public function run()
     {
-        $visit = factory(App\Visit::class, 50)->create();
+        $visit = factory(Visit::class, 50)->create();
     }
 }

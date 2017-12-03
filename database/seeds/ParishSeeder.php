@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Parish;
+use Illuminate\Database\Seeder;
 
 class ParishSeeder extends Seeder
 {

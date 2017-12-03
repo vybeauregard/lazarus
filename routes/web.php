@@ -31,6 +31,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('parishes', 'ParishController');
 
+    Route::resource('counselors', 'CounselorController');
+
     Route::get('reports', function(){
         return view("reports.index");
     })->name('reports');
