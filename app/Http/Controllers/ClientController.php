@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\State;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -24,7 +25,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $states = new State();
+        $states = $states->list();
+        return view('clients.create', compact('states'));
     }
 
     /**

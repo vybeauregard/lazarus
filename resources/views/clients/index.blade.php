@@ -5,4 +5,5 @@ Clients
 <div class="panel">
     @include('partials.nav')
 </div>
+<a href="{{ route('clients.create') }}">New Client</a>
 @endsection
