@@ -14,7 +14,7 @@ class CounselorController extends Controller
      */
     public function index()
     {
-        $counselors = Counselor::all();
+        $counselors = Counselor::with('contact')->get();
         return view('counselors.index', compact('counselors'));
     }
 

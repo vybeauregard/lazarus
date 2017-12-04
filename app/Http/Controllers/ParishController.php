@@ -14,7 +14,7 @@ class ParishController extends Controller
      */
     public function index()
     {
-        $parishes = Parish::all();
+        $parishes = Parish::with('contact')->get();
         return view('parishes.index', compact('parishes'));
     }
 
