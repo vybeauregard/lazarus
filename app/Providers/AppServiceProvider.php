@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            __DIR__.'/../../resources/assets/js' => public_path('js'),
+            __DIR__.'/../../resources/assets/css' => public_path('css'),
+        ], 'public');
     }
 
     /**

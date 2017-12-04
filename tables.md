@@ -47,8 +47,9 @@ clients
 - us_citizen
 - green_card
 - veteran_status
-- incarceration_history
+- incarceration
 - insurance
+- insurance_type
 
 family
 - name

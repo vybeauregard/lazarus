@@ -8,6 +8,6 @@ class Parish extends Model
 {
     public function contact()
     {
-        return $this->morphMany(Contact::class, 'contactable');
+        return $this->morphOne(Contact::class, 'contactable');
     }
 }
