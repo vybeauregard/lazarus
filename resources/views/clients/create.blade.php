@@ -8,6 +8,18 @@
 <form style="margin:14px;" class="">
     <div class="form-group row">
         <div class="col-md-2">
+            <label for="date">Date</label>
+        </div>
+        <div class="col-md-2 input-group">
+            <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ Carbon\Carbon::now()->format('m/d/Y') }}" />
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-2">
             <label for="last_name">Last Name</label>
         </div>
         <div class="col-md-5">
@@ -131,8 +143,9 @@
         <div class="col-md-2">
             <label for="phone">Phone Number</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 input-group">
             <input type="text" class="form-control bfh-phone" id="phone" name="phone" data-format="(ddd) ddd-dddd">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
         </div>
     </div>
 
@@ -140,8 +153,9 @@
         <div class="col-md-2">
             <label for="emergency_phone">Emergency Contact Number</label>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 input-group">
             <input type="text" class="form-control bfh-phone" id="emergency_phone" name="emergency_phone" data-format="(ddd) ddd-dddd">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
         </div>
     </div>
 
@@ -251,8 +265,19 @@
 
 @section('custom-css')
     <link href="{{ asset('css/bootstrap-formhelpers.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('custom-js')
     <script src="{{ asset('js/bootstrap-formhelpers.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script>
+        $("document").ready(function(){
+            $(".bfh-phone").val('');
+            $(".datepicker").datepicker({todayHighlight: true})
+        });
+        $(".input-group-addon").on('click', function(){
+            $(this).prev('input').focus();
+        });
+    </script>
 @endsection

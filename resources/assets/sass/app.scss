@@ -11,3 +11,6 @@
 .body {
     margin: 0 5px;
 }
+.input-group[class*="col-"] {
+    padding-left: 15px;
+}
