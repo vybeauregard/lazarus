@@ -23,15 +23,6 @@
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="last_name">Last Name</label>
-        </div>
-        <div class="col-md-5">
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}" />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
             <label for="first_name">First Name</label>
         </div>
         <div class="col-md-5">
@@ -45,6 +36,15 @@
         </div>
         <div class="col-md-1">
             <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" value="{{ old('middle_initial') }}" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-2">
+            <label for="last_name">Last Name</label>
+        </div>
+        <div class="col-md-5">
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}" />
         </div>
     </div>
 
@@ -101,34 +101,34 @@
     <div class="form-group row">
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="status1" name="status" value="homeless"> Homeless
+            <input class="form-check-input" type="checkbox" id="homeless" {{ old('homeless') == 1 ? 'checked' : '' }} name="homeless" value="1"> Homeless
           </label>
         </div>
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="status2" name="status" value="shelter"> Shelter
+            <input class="form-check-input" type="checkbox" id="shelter" {{ old('shelter') == 1 ? 'checked' : '' }} name="shelter" value="1"> Shelter
           </label>
         </div>
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="status3" name="status" value="private_res"> Private Residence
+            <input class="form-check-input" type="checkbox" id="private_res" {{ old('private_res') == 1 ? 'checked' : '' }} name="private_res" value="1"> Private Residence
           </label>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="status4" name="status" value="section_8"> Section 8
+            <input class="form-check-input" type="checkbox" id="section_8" {{ old('section_8') == 1 ? 'checked' : '' }} name="section_8" value="1"> Section 8
           </label>
         </div>
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="status5" name="status" value="arha"> ARHA
+            <input class="form-check-input" type="checkbox" id="arha" {{ old('arha') == 1 ? 'checked' : '' }} name="arha" value="1"> ARHA
           </label>
         </div>
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="status6" name="status" value="other"> Other
+            <input class="form-check-input" type="checkbox" id="other" {{ old('other') == 1 ? 'checked' : '' }} name="other" value="1"> Other
           </label>
         </div>
     </div>
@@ -244,25 +244,7 @@
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="insurance">Do you have medical Insurance?</label>
-        </div>
-        <div class="col-md-5">
-            <div class="form-check form-check-inline">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="insurance" id="insurance1" value="1"> Yes
-              </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="insurance" id="insurance2" value="0"> No
-              </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="insurance_type">If yes, what type</label>
+            <label for="insurance_type">Medical Insurance?</label>
         </div>
         <div class="col-md-3">
             <input type="text" class="form-control" id="insurance_type" name="insurance_type" value="{{ old('insurance_type') }}" />

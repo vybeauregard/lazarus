@@ -16,6 +16,12 @@ class Client extends Model
         'veteran_status',
         'incarceration',
         'insurance_type',
+        'homeless',
+        'shelter',
+        'private_res',
+        'section_8',
+        'arha',
+        'other',
     ];
     public function contact()
     {

@@ -24,6 +24,12 @@ class CreateClientsTable extends Migration
             $table->string('veteran_status')->nullable();
             $table->text('incarceration')->nullable();
             $table->text('insurance_type')->nullable();
+            $table->boolean('homeless')->default(0);
+            $table->boolean('shelter')->default(0);
+            $table->boolean('private_res')->default(0);
+            $table->boolean('section_8')->default(0);
+            $table->boolean('arha')->default(0);
+            $table->boolean('other')->default(0);
             $table->timestamps();
         });
     }

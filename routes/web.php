@@ -35,6 +35,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('reports', function(){
         return view("reports.index");
-    })->name('reports');
+    })->name('reports.index');
 
 //});
