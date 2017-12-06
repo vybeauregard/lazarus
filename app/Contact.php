@@ -16,6 +16,7 @@ class Contact extends Model
         'state',
         'zip',
         'phone',
+        'emergency_phone',
         'email',
 //        'contactable_id',
 //        'contactable_type',

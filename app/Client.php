@@ -8,7 +8,14 @@ class Client extends Model
 {
     protected $fillable = [
         'date',
-        'dob'
+        'dob',
+        'apartment_name',
+        'gender',
+        'ethnicity',
+        'birth_country',
+        'veteran_status',
+        'incarceration',
+        'insurance_type',
     ];
     public function contact()
     {

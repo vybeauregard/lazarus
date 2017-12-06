@@ -23,7 +23,8 @@ class CreateContactsTable extends Migration
             $table->string('city')->nullable();
             $table->string('state', 2)->nullable();
             $table->string('zip', 10)->nullable();
-            $table->string('phone', 10)->nullable();
+            $table->string('phone', 14)->nullable();
+            $table->string('emergency_phone', 14)->nullable();
             $table->string('email')->nullable();
             $table->morphs('contactable');
             $table->timestamps();

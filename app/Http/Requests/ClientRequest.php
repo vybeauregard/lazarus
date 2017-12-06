@@ -28,13 +28,9 @@ class ClientRequest extends FormRequest
             'dob_year'  => 'numeric',
             'dob_month'  => 'numeric',
             'dob_day'  => 'numeric',
+            'zip'   =>  'numeric'
         ];
-        if ($this->has('phone')) {
-            $this->merge(['phone' => str_replace([" ", "(", ")", "-"], "", $this->phone)]);
-        }
-//        if ($this->has('phone')) {
-//            $this->merge(['phone', str_replace([" ", "(", ")"], "", $this->phone)]);
-//        }
+
         if ($this->has('date')) {
             $date = Carbon::parse($this->date)->toDateString();
             $this->merge(['date' => $date]);
@@ -45,4 +41,5 @@ class ClientRequest extends FormRequest
         }
         return $rules;
     }
+
 }

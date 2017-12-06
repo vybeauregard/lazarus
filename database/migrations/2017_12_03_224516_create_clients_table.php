@@ -17,6 +17,13 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->date('date')->nullable();
             $table->date('dob')->nullable();
+            $table->string('apartment_name')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('ethnicity')->nullable();
+            $table->string('birth_country')->nullable();
+            $table->string('veteran_status')->nullable();
+            $table->text('incarceration')->nullable();
+            $table->text('insurance_type')->nullable();
             $table->timestamps();
         });
     }
