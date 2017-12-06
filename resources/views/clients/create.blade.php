@@ -5,7 +5,8 @@
     @include('partials.nav')
 </div>
 <h3>Create a new Client</h3>
-<form style="margin:14px;" class="">
+<form style="margin:14px;" class="" method="post" action="{{ route('clients.store') }}">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <div class="form-group row">
         <div class="col-md-2">
             <label for="date">Date</label>
@@ -41,7 +42,7 @@
             <label for="middle_initial">Middle Initial</label>
         </div>
         <div class="col-md-1">
-            <input type="text" class="form-control" id="middle_initial" name="middle_initial" />
+            <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" />
         </div>
     </div>
 
@@ -166,14 +167,14 @@
         <div class="col-md-2">
             <select type="text" class="form-control" id="dob_month" placeholder="Month" name="dob_month">
                 @foreach(['Select a Month', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $index => $month)
-                <option {{ $loop->first ? 'disabled selected' : '' }} value="{{ $index }}">{{ $month }}</option>
+                <option {{ $loop->first ? 'disabled selected' : '' }} value="{{ str_pad($index, 2, '0', STR_PAD_LEFT) }}">{{ $month }}</option>
                 @endforeach
             </select>
         </div>
         <div class="col-md-1">
             <select type="text" class="form-control" id="dob_day" placeholder="Day" name="dob_day">
                 @foreach(range(1, 31) as $day)
-                <option value="{{ $day }}">{{ $day }}</option>
+                <option value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
                 @endforeach
             </select>
         </div>

@@ -12,15 +12,14 @@ class ParishSeeder extends Seeder
      */
     public function run()
     {
-        $visits = collect([
+        $parishes = collect([
             "St. Paul's",
             "Resurrection",
             "Christ Church",
             "St. Rita's"
         ]);
-        $visits->each(function($visit) {
-            Parish::create(['name' => $visit]);
+        $parishes->each(function($parish) {
+            Parish::create(['name' => $parish]);
         });
-//        $visit = factory(App\Parish::class, 50)->create();
     }
 }

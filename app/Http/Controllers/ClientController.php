@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Contact;
 use App\State;
+use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -37,9 +39,12 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        //
+        $client = Client::create($request->all());
+        $contact = new Contact($request->all());
+        $client->contact()->save($contact);
+        return redirect()->route('clients.index');
     }
 
     /**
