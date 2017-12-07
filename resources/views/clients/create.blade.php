@@ -251,6 +251,19 @@
         </div>
     </div>
 
+    <div class="form-group row">
+        <div class="col-md-2">
+            <label for="monthly_income">Total Monthly Income</label>
+        </div>
+        <div class="col-md-3 input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+            <input type="text" class="form-control" id="monthly_income" name="monthly_income" value="{{ old('monthly_income') }}" />
+        </div>
+    </div>
+<hr />
+    @include('clients.employment')
+<hr />
+    @include('clients.family')
 
     <input type="submit" name="submit" value="Save" class="btn btn-primary" />
 </form>
