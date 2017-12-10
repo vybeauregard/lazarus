@@ -15,7 +15,9 @@
     </thead>
     <tbody>
     @foreach($loans as $loan)
-        <td>{{ $loan }}</td>
+        <tr>
+            <td>{{ $loan }}</td>
+        </tr>
     @endforeach
     </tbody>
 </table>

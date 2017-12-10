@@ -15,7 +15,9 @@
     </thead>
     <tbody>
     @foreach($clients as $client)
-        <td>{{ $client }}</td>
+        <tr>
+            <td>{{ $client }}</td>
+        </tr>
     @endforeach
     </tbody>
 </table>
