@@ -19,6 +19,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "bootstrap-datepicker": "^1.7.1"
+        "bootstrap": "^3.3.7",
+        "bootstrap-datepicker": "^1.7.1",
+        "bootstrap-formhelpers": "git+https://github.com/vlamanna/BootstrapFormHelpers.git"
     }
 }

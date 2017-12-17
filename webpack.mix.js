@@ -13,5 +13,16 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
-    .copy('node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js', 'public/js/')
-    .copy('node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css', 'public/css/');
+    .copy('node_modules/bootstrap/dist/fonts/', 'public/fonts')
+    .combine([
+        'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+        'node_modules/bootstrap-formhelpers/dist/css/bootstrap-formhelpers.min.css',
+    ], 'public/css/vendor.css')
+    .combine([
+        'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/bootstrap/dist/js/bootstrap.min.js',
+        'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+        'node_modules/bootstrap-formhelpers/dist/js/bootstrap-formhelpers.min.js',
+    ], 'public/js/vendor.js')
+    .version();
+

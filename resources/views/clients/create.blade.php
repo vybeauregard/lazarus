@@ -6,7 +6,7 @@
     @include('partials.nav')
 </div>
 @include('partials.errors')
-<h3>Create a new Client</h3>
+<h2>Create a new Client</h2>
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.store') }}">
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <div class="form-group row">
@@ -263,27 +263,24 @@
 <hr />
     @include('clients.employment')
 <hr />
-    @include('clients.family')
+    <h3>Family Members</h3>
+    @include('clients.family', ["fam_id" => 0])
 
     <input type="submit" name="submit" value="Save" class="btn btn-primary" />
 </form>
 @endsection
 
 @section('custom-css')
-    <link href="{{ asset('css/bootstrap-formhelpers.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('custom-js')
-    <script src="{{ asset('js/bootstrap-formhelpers.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
     <script>
         $("document").ready(function(){
             if ("{{ old('phone') }}" == "") {
-                $("#phone").val('');
+//                $("#phone").val('');
             }
             if ("{{ old('emergency_phone') }}" == "") {
-                $("#emergency_phone").val('');
+//                $("#emergency_phone").val('');
             }
             $(".datepicker").datepicker({todayHighlight: true})
         });
