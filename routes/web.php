@@ -33,6 +33,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('counselors', 'CounselorController');
 
+    Route::get('load-family-form/{fam_id}', function($fam_id){
+        return view("clients.family", compact('fam_id'));
+    });
+
     Route::get('reports', function(){
         return view("reports.index");
     })->name('reports.index');
