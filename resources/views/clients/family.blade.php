@@ -88,10 +88,10 @@
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="family_insurance_type_{{ $fam_id }}">Medical Insurance?</label>
+            <label for="family_insurance_{{ $fam_id }}">Medical Insurance?</label>
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="family_insurance_type_{{ $fam_id }}" name="family_insurance_type_{{ $fam_id }}" value="{{ old('family_insurance_type_' . $fam_id) }}" />
+            <input type="text" class="form-control" id="family_insurance_{{ $fam_id }}" name="family_insurance_{{ $fam_id }}" value="{{ old('family_insurance_' . $fam_id) }}" />
         </div>
     </div>
 </div>

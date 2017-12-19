@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Contact;
+use App\Family;
 use App\State;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with('contact')->get()->sortBy('contact.last_name');
+        $clients = Client::with(['contact', 'family'])->get()->sortBy('contact.last_name');
         return view('clients.index', compact('clients'));
     }
 
@@ -41,9 +42,12 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        dd($request->all());
+//        dd($request->family);
         $client = Client::create($request->all());
         $contact = new Contact($request->all());
+        foreach($request->family as $person) {
+            $client->family()->save(new Family($person));
+        }
         $client->contact()->save($contact);
         return redirect()->route('clients.index');
     }

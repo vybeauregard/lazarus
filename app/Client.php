@@ -23,8 +23,14 @@ class Client extends Model
         'arha',
         'other',
     ];
+
     public function contact()
     {
         return $this->morphOne(Contact::class, 'contactable');
+    }
+
+    public function family()
+    {
+        return $this->hasMany(Family::class);
     }
 }
