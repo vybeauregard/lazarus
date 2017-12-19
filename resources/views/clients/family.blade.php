@@ -69,10 +69,10 @@
         </div>
         <div class="col-md-2 btn-group" data-toggle="radio">
             <label class="btn btn-text">
-                <input type="radio" name="family_sex_{{ $fam_id }}" id="family_sex_f_{{ $fam_id }}" value="family_sex_f" {{ old('family_sex_' . $fam_id) == 'family_sex_f' ? 'checked' : '' }}> Female
+                <input type="radio" name="family_sex_{{ $fam_id }}" id="family_sex_f_{{ $fam_id }}" value="f" {{ old('family_sex_' . $fam_id) == 'f' ? 'checked' : '' }}> Female
             </label>
             <label class="btn btn-text">
-                <input type="radio" name="family_sex_{{ $fam_id }}" id="family_sex_m_{{ $fam_id }}" value="family_sex_m" {{ old('family_sex_' . $fam_id) == 'family_sex_m' ? 'checked' : '' }}> Male
+                <input type="radio" name="family_sex_{{ $fam_id }}" id="family_sex_m_{{ $fam_id }}" value="m" {{ old('family_sex_' . $fam_id) == 'm' ? 'checked' : '' }}> Male
             </label>
         </div>
     </div>

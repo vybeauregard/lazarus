@@ -17,6 +17,32 @@ class ClientRequest extends FormRequest
         return true;
     }
 
+    private function sanitize()
+    {
+        if ($this->has('date')) {
+            $date = Carbon::createFromFormat('m/d/Y', $this->date);
+            $this->merge(['date' => $date]);
+        }
+        if ($this->has('dob_year') && $this->has('dob_month') && $this->has('dob_day')) {
+            $dob = Carbon::createFromFormat('m/d/Y', "{$this->dob_month}/{$this->dob_day}/{$this->dob_year}");
+            $this->merge(['dob' => $dob]);
+        }
+        $family_count = count(preg_grep("/family_name_/", array_keys($this->all())));
+        $family = [];
+        for($i=0;$i<$family_count;$i++){
+            $family[] = [
+                'relationship' => $this['family_relationship_' . $i],
+                'name' => $this['family_name_' . $i],
+                'dob' => Carbon::createFromFormat('m/d/Y', "{$this['family_dob_month_' . $i]}/{$this['family_dob_day_' . $i]}/{$this['family_dob_year_' . $i]}"),
+                'sex' => $this['family_sex_' . $i],
+                'birth_country' => $this['family_birth_country_' . $i],
+                'insurance_type' => $this['family_insurance_type_' . $i]
+            ];
+        }
+        $this->merge(['family' => $family]);
+
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,7 +50,7 @@ class ClientRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
             'first_name'    => 'max:255',
             'last_name'    => 'max:255',
             'middle_initial'    => 'alpha|size:1',
@@ -40,16 +66,6 @@ class ClientRequest extends FormRequest
             'dob_day'  => 'numeric|between:1,31',
             'zip'   =>  'numeric|nullable'
         ];
-
-        if ($this->has('date')) {
-            $date = Carbon::parse($this->date)->toDateString();
-            $this->merge(['date' => $date]);
-        }
-        if ($this->has('dob_year') && $this->has('dob_month') && $this->has('dob_day')) {
-            $dob = "{$this->dob_year}-{$this->dob_month}-{$this->dob_day}";
-            $this->merge(['dob' => $dob]);
-        }
-        return $rules;
     }
 
     public function messages()
@@ -58,6 +74,11 @@ class ClientRequest extends FormRequest
             'zip.numeric'   => 'Zip code must be numeric',
             'dob_day.between'   => 'Birth day must be between :min and :max'
         ];
+    }
+
+    public function getValidatorInstance() {
+        $this->sanitize();
+        return parent::getValidatorInstance();
     }
 
 }
