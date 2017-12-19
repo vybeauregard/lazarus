@@ -24,6 +24,11 @@ class Client extends Model
         'other',
     ];
 
+    public $dates = [
+        'date',
+        'dob'
+    ];
+
     public function contact()
     {
         return $this->morphOne(Contact::class, 'contactable');
@@ -32,5 +37,13 @@ class Client extends Model
     public function family()
     {
         return $this->hasMany(Family::class);
+    }
+
+    public function getNameAttribute()
+    {
+        if(!$this->contact) {
+            return "no name";
+        }
+        return "{$this->contact->first_name} {$this->contact->last_name}";
     }
 }

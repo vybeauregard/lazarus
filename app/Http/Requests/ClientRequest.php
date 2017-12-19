@@ -53,9 +53,9 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'    => 'max:255',
-            'last_name'    => 'max:255',
-            'middle_initial'    => 'alpha|size:1',
+            'first_name'    => 'required|max:255',
+            'last_name'    => 'required|max:255',
+            'middle_initial'    => 'alpha|size:1|nullable',
             'address1'    => 'max:255',
             'address2'    => 'max:255',
             'city'    => 'max:255',
