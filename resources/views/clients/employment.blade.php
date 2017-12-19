@@ -59,10 +59,10 @@
     </div>
     <div class="col-md-2 btn-group" data-toggle="radio">
         <label class="btn btn-text">
-            <input type="radio" name="unemployed" id="unemployed_y"> Yes
+            <input type="radio" name="unemployed" id="unemployed_y" value="y" {{ old('unemployed') == "y" ? 'checked' : '' }}> Yes
         </label>
         <label class="btn btn-text">
-            <input type="radio" name="unemployed" id="unemployed_n"> No
+            <input type="radio" name="unemployed" id="unemployed_n" value="n" {{ old('unemployed') == "n" ? 'checked' : '' }}> No
         </label>
     </div>
 </div>
@@ -73,10 +73,10 @@
     </div>
     <div class="col-md-2 btn-group" data-toggle="radio">
         <label class="btn btn-text">
-            <input type="radio" name="looking" id="looking_y"> Yes
+            <input type="radio" name="looking" id="looking_y" value="y" {{ old('looking') == "y" ? 'checked' : '' }}> Yes
         </label>
         <label class="btn btn-text">
-            <input type="radio" name="looking" id="looking_n"> No
+            <input type="radio" name="looking" id="looking_n" value="n" {{ old('looking') == "n" ? 'checked' : '' }}> No
         </label>
     </div>
 </div>
