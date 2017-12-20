@@ -7,7 +7,7 @@
 @include('partials.errors')
 <h2>Create a new Client</h2>
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.store') }}">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+    {{ csrf_field() }}
     <div class="form-group row">
         <div class="col-md-2">
             <label for="date">Date</label>
@@ -49,19 +49,19 @@
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="address_1">Address 1</label>
+            <label for="address1">Address 1</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="address_1" name="address_1" value="{{ old('address_1') }}" />
+            <input type="text" class="form-control" id="address1" name="address1" value="{{ old('address1') }}" />
         </div>
     </div>
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="address_2">Address 2</label>
+            <label for="address2">Address 2</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="address_2" name="address_2" value="{{ old('address_2') }}" />
+            <input type="text" class="form-control" id="address2" name="address2" value="{{ old('address2') }}" />
         </div>
     </div>
 

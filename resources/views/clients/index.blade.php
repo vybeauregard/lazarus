@@ -7,10 +7,11 @@
 <h3>Clients</h3>
 <a href="{{ route('clients.create') }}" class="btn btn-success">New Client</a>
 
-<table class="table" style="width:500px;">
+<table class="table table-striped" style="width:500px;">
     <thead>
         <tr>
-            <th></th>
+            <th>Name</th>
+            <th>Date</th>
         </tr>
     </thead>
     <tbody>

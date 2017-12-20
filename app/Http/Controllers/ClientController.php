@@ -42,7 +42,6 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-//        dd($request->family);
         $client = Client::create($request->all());
         $contact = new Contact($request->all());
         foreach($request->family as $person) {
@@ -60,7 +59,8 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        dd($client);
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -71,7 +71,10 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        $client->load('family');
+        $states = new State();
+        $states = $states->list();
+        return view('clients.edit', compact('client', 'states'));
     }
 
     /**
