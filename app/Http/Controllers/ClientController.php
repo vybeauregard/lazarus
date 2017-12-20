@@ -92,8 +92,19 @@ class ClientController extends Controller
     public function update(ClientRequest $request, Client $client)
     {
         $client->fill($request->all());
-        $client->contact->fill($request->all());
-        $client->income->fill($request->all());
+        if(is_null($client->contact)){
+            $contact = new Contact($request->all());
+            $client->contact()->save($contact);
+
+        } else {
+            $client->contact->fill($request->all());
+        }
+        if(is_null($client->income)){
+            $income = new Income($request->all());
+            $client->income()->save($income);
+        } else {
+            $client->income->fill($request->all());
+        }
         $client->push();
         return redirect()->route('clients.index');
 

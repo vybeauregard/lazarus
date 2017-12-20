@@ -25,7 +25,7 @@
             <label for="first_name">First Name</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') ? old('first_name') : $client->contact->first_name }}" />
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') ? old('first_name') : ($client->contact ? $client->contact->first_name : '') }}" />
         </div>
     </div>
 
@@ -34,7 +34,7 @@
             <label for="middle_initial">Middle Initial</label>
         </div>
         <div class="col-md-1">
-            <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" value="{{ old('middle_initial') ? old('middle_initial') : $client->contact->middle_initial }}" />
+            <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" value="{{ old('middle_initial') ? old('middle_initial') : ($client->contact ? $client->contact->middle_initial : '') }}" />
         </div>
     </div>
 
@@ -43,7 +43,7 @@
             <label for="last_name">Last Name</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') ? old('last_name') : $client->contact->last_name }}" />
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') ? old('last_name') : ($client->contact ? $client->contact->last_name : '') }}" />
         </div>
     </div>
 
@@ -52,7 +52,7 @@
             <label for="address1">Address 1</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="address1" name="address1" value="{{ old('address1') ? old('address1') : $client->contact->address1 }}" />
+            <input type="text" class="form-control" id="address1" name="address1" value="{{ old('address1') ? old('address1') : ($client->contact ? $client->contact->address1 : '') }}" />
         </div>
     </div>
 
@@ -61,7 +61,7 @@
             <label for="address2">Address 2</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="address2" name="address2" value="{{ old('address2') ? old('address2') : $client->contact->address2 }}" />
+            <input type="text" class="form-control" id="address2" name="address2" value="{{ old('address2') ? old('address2') : ($client->contact ? $client->contact->address2 : '') }}" />
         </div>
     </div>
 
@@ -70,7 +70,7 @@
             <label for="city">City</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="city" name="city" value="{{ old('city') ? old('city') : $client->contact->city}}" />
+            <input type="text" class="form-control" id="city" name="city" value="{{ old('city') ? old('city') : ($client->contact? $client->contact->city : '') }}" />
         </div>
     </div>
 
@@ -80,11 +80,11 @@
         </div>
         <div class="col-md-2">
             <select class="form-control" id="state" name="state">
-                <option disabled {{ old('state') || $client->contact->state ? '' : 'selected' }}>Select a State</option>
+                <option disabled {{ old('state') || ($client->contact && $client->contact->state) ? '' : 'selected' }}>Select a State</option>
                 @foreach($states as $code => $state)
                 @if(old('state') && old('state') == $code)
                 <option value="{{ $code }}" selected>{{ $state }}</option>
-                @elseif($client->contact->state == $code)
+                @elseif($client->contact && $client->contact->state == $code)
                 <option value="{{ $code }}" selected>{{ $state }}</option>
                 @else
                 <option value="{{ $code }}">{{ $state }}</option>
@@ -99,7 +99,7 @@
             <label for="zip">Zip</label>
         </div>
         <div class="col-md-2">
-            <input type="text" class="form-control" id="zip" name="zip" value="{{ old('zip') ? old('zip') : $client->contact->zip }}" />
+            <input type="text" class="form-control" id="zip" name="zip" value="{{ old('zip') ? old('zip') : ($client->contact ? $client->contact->zip : '') }}" />
         </div>
     </div>
 
@@ -194,7 +194,7 @@
             <label for="phone">Phone Number</label>
         </div>
         <div class="col-md-2 input-group">
-            <input type="text" class="form-control bfh-phone" id="phone" name="phone" data-format="(ddd) ddd-dddd" value="{{ old('phone') ? old('phone') : $client->contact->phone }}">
+            <input type="text" class="form-control bfh-phone" id="phone" name="phone" data-format="(ddd) ddd-dddd" value="{{ old('phone') ? old('phone') : ($client->contact ? $client->contact->phone : '') }}">
             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
         </div>
     </div>
@@ -204,7 +204,7 @@
             <label for="emergency_phone">Emergency Contact Number</label>
         </div>
         <div class="col-md-2 input-group">
-            <input type="text" class="form-control bfh-phone" id="emergency_phone" name="emergency_phone" data-format="(ddd) ddd-dddd" value="{{ old('emergency_phone') ? old('emergency_phone') : $client->contact->emergency_phone }}">
+            <input type="text" class="form-control bfh-phone" id="emergency_phone" name="emergency_phone" data-format="(ddd) ddd-dddd" value="{{ old('emergency_phone') ? old('emergency_phone') : ($client->contact ? $client->contact->emergency_phone : '') }}">
             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
         </div>
     </div>
@@ -218,7 +218,7 @@
                 @foreach(['Select a Month', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $index => $month)
                     @if(old('dob_month') && old('dob_month') == str_pad($index, 2, '0', STR_PAD_LEFT))
                     <option value="{{ str_pad($index, 2, '0', STR_PAD_LEFT) }}" selected>{{ $month }}</option>
-                    @elseif($client->dob->format('m') == str_pad($index, 2, '0', STR_PAD_LEFT))
+                    @elseif($client->dob && $client->dob->format('m') == str_pad($index, 2, '0', STR_PAD_LEFT))
                     <option value="{{ str_pad($index, 2, '0', STR_PAD_LEFT) }}" selected>{{ $month }}</option>
                     @elseif(!old('dob_month') && !$client->dob)
                     <option value="{{ str_pad($index, 2, '0', STR_PAD_LEFT) }}" {{ $loop->last ? 'selected' : '' }}>{{ $month }}</option>
@@ -233,7 +233,7 @@
                 @foreach(range(1, 31) as $day)
                 @if(old('dob_day') && old('dob_day') == str_pad($day, 2, '0', STR_PAD_LEFT))
                 <option selected value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
-                @elseif($client->dob->format('d') == str_pad($day, 2, '0', STR_PAD_LEFT))
+                @elseif($client->dob && $client->dob->format('d') == str_pad($day, 2, '0', STR_PAD_LEFT))
                 <option selected value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
                 @else
                 <option value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
@@ -246,7 +246,7 @@
                 @foreach(range(1900, date('Y')) as $year)
                 @if(old('dob_year') && old('dob_year') == $year)
                 <option value="{{ $year }}" selected>{{ $year }}</option>
-                @elseif($client->dob->format('Y') == $year)
+                @elseif($client->dob && $client->dob->format('Y') == $year)
                 <option value="{{ $year }}" selected>{{ $year }}</option>
                 @elseif(!old('dob_year') && !$client->dob)
                 <option value="{{ $year }}" {{ $loop->last ? 'selected' : '' }}>{{ $year }}</option>
