@@ -7,6 +7,7 @@
 @include('partials.errors')
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.update', $client->id) }}">
     {{ csrf_field() }}
+    {{ method_field('PUT') }}
     <div class="form-group row">
         <div class="col-md-2">
             <label for="date">Date</label>
@@ -310,18 +311,9 @@
         </div>
     </div>
 
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="monthly_income">Total Monthly Income</label>
-        </div>
-        <div class="col-md-3 input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-            <input type="text" class="form-control" id="monthly_income" name="monthly_income" value="{{ old('monthly_income') ? old('monthly_income') : $client->monthly_income }}" />
-        </div>
-    </div>
+    @include('clients.employment')
 
 
-{{ dump($client) }}
     <input type="submit" name="submit" value="Save" class="btn btn-primary" />
 </form>
 <table class="table table-striped">

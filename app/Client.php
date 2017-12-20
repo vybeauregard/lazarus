@@ -39,6 +39,11 @@ class Client extends Model
         return $this->hasMany(Family::class);
     }
 
+    public function income()
+    {
+        return $this->hasOne(Income::class);
+    }
+
     public function getNameAttribute()
     {
         if(!$this->contact) {

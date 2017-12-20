@@ -1,9 +1,19 @@
 <div class="form-group row">
     <div class="col-md-2">
+        <label for="monthly_income">Total Monthly Income</label>
+    </div>
+    <div class="col-md-3 input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+        <input type="text" class="form-control" id="monthly_income" name="monthly_income" value="{{ old('monthly_income') ? old('monthly_income') : $client->income->monthly_income }}" />
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-2">
         <label for="part_time">Part Time Job</label>
     </div>
     <div class="col-md-5">
-        <input type="text" class="form-control" id="part_time" name="part_time" value="{{ old('part_time') }}" />
+        <input type="text" class="form-control" id="part_time" name="part_time" value="{{ old('part_time') ? old('part_time') : $client->income->part_time }}" />
     </div>
 </div>
 
@@ -12,7 +22,7 @@
         <label for="pt_employer">Employer</label>
     </div>
     <div class="col-md-3">
-        <input type="text" class="form-control" id="pt_employer" name="pt_employer" value="{{ old('pt_employer') }}" />
+        <input type="text" class="form-control" id="pt_employer" name="pt_employer" value="{{ old('pt_employer') ? old('pt_employer') : $client->income->pt_employer }}" />
     </div>
 </div>
 
@@ -21,7 +31,7 @@
         <label for="full_time">Full Time Job</label>
     </div>
     <div class="col-md-5">
-        <input type="text" class="form-control" id="full_time" name="full_time" value="{{ old('full_time') }}" />
+        <input type="text" class="form-control" id="full_time" name="full_time" value="{{ old('full_time') ? old('full_time') : $client->income->full_time }}" />
     </div>
 </div>
 
@@ -30,7 +40,7 @@
         <label for="ft_employer">Employer</label>
     </div>
     <div class="col-md-3">
-        <input type="text" class="form-control" id="ft_employer" name="ft_employer" value="{{ old('ft_employer') }}" />
+        <input type="text" class="form-control" id="ft_employer" name="ft_employer" value="{{ old('ft_employer') ? old('ft_employer') : $client->income->ft_employer }}" />
     </div>
 </div>
 
@@ -39,7 +49,7 @@
         <label for="position">Position</label>
     </div>
     <div class="col-md-5">
-        <textarea class="form-control" rows="5" id="position" name="position">{{ old('position') }}</textarea>
+        <textarea class="form-control" rows="5" id="position" name="position">{{ old('position') ? old('position') : $client->income->position }}</textarea>
     </div>
 </div>
 
@@ -49,7 +59,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="income" name="income" value="{{ old('income') }}" />
+        <input type="text" class="form-control" id="income" name="income" value="{{ old('income') ? old('income') : $client->income->income }}" />
     </div>
 </div>
 
@@ -59,10 +69,24 @@
     </div>
     <div class="col-md-2 btn-group" data-toggle="radio">
         <label class="btn btn-text">
-            <input type="radio" name="unemployed" id="unemployed_y" value="y" {{ old('unemployed') == "y" ? 'checked' : '' }}> Yes
+            @if(old('unemployed') && old('unemployed' == '1'))
+            <input type="radio" name="unemployed" id="unemployed_y" value="1" checked>
+            @elseif($client->income->unemployed == 1)
+            <input type="radio" name="unemployed" id="unemployed_y" value="1" checked>
+            @else
+            <input type="radio" name="unemployed" id="unemployed_y" value="1">
+            @endif
+            Yes
         </label>
         <label class="btn btn-text">
-            <input type="radio" name="unemployed" id="unemployed_n" value="n" {{ old('unemployed') == "n" ? 'checked' : '' }}> No
+            @if(old('unemployed') && old('unemployed' == '0'))
+            <input type="radio" name="unemployed" id="unemployed_n" value="0" checked>
+            @elseif($client->income->unemployed == 0)
+            <input type="radio" name="unemployed" id="unemployed_n" value="0" checked>
+            @else
+            <input type="radio" name="unemployed" id="unemployed_n" value="0" {{ old('unemployed') == "n" ? 'checked' : '' }}>
+            @endif
+            No
         </label>
     </div>
 </div>
@@ -73,10 +97,24 @@
     </div>
     <div class="col-md-2 btn-group" data-toggle="radio">
         <label class="btn btn-text">
-            <input type="radio" name="looking" id="looking_y" value="y" {{ old('looking') == "y" ? 'checked' : '' }}> Yes
+            @if(old('looking') && old('looking' == '1'))
+            <input type="radio" name="looking" id="looking_y" value="1" checked>
+            @elseif($client->income->looking == 1)
+            <input type="radio" name="looking" id="looking_y" value="1" checked>
+            @else
+            <input type="radio" name="looking" id="looking_y" value="1">
+            @endif
+            Yes
         </label>
         <label class="btn btn-text">
-            <input type="radio" name="looking" id="looking_n" value="n" {{ old('looking') == "n" ? 'checked' : '' }}> No
+            @if(old('looking') && old('looking' == '0'))
+            <input type="radio" name="looking" id="looking_n" value="0" checked>
+            @elseif($client->income->looking == 0)
+            <input type="radio" name="looking" id="looking_n" value="0" checked>
+            @else
+            <input type="radio" name="looking" id="looking_n" value="0">
+            @endif
+            No
         </label>
     </div>
 </div>
@@ -86,7 +124,7 @@
         <label for="applying">Applying for jobs where?</label>
     </div>
     <div class="col-md-5">
-        <textarea class="form-control" rows="5" id="applying" name="applying">{{ old('applying') }}</textarea>
+        <textarea class="form-control" rows="5" id="applying" name="applying">{{ old('applying') ? old('applying') : $client->income->applying }}</textarea>
     </div>
 </div>
 
@@ -96,7 +134,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="day_labor" name="day_labor" value="{{ old('day_labor') }}" />
+        <input type="text" class="form-control" id="day_labor" name="day_labor" value="{{ old('day_labor') ? old('day_labor') : $client->income->day_labor }}" />
     </div>
 </div>
 
@@ -106,7 +144,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="rent" name="rent" value="{{ old('rent') }}" />
+        <input type="text" class="form-control" id="rent" name="rent" value="{{ old('rent') ? old('rent') : $client->income->rent }}" />
     </div>
 </div>
 
@@ -116,7 +154,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="ssi" name="ssi" value="{{ old('ssi') }}" />
+        <input type="text" class="form-control" id="ssi" name="ssi" value="{{ old('ssi') ? old('ssi') : $client->income->ssi }}" />
     </div>
 </div>
 
@@ -126,7 +164,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="snap" name="snap" value="{{ old('snap') }}" />
+        <input type="text" class="form-control" id="snap" name="snap" value="{{ old('snap') ? old('snap') : $client->income->snap }}" />
     </div>
 </div>
 
@@ -136,7 +174,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="tanf" name="tanf" value="{{ old('tanf') }}" />
+        <input type="text" class="form-control" id="tanf" name="tanf" value="{{ old('tanf') ? old('tanf') : $client->income->tanf }}" />
     </div>
 </div>
 
@@ -146,7 +184,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="child_support" name="child_support" value="{{ old('child_support') }}" />
+        <input type="text" class="form-control" id="child_support" name="child_support" value="{{ old('child_support') ? old('child_support') : $client->income->child_support }}" />
     </div>
 </div>
 
@@ -156,7 +194,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="utility_benefits" name="utility_benefits" value="{{ old('utility_benefits') }}" />
+        <input type="text" class="form-control" id="utility_benefits" name="utility_benefits" value="{{ old('utility_benefits') ? old('utility_benefits') : $client->income->utility_benefits }}" />
     </div>
 </div>
 
@@ -166,7 +204,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="veteran_benefits" name="veteran_benefits" value="{{ old('veteran_benefits') }}" />
+        <input type="text" class="form-control" id="veteran_benefits" name="veteran_benefits" value="{{ old('veteran_benefits') ? old('veteran_benefits') : $client->income->veteran_benefits }}" />
     </div>
 </div>
 
@@ -176,6 +214,6 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="other_income" name="other_income" value="{{ old('other_income') }}" />
+        <input type="text" class="form-control" id="other_income" name="other_income" value="{{ old('other_income') ? old('other_income') : $client->income->other_income }}" />
     </div>
 </div>

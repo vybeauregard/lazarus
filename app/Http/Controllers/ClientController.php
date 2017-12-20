@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Contact;
 use App\Family;
+use App\Income;
 use App\State;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
@@ -29,9 +30,11 @@ class ClientController extends Controller
      */
     public function create()
     {
+        $client = new Client;
+        $client->income = new Income;
         $states = new State();
         $states = $states->list();
-        return view('clients.create', compact('states'));
+        return view('clients.create', compact('client', 'states'));
     }
 
     /**
@@ -44,10 +47,12 @@ class ClientController extends Controller
     {
         $client = Client::create($request->all());
         $contact = new Contact($request->all());
+        $income = new Income($request->all());
         foreach($request->family as $person) {
             $client->family()->save(new Family($person));
         }
         $client->contact()->save($contact);
+        $client->income()->save($income);
         return redirect()->route('clients.index');
     }
 
@@ -71,7 +76,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        $client->load('family');
+        $client->load('contact', 'family', 'income');
         $states = new State();
         $states = $states->list();
         return view('clients.edit', compact('client', 'states'));
@@ -84,9 +89,14 @@ class ClientController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(ClientRequest $request, Client $client)
     {
-        //
+        $client->fill($request->all());
+        $client->contact->fill($request->all());
+        $client->income->fill($request->all());
+        $client->push();
+        return redirect()->route('clients.index');
+
     }
 
     /**
