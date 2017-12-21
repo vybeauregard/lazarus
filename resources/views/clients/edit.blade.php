@@ -326,12 +326,30 @@
     </thead>
     <tbody>
 @foreach($client->family as $family)
-        <tr>
+        <tr data-family-id="{{ $family->id }}">
             <td>{{ $family->name }}</td>
             <td>{{ $family->relationship }}</td>
-            <td><i class="glyphicon glyphicon-trash"></i></td>
+            <td><button onclick="deleteFamilyMember({{ $family->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash" data-confirm-title="Remove Family Member" data-confirm-content="Are you sure?" ></button></td>
+
         </tr>
 @endforeach
     </tbody>
 </table>
 @endsection
+
+@section('custom-js')
+<script>
+function deleteFamilyMember(family_id) {
+    var url = "{{ route('clients.families.destroy', [$client->id, 0]) }}";
+    var ajax = {
+        data: {
+            _token: $("input[name='_token']").val(),
+            _method: "DELETE"
+        },
+        url: url.substr(0, (url.length - 1)) + family_id
+    };
+    $.post(ajax);
+}
+</script>
+@endsection
+

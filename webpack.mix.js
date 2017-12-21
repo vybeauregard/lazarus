@@ -23,6 +23,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
         'node_modules/bootstrap-formhelpers/dist/js/bootstrap-formhelpers.min.js',
+        'node_modules/PopConfirm/jquery.popconfirm.js',
     ], 'public/js/vendor.js')
     .version();
 

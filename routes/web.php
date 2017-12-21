@@ -25,6 +25,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('clients', 'ClientController');
 
+    Route::resource('clients.families', 'FamilyController');
+
     Route::resource('programs', 'ProgramController');
 
     Route::resource('loans', 'LoanController');
