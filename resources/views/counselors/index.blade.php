@@ -15,7 +15,7 @@
         <tbody>
         @foreach($counselors as $counselor)
             <tr>
-                <td>{{ $counselor->contact->fullName }}</td>
+                <td>{{ $counselor->name }}</td>
             </tr>
         @endforeach
         </tbody>

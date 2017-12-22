@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\HasContact;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
+    use HasContact;
+
     protected $fillable = [
         'date',
         'dob',
@@ -42,14 +45,6 @@ class Client extends Model
     public function income()
     {
         return $this->hasOne(Income::class);
-    }
-
-    public function getNameAttribute()
-    {
-        if(!$this->contact) {
-            return "no name";
-        }
-        return "{$this->contact->first_name} {$this->contact->last_name}";
     }
 
     public function delete()
