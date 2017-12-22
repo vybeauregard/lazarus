@@ -9,7 +9,7 @@
             <label for="date">Date</label>
         </div>
         <div class="col-md-2 input-group">
-            <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ old('date') ? old('date') : $client->date->format('m/d/Y') }}" />
+            <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ old('date') ?? $client->date->format('m/d/Y') }}" />
             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
         </div>
         <div class="col-md-2">
@@ -21,7 +21,7 @@
             <label for="first_name">First Name</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') ? old('first_name') : ($client->contact ? $client->contact->first_name : '') }}" />
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') ?? ($client->contact ? $client->contact->first_name : '') }}" />
         </div>
     </div>
 
@@ -30,7 +30,7 @@
             <label for="middle_initial">Middle Initial</label>
         </div>
         <div class="col-md-1">
-            <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" value="{{ old('middle_initial') ? old('middle_initial') : ($client->contact ? $client->contact->middle_initial : '') }}" />
+            <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" value="{{ old('middle_initial') ?? ($client->contact ? $client->contact->middle_initial : '') }}" />
         </div>
     </div>
 
@@ -39,7 +39,7 @@
             <label for="last_name">Last Name</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') ? old('last_name') : ($client->contact ? $client->contact->last_name : '') }}" />
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') ?? ($client->contact ?? '') }}" />
         </div>
     </div>
 
@@ -48,7 +48,7 @@
             <label for="address1">Address 1</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="address1" name="address1" value="{{ old('address1') ? old('address1') : ($client->contact ? $client->contact->address1 : '') }}" />
+            <input type="text" class="form-control" id="address1" name="address1" value="{{ old('address1') ?? ($client->contact ? $client->contact->address1 : '') }}" />
         </div>
     </div>
 
@@ -57,7 +57,7 @@
             <label for="address2">Address 2</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="address2" name="address2" value="{{ old('address2') ? old('address2') : ($client->contact ? $client->contact->address2 : '') }}" />
+            <input type="text" class="form-control" id="address2" name="address2" value="{{ old('address2') ?? ($client->contact ? $client->contact->address2 : '') }}" />
         </div>
     </div>
 
@@ -66,7 +66,7 @@
             <label for="city">City</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="city" name="city" value="{{ old('city') ? old('city') : ($client->contact? $client->contact->city : '') }}" />
+            <input type="text" class="form-control" id="city" name="city" value="{{ old('city') ?? ($client->contact? $client->contact->city : '') }}" />
         </div>
     </div>
 
@@ -95,7 +95,7 @@
             <label for="zip">Zip</label>
         </div>
         <div class="col-md-2">
-            <input type="text" class="form-control" id="zip" name="zip" value="{{ old('zip') ? old('zip') : ($client->contact ? $client->contact->zip : '') }}" />
+            <input type="text" class="form-control" id="zip" name="zip" value="{{ old('zip') ?? ($client->contact ? $client->contact->zip : '') }}" />
         </div>
     </div>
 
@@ -181,7 +181,7 @@
             <label for="apartment_name">Apartment Complex Name</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="apartment_name" name="apartment_name" value="{{ old('apartment_name') ? old('apartment_name') : $client->apartment_name }}" />
+            <input type="text" class="form-control" id="apartment_name" name="apartment_name" value="{{ old('apartment_name') ?? $client->apartment_name }}" />
         </div>
     </div>
 
@@ -190,7 +190,7 @@
             <label for="phone">Phone Number</label>
         </div>
         <div class="col-md-2 input-group">
-            <input type="text" class="form-control bfh-phone" id="phone" name="phone" data-format="(ddd) ddd-dddd" value="{{ old('phone') ? old('phone') : ($client->contact ? $client->contact->phone : '') }}">
+            <input type="text" class="form-control bfh-phone" id="phone" name="phone" data-format="(ddd) ddd-dddd" value="{{ old('phone') ?? ($client->contact ? $client->contact->phone : '') }}">
             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
         </div>
     </div>
@@ -200,7 +200,7 @@
             <label for="emergency_phone">Emergency Contact Number</label>
         </div>
         <div class="col-md-2 input-group">
-            <input type="text" class="form-control bfh-phone" id="emergency_phone" name="emergency_phone" data-format="(ddd) ddd-dddd" value="{{ old('emergency_phone') ? old('emergency_phone') : ($client->contact ? $client->contact->emergency_phone : '') }}">
+            <input type="text" class="form-control bfh-phone" id="emergency_phone" name="emergency_phone" data-format="(ddd) ddd-dddd" value="{{ old('emergency_phone') ?? ($client->contact ? $client->contact->emergency_phone : '') }}">
             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
         </div>
     </div>
@@ -259,7 +259,7 @@
             <label for="gender">Gender</label>
         </div>
         <div class="col-md-1">
-            <input type="text" class="form-control" id="gender" name="gender" value="{{ old('gender') ? old('gender') : $client->gender }}" />
+            <input type="text" class="form-control" id="gender" name="gender" value="{{ old('gender') ?? $client->gender }}" />
         </div>
     </div>
 
@@ -268,7 +268,7 @@
             <label for="ethnicity">Ethnicity</label>
         </div>
         <div class="col-md-2">
-            <input type="text" class="form-control" id="ethnicity" name="ethnicity" value="{{ old('ethnicity') ? old('ethnicity') : $client->ethnicity }}" />
+            <input type="text" class="form-control" id="ethnicity" name="ethnicity" value="{{ old('ethnicity') ?? $client->ethnicity }}" />
         </div>
     </div>
 
@@ -277,7 +277,7 @@
             <label for="birth_country">Country of Birth</label>
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="birth_country" name="birth_country" value="{{ old('birth_country') ? old('birth_country') : $client->birth_country }}" />
+            <input type="text" class="form-control" id="birth_country" name="birth_country" value="{{ old('birth_country') ?? $client->birth_country }}" />
         </div>
     </div>
     <div class="form-group row">
@@ -285,7 +285,7 @@
             <label for="veteran_status">Veteran Status</label>
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="veteran_status" name="veteran_status" value="{{ old('veteran_status') ? old('veteran_status') : $client->veteran_status }}" />
+            <input type="text" class="form-control" id="veteran_status" name="veteran_status" value="{{ old('veteran_status') ?? $client->veteran_status }}" />
         </div>
     </div>
 
@@ -294,7 +294,7 @@
             <label for="incarceration">Incarceration History (if any)</label>
         </div>
         <div class="col-md-5">
-            <textarea class="form-control" rows="5" id="incarceration" name="incarceration">{{ old('incarceration') ? old('incarceration') : $client->incarceration }}</textarea>
+            <textarea class="form-control" rows="5" id="incarceration" name="incarceration">{{ old('incarceration') ?? $client->incarceration }}</textarea>
         </div>
     </div>
 
@@ -303,7 +303,7 @@
             <label for="insurance_type">Medical Insurance?</label>
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="insurance_type" name="insurance_type" value="{{ old('insurance_type') ? old('insurance_type') : $client->insurance_type }}" />
+            <input type="text" class="form-control" id="insurance_type" name="insurance_type" value="{{ old('insurance_type') ?? $client->insurance_type }}" />
         </div>
     </div>
 
