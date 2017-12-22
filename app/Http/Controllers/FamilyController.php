@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Family;
 use App\Http\Requests\FamilyRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FamilyController extends Controller
@@ -26,7 +27,8 @@ class FamilyController extends Controller
      */
     public function create(Client $client)
     {
-        return view('clients.families.create', compact('client'));
+        $family = new Family();
+        return view('clients.families.create', compact('client', 'family'));
     }
 
     /**
@@ -70,9 +72,10 @@ class FamilyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client, Family $family)
+    public function update(FamilyRequest $request, Client $client, Family $family)
     {
-        dd([$client, $family]);
+        $family->fill($request->family)->save();
+        return redirect()->route('clients.edit', $client->id);
     }
 
     /**

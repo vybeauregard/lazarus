@@ -19,14 +19,14 @@ class FamilyRequest extends FormRequest
 
     private function sanitize()
     {
-        if($this['family_name_0']) {
+        if($this->name) {
             $family = [
-                'relationship' => $this['family_relationship_0'],
-                'name' => $this['family_name_0'],
-                'dob' => Carbon::createFromFormat('m/d/Y', "{$this['family_dob_month_0']}/{$this['family_dob_day_0']}/{$this['family_dob_year_0']}"),
-                'sex' => $this['family_sex_0'],
-                'birth_country' => $this['family_birth_country_0'],
-                'insurance' => $this['family_insurance_0']
+                'relationship' => $this->relationship,
+                'name' => $this->name,
+                'dob' => Carbon::createFromFormat('m/d/Y', "{$this->dob_month}/{$this->dob_day}/{$this->dob_year}"),
+                'sex' => $this->sex,
+                'birth_country' => $this->birth_country,
+                'insurance' => $this->insurance
             ];
         }
         $this->merge(['family' => $family]);

@@ -5,7 +5,7 @@
 
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.families.store', $client->id) }}">
     {{ csrf_field() }}
-    @include('clients.family', ['fam_id' => 0])
+    @include('clients.families.family')
     <input type="submit" name="submit" value="Save" class="btn btn-primary" />
 </form>
 @endsection

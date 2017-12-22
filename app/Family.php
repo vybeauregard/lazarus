@@ -15,6 +15,10 @@ class Family extends Model
         'relationship'
     ];
 
+    public $dates = [
+        'dob',
+    ];
+
     public function client()
     {
         return $this->belongsTo(Client::class);

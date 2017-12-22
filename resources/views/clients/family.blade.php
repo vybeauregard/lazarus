@@ -6,7 +6,7 @@
         <div class="col-md-2">
             <select type="text" class="form-control" id="family_relationship_{{ $fam_id }}"  name="family_relationship_{{ $fam_id }}">
                 @foreach(["spouse", "child", "other adult"] as $type)
-                <option {{ old('family_relationship_' . $fam_id) == $type ? 'selected' : ''}} value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
+                <option {{ old('family_relationship_' . $fam_id) == str_replace(' ', '_', $type) ? 'selected' : ''}} value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
                 @endforeach
             </select>
         </div>
