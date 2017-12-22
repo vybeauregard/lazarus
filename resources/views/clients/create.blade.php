@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="panel">
-    @include('partials.nav')
-</div>
-@include('partials.errors')
 <h2>Create a new Client</h2>
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.store') }}">
     {{ csrf_field() }}

@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="panel">
-    @include('partials.nav')
-</div>
-@include('partials.errors')
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.update', $client->id) }}">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
@@ -312,29 +308,39 @@
     </div>
 
     @include('clients.employment')
+    <hr />
 
+    <div class="row">
+        <div class="col-md-10">
+            <h4>Family Members</h4>
+        </div>
 
-    <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+        <div class="col-md-2">
+            <a href="{{ route('clients.families.create', $client->id) }}" class="btn btn-success">Add Family Member</a>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Relationship</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach($client->family as $family)
+            <tr data-family-id="{{ $family->id }}">
+                <td><a href="{{ route('clients.families.edit', [$client->id, $family->id]) }}">{{ $family->name }}</a></td>
+                <td>{{ $family->relationship }}</td>
+                <td><button onclick="removeFamilyMember({{ $family->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Family Member" data-confirm-content="Are you sure?" ></button></td>
+
+            </tr>
+    @endforeach
+        </tbody>
+    </table>
+
+    <input type="submit" name="submit" value="Save Client" class="btn btn-primary" />
 </form>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Relationship</th>
-            <th>Remove</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach($client->family as $family)
-        <tr data-family-id="{{ $family->id }}">
-            <td>{{ $family->name }}</td>
-            <td>{{ $family->relationship }}</td>
-            <td><button onclick="removeFamilyMember({{ $family->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash" data-confirm-title="Remove Family Member" data-confirm-content="Are you sure?" ></button></td>
-
-        </tr>
-@endforeach
-    </tbody>
-</table>
 @endsection
 
 @section('custom-js')

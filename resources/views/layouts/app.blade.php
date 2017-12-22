@@ -74,6 +74,10 @@
         </nav>
 
         <div class="body">
+            <div class="panel">
+                @include('partials.nav')
+            </div>
+            @include('partials.errors')
             @yield('content')
         </div>
     </div>

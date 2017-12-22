@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="panel">
-    @include('partials.nav')
-</div>
 Reports
 
 <div class="form-group row">

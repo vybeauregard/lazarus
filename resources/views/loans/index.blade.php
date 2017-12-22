@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="panel">
-    @include('partials.nav')
-</div>
 <h3>Loans</h3>
 <a href="{{ route('loans.create') }}" class="btn btn-success">New Loan</a>
 
