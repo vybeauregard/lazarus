@@ -81,7 +81,6 @@ class FamilyController extends Controller
      */
     public function destroy(Client $client, Family $family)
     {
-        dd($client);
-        $client->family()->detach($family->id);
+        $family->delete();
     }
 }

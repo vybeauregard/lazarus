@@ -329,7 +329,7 @@
         <tr data-family-id="{{ $family->id }}">
             <td>{{ $family->name }}</td>
             <td>{{ $family->relationship }}</td>
-            <td><button onclick="deleteFamilyMember({{ $family->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash" data-confirm-title="Remove Family Member" data-confirm-content="Are you sure?" ></button></td>
+            <td><button onclick="removeFamilyMember({{ $family->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash" data-confirm-title="Remove Family Member" data-confirm-content="Are you sure?" ></button></td>
 
         </tr>
 @endforeach
@@ -339,7 +339,7 @@
 
 @section('custom-js')
 <script>
-function deleteFamilyMember(family_id) {
+function removeFamilyMember(family_id) {
     var url = "{{ route('clients.families.destroy', [$client->id, 0]) }}";
     var ajax = {
         data: {

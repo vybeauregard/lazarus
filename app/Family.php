@@ -17,6 +17,6 @@ class Family extends Model
 
     public function client()
     {
-        return $this->belongsTo(Client::model);
+        return $this->belongsTo(Client::class);
     }
 }
