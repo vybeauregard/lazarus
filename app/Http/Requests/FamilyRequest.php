@@ -28,8 +28,8 @@ class FamilyRequest extends FormRequest
                 'birth_country' => $this->birth_country,
                 'insurance' => $this->insurance
             ];
+            $this->merge(['family' => $family]);
         }
-        $this->merge(['family' => $family]);
 
     }
 
@@ -40,12 +40,16 @@ class FamilyRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'name'  =>  'required',
+        ];
     }
 
     public function messages()
     {
-        return [];
+        return [
+            'name.required' => 'Please enter a name.'
+        ];
     }
 
     public function getValidatorInstance() {

@@ -354,7 +354,9 @@ function removeFamilyMember(family_id) {
         },
         url: url.substr(0, (url.length - 1)) + family_id
     };
-    $.post(ajax);
+    $.post(ajax).then(function(){
+        $('tr[data-family-id="'+family_id+'"]').remove();
+    });
 }
 </script>
 @endsection

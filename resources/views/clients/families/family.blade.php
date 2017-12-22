@@ -6,7 +6,13 @@
         <div class="col-md-2">
             <select type="text" class="form-control" id="relationship"  name="relationship">
                 @foreach(["spouse", "child", "other adult"] as $type)
-                <option {{ old('relationship') ?? $family->relationship == str_replace(' ', '_', $type) ? 'selected' : ''}} value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
+                    @if(old('relationship') == str_replace(' ', '_', $type))
+                        <option selected value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
+                    @elseif(old('relationship') == str_replace(' ', '_', $type))
+                        <option selected value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
+                    @else
+                        <option value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>
