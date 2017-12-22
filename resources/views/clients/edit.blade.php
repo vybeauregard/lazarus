@@ -39,7 +39,7 @@
             <label for="last_name">Last Name</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') ?? ($client->contact ?? '') }}" />
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') ?? ($client->contact ? $client->contact->last_name : '') }}" />
         </div>
     </div>
 
@@ -331,7 +331,7 @@
     @foreach($client->family as $family)
             <tr data-family-id="{{ $family->id }}">
                 <td><a href="{{ route('clients.families.edit', [$client->id, $family->id]) }}">{{ $family->name }}</a></td>
-                <td>{{ $family->relationship }}</td>
+                <td>{{ str_replace("_", " ", title_case($family->relationship)) }}</td>
                 <td><button onclick="removeFamilyMember({{ $family->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Family Member" data-confirm-content="Are you sure?" ></button></td>
 
             </tr>
