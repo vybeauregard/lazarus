@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Visit;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class VisitController extends Controller
@@ -25,7 +26,8 @@ class VisitController extends Controller
      */
     public function create()
     {
-        //
+        $visit = new Visit(['date' => Carbon::now()]);
+        return view('visits.create', compact('visit'));
     }
 
     /**
@@ -42,10 +44,10 @@ class VisitController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Visitor  $visitor
+     * @param  \App\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function show(Visitor $visitor)
+    public function show(Visit $visit)
     {
         //
     }
@@ -53,12 +55,12 @@ class VisitController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Visitor  $visitor
+     * @param  \App\Visit  $visit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Visitor $visitor)
+    public function edit(Visit $visit)
     {
-        //
+        return view('visits.edit', compact('visit'));
     }
 
     /**
@@ -68,7 +70,7 @@ class VisitController extends Controller
      * @param  \App\Visitor  $visitor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Visitor $visitor)
+    public function update(Request $request, Visit $visit)
     {
         //
     }
@@ -79,7 +81,7 @@ class VisitController extends Controller
      * @param  \App\Visitor  $visitor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Visitor $visitor)
+    public function destroy(Visit $visit)
     {
         //
     }

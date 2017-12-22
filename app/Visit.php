@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
 {
+    protected $fillable = [
+        'date',
+        'client_id',
+        'counselor_id',
+        'request',
+        'action'
+    ];
+
     protected $dates = [
         'date',
     ];

@@ -16,7 +16,7 @@
     <tbody>
     @foreach($visits as $visit)
         <tr>
-            <td>{{ $visit->client->name }}</td>
+            <td><a href="{{ route('visits.edit', $visit->id) }}">{{ $visit->client->name }}</a></td>
             <td>{{ $visit->date->format('m/d/Y') }}</td>
             <td>{{ $visit->counselor->name }}</td>
             <td>[[trash]]</td>
