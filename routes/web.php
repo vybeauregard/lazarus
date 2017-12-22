@@ -25,7 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('clients', 'ClientController');
 
-    Route::resource('clients.families', 'FamilyController');
+    Route::resource('clients.families', 'FamilyController')->except(['index']);
 
     Route::resource('programs', 'ProgramController');
 
@@ -37,7 +37,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('load-family-form/{fam_id}', function($fam_id){
         return view("clients.family", compact('fam_id'));
-    });
+    })->name('clients.families.form');
 
     Route::get('reports', function(){
         return view("reports.index");
