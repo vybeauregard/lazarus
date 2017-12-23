@@ -8,7 +8,7 @@
                 @foreach(["spouse", "child", "other adult"] as $type)
                     @if(old('relationship') == str_replace(' ', '_', $type))
                         <option selected value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
-                    @elseif(old('relationship') == str_replace(' ', '_', $type))
+                    @elseif($family->relationship == str_replace(' ', '_', $type))
                         <option selected value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
                     @else
                         <option value="{{ str_replace(' ', '_', $type) }}">{{ $type }}</option>
