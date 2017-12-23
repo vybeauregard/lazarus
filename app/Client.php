@@ -59,4 +59,5 @@ class Client extends Model
     {
         return $query->where('id', 1);
     }
+
 }

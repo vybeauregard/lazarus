@@ -309,6 +309,8 @@
     </div>
 
     @include('clients.employment')
+
+    @if($client->family->count())
     <hr />
 
     <div class="row">
@@ -339,6 +341,9 @@
     @endforeach
         </tbody>
     </table>
+    @else
+        <a href="{{ route('clients.families.create', $client->id) }}" class="btn btn-success">Add Family Member</a>
+    @endif
 
     <input type="submit" name="submit" value="Save Client" class="btn btn-primary" />
 </form>

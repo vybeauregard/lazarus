@@ -81,7 +81,7 @@
             <label for="phone">Phone Number</label>
         </div>
         <div class="col-md-2">
-            <p>{{ $client->contact->phone }}</p>
+            <p>{{ $client->formattedPhone }}</p>
         </div>
     </div>
 
@@ -90,7 +90,7 @@
             <label for="emergency_phone">Emergency Contact Number</label>
         </div>
         <div class="col-md-2">
-            <p>{{ $client->contact->emergency_phone }}</p>
+            <p>{{ $client->formattedEmergencyPhone }}</p>
         </div>
     </div>
 
@@ -157,8 +157,9 @@
     </div>
 
     @include('clients.readonly-employment')
-    <hr />
 
+@if($client->family->count())
+    <hr />
     <div class="row">
         <div class="col-md-10">
             <h4>Family Members</h4>
@@ -192,5 +193,6 @@
     @endforeach
         </tbody>
     </table>
+@endif
 </div>
 @endsection

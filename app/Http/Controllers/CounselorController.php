@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use App\Counselor;
-use Illuminate\Http\Request;
+use App\Http\Requests\CounselorRequest;
 
 class CounselorController extends Controller
 {
@@ -36,7 +36,7 @@ class CounselorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CounselorRequest $request)
     {
         $counselor = Counselor::create();
         $contact = new Contact($request->all());
@@ -74,7 +74,7 @@ class CounselorController extends Controller
      * @param  \App\Counselor  $counselor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Counselor $counselor)
+    public function update(CounselorRequest $request, Counselor $counselor)
     {
         if(is_null($counselor->contact)){
             $contact = new Contact($request->all());

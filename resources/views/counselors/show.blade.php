@@ -37,7 +37,7 @@
             <label for="phone">Phone Number</label>
         </div>
         <div class="col-md-2">
-            <p>{{ $counselor->contact->phone }}</p>
+            <p>{{ $counselor->formattedPhone }}</p>
         </div>
     </div>
 
@@ -46,7 +46,7 @@
             <label for="emergency_phone">Emergency Contact Number</label>
         </div>
         <div class="col-md-2">
-            <p>{{ $counselor->contact->emergency_phone }}</p>
+            <p>{{ $counselor->formattedEmergencyPhone }}</p>
         </div>
     </div>
 
