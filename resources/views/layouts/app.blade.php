@@ -75,9 +75,9 @@
 
         <div class="body">
             <div class="panel">
-                @include('partials.nav')
+                @include('layouts.nav')
             </div>
-            @include('partials.errors')
+            @include('layouts.errors')
             @yield('content')
         </div>
     </div>

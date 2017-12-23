@@ -17,6 +17,17 @@ class AppServiceProvider extends ServiceProvider
             __DIR__.'/../../resources/assets/js' => public_path('js'),
             __DIR__.'/../../resources/assets/css' => public_path('css'),
         ], 'public');
+
+        \View::composer(
+            ['visits.edit', 'visits.create'],
+            'App\Http\ViewComposers\CounselorTypeahead'
+        );
+
+        \View::composer(
+            ['visits.edit', 'visits.create'],
+            'App\Http\ViewComposers\ClientTypeahead'
+        );
+
     }
 
     /**

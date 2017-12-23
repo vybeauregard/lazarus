@@ -15,7 +15,14 @@
         <label for="client">Client</label>
     </div>
     <div class="col-md-3 input-group">
-        <input type="text" class="form-control " id="client" name="client" value="{{ old('client') ?? $visit->client }}" />
+        <input type="text"
+               class="form-control typeahead"
+               data-provide="typeahead"
+               autocomplete="off"
+               id="client"
+               name="client"
+               value="{{ old('client') ?? ($visit->client ? $visit->client->name : '') }}" />
+        <input type="hidden" name="client_id" value="{{ old('client_id') ?? $visit->client_id }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
     </div>
     <div class="col-md-2">
@@ -27,15 +34,19 @@
         <label for="counselor">Counselor</label>
     </div>
     <div class="col-md-3 input-group">
-        <input type="text" class="form-control " id="counselor" name="counselor" value="{{ old('counselor') ?? $visit->counselor }}" />
+        <input type="text"
+               class="form-control typeahead"
+               data-provide="typeahead"
+               autocomplete="off"
+               id="counselor"
+               name="counselor"
+               value="{{ old('counselor') ?? ($visit->counselor ? $visit->counselor->name : '') }}" />
+        <input type="hidden" name="counselor_id" value="{{ old('counselor_id') ?? $visit->counselor_id }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
     </div>
     <div class="col-md-2">
     </div>
 </div>
-
-
-Counselor (dropdown? autocomplete?)
 
 <div class="form-group row">
     <div class="col-md-2">
@@ -54,3 +65,26 @@ Counselor (dropdown? autocomplete?)
         <textarea class="form-control" rows="5" id="action" name="action">{{ old('action') ?? $visit->action }}</textarea>
     </div>
 </div>
+
+@section('custom-js')
+<script>
+    $(".typeahead[name='client']").typeahead({
+        provide: "typeahead",
+        source: {!! $clients !!},
+        showHintOnFocus: "true",
+        afterSelect: function(item) {
+            $("input[name='client_id']").val(item.id)
+        }
+    });
+    $(".typeahead[name='counselor']").typeahead({
+        provide: "typeahead",
+        source: {!! $counselors !!},
+        showHintOnFocus: "true",
+        afterSelect: function(item) {
+            $("input[name='counselor_id']").val(item.id)
+        }
+    });
+</script>
+@endsection
+
+

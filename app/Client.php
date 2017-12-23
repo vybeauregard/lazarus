@@ -54,4 +54,9 @@ class Client extends Model
         $this->income()->delete();
         parent::delete();
     }
+
+    public function scopeTypeahead($query)
+    {
+        return $query->where('id', 1);
+    }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Visit;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Http\Requests\VisitRequest;
 
 class VisitController extends Controller
 {
@@ -26,7 +26,9 @@ class VisitController extends Controller
      */
     public function create()
     {
-        $visit = new Visit(['date' => Carbon::now()]);
+        $visit = new Visit([
+            'date' => Carbon::now(),
+        ]);
         return view('visits.create', compact('visit'));
     }
 
@@ -36,9 +38,11 @@ class VisitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VisitRequest $request)
     {
-        //
+        Visit::create($request->all());
+        return redirect()->route('visits.index');
+
     }
 
     /**
@@ -70,9 +74,10 @@ class VisitController extends Controller
      * @param  \App\Visitor  $visitor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Visit $visit)
+    public function update(VisitRequest $request, Visit $visit)
     {
-        //
+        $visit->update($request->all());
+        return redirect()->route('visits.index');
     }
 
     /**
@@ -83,6 +88,6 @@ class VisitController extends Controller
      */
     public function destroy(Visit $visit)
     {
-        //
+        $visit->delete();
     }
 }

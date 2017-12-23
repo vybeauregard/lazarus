@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "bootstrap": "^3.3.7",
+        "bootstrap-3-typeahead": "^4.0.2",
         "bootstrap-datepicker": "^1.7.1",
         "bootstrap-formhelpers": "git+https://github.com/vlamanna/BootstrapFormHelpers.git",
         "napa": "^3.0.0"
