@@ -6,6 +6,10 @@ trait HasContact
 {
     public function getNameAttribute()
     {
+        //Parishes have contact info, but name data lives on the parish model
+        if (array_key_exists("name", $this->attributes)) {
+            return $this->attributes['name'];
+        }
         if(!$this->contact) {
             return "no name";
         }
@@ -22,6 +26,9 @@ trait HasContact
 
     public function getFormattedAddressAttribute()
     {
+        if(!$this->contact) {
+            return [];
+        }
         $address = [
             $this->contact->address1,
         ];
@@ -39,11 +46,17 @@ trait HasContact
 
     public function getFormattedPhoneAttribute()
     {
+        if(!$this->contact) {
+            return "";
+        }
         return $this->formatPhone($this->contact->phone);
     }
 
     public function getFormattedEmergencyPhoneAttribute()
     {
+        if(!$this->contact) {
+            return "";
+        }
         return $this->formatPhone($this->contact->emergency_phone);
     }
 

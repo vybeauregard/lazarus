@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
+use App\Http\Requests\ParishRequest;
 use App\Parish;
-use Illuminate\Http\Request;
 
 class ParishController extends Controller
 {
@@ -25,7 +26,9 @@ class ParishController extends Controller
      */
     public function create()
     {
-        //
+        $parish = new Parish;
+        $parish->contact = new Contact;
+        return view('parishes.create', compact('parish'));
     }
 
     /**
@@ -34,9 +37,14 @@ class ParishController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ParishRequest $request)
     {
-        //
+        $parish = Parish::create($request->all());
+        $contact = new Contact($request->all());
+        $parish->contact()->save($contact);
+
+        $parish->push();
+        return redirect()->route('parishes.index');
     }
 
     /**
@@ -47,7 +55,7 @@ class ParishController extends Controller
      */
     public function show(Parish $parish)
     {
-        //
+        return view('parishes.show', compact('parish'));
     }
 
     /**
@@ -58,7 +66,7 @@ class ParishController extends Controller
      */
     public function edit(Parish $parish)
     {
-        //
+        return view('parishes.edit', compact('parish'));
     }
 
     /**
@@ -68,9 +76,20 @@ class ParishController extends Controller
      * @param  \App\Parish  $parish
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Parish $parish)
+    public function update(ParishRequest $request, Parish $parish)
     {
-        //
+        $parish->fill($request->all());
+        if(is_null($parish->contact)){
+            $contact = new Contact($request->all());
+            $parish->contact()->save($contact);
+
+        } else {
+            $parish->contact->fill($request->all());
+        }
+
+        $parish->push();
+        return redirect()->route('parishes.index');
+
     }
 
     /**
@@ -81,6 +100,6 @@ class ParishController extends Controller
      */
     public function destroy(Parish $parish)
     {
-        //
+        $parish->delete();
     }
 }

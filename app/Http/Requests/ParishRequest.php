@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CounselorRequest extends FormRequest
+class ParishRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,9 +35,7 @@ class CounselorRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'    => 'required|max:255',
-            'last_name'    => 'required|max:255',
-            'middle_initial'    => 'alpha|size:1|nullable',
+            'name'      => 'required',
             'address1'    => 'max:255',
             'address2'    => 'max:255',
             'city'    => 'max:255',
@@ -51,8 +49,8 @@ class CounselorRequest extends FormRequest
     public function messages()
     {
         return [
-            'zip.numeric'   => 'Zip code must be numeric',
-            'dob_day.between'   => 'Birth day must be between :min and :max'
+            'name.required'   => 'Parish must have a name.',
+            'zip.numeric'   => 'Zip code must be numeric.',
         ];
     }
 
