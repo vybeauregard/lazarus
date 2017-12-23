@@ -7,6 +7,6 @@
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     @include('clients.families.family', ['fam_id' => $family->id])
-    <input type="submit" name="submit" value="Save" class="btn btn-primary" />
+    <input type="submit" name="submit" value="Save Family Member" class="btn btn-primary" />
 </form>
 @endsection
