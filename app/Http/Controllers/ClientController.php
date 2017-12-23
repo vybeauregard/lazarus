@@ -32,9 +32,7 @@ class ClientController extends Controller
     {
         $client = new Client;
         $client->income = new Income;
-        $states = new State();
-        $states = $states->list();
-        return view('clients.create', compact('client', 'states'));
+        return view('clients.create', compact('client'));
     }
 
     /**
@@ -64,7 +62,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        dd($client);
+        $client->load('contact', 'family', 'income');
         return view('clients.edit', compact('client'));
     }
 
@@ -77,9 +75,7 @@ class ClientController extends Controller
     public function edit(Client $client)
     {
         $client->load('contact', 'family', 'income');
-        $states = new State();
-        $states = $states->list();
-        return view('clients.edit', compact('client', 'states'));
+        return view('clients.edit', compact('client'));
     }
 
     /**

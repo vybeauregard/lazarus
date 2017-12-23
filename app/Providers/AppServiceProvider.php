@@ -19,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
         ], 'public');
 
         \View::composer(
+            ['clients.create', 'clients.edit'],
+            'App\Http\ViewComposers\StateList'
+        );
+
+        \View::composer(
             ['visits.form'],
             'App\Http\ViewComposers\CounselorTypeahead'
         );
