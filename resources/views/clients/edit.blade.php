@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<h3>{{ $client->name }}</h3>
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.update', $client->id) }}">
     {{ csrf_field() }}
     {{ method_field('PUT') }}

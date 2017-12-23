@@ -8362,3 +8362,11 @@ button.close {
   text-decoration: none !important;
 }
 
+.danger {
+  color: #bf5329;
+}
+
+.success {
+  color: #2ab27b;
+}
+

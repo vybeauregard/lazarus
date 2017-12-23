@@ -16,7 +16,7 @@
     <tbody>
     @foreach($clients as $client)
         <tr data-client-id="{{ $client->id }}">
-            <td><a href="{{ route('clients.edit', $client->id) }}">{{ $client->name }}</a></td>
+            <td><a href="{{ route('clients.show', $client->id) }}">{{ $client->name }}</a></td>
             <td>{{ $client->date->format('m/d/Y') }}</td>
             <td><button onclick="removeClient({{ $client->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Client" data-confirm-content="Are you sure?" ></button></td>
         </tr>

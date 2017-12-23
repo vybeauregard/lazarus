@@ -51,7 +51,7 @@ class FamilyController extends Controller
      */
     public function show(Client $client, Family $family)
     {
-        dd([$client, $family]);
+        return view('clients.families.show', compact('client', 'family'));
     }
 
     /**

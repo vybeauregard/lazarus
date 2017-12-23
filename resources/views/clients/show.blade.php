@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<form style="margin:14px;" class="" method="post" action="{{ route('clients.update', $client->id) }}">
-    {{ csrf_field() }}
-    {{ method_field('PUT') }}
+<h3>{{ $client->name }} <a href="{{ route('clients.edit', $client->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h3>
+<div style="margin:14px;">
     <div class="form-group row">
         <div class="col-md-2">
             <label for="date">Date</label>
         </div>
-        <div class="col-md-2 input-group">
-            <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ old('date') ?? $client->date->format('m/d/Y') }}" />
-            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="col-md-2">
+            <p>{{ $client->date->format('m/d/Y') }}</p>
         </div>
         <div class="col-md-2">
         </div>
@@ -18,170 +16,63 @@
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="first_name">First Name</label>
+            <label for="name">Name</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') ?? ($client->contact ? $client->contact->first_name : '') }}" />
+            <p>{{ $client->fullName }}</p>
         </div>
     </div>
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="middle_initial">Middle Initial</label>
-        </div>
-        <div class="col-md-1">
-            <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" value="{{ old('middle_initial') ?? ($client->contact ? $client->contact->middle_initial : '') }}" />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="last_name">Last Name</label>
-        </div>
-        <div class="col-md-5">
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') ?? ($client->contact ? $client->contact->last_name : '') }}" />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="address1">Address 1</label>
-        </div>
-        <div class="col-md-5">
-            <input type="text" class="form-control" id="address1" name="address1" value="{{ old('address1') ?? ($client->contact ? $client->contact->address1 : '') }}" />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="address2">Address 2</label>
-        </div>
-        <div class="col-md-5">
-            <input type="text" class="form-control" id="address2" name="address2" value="{{ old('address2') ?? ($client->contact ? $client->contact->address2 : '') }}" />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="city">City</label>
-        </div>
-        <div class="col-md-5">
-            <input type="text" class="form-control" id="city" name="city" value="{{ old('city') ?? ($client->contact? $client->contact->city : '') }}" />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="state">State</label>
+            <label for="address">Address</label>
         </div>
         <div class="col-md-2">
-            <select class="form-control" id="state" name="state">
-                <option disabled {{ old('state') || ($client->contact && $client->contact->state) ? '' : 'selected' }}>Select a State</option>
-                @foreach($states as $code => $state)
-                @if(old('state') && old('state') == $code)
-                <option value="{{ $code }}" selected>{{ $state }}</option>
-                @elseif($client->contact && $client->contact->state == $code)
-                <option value="{{ $code }}" selected>{{ $state }}</option>
-                @else
-                <option value="{{ $code }}">{{ $state }}</option>
-                @endif
-                @endforeach
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="zip">Zip</label>
-        </div>
-        <div class="col-md-2">
-            <input type="text" class="form-control" id="zip" name="zip" value="{{ old('zip') ?? ($client->contact ? $client->contact->zip : '') }}" />
+            <p>{!! implode("<br>", $client->formattedAddress) !!}</p>
         </div>
     </div>
 
     <div class="form-group row">
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-          @if(old('homeless') && old('homeless') == 1)
-            <input class="form-check-input" type="checkbox" id="homeless"  checked name="homeless" value="1">
-          @elseif($client->homeless == 1)
-            <input class="form-check-input" type="checkbox" id="homeless"  checked name="homeless" value="1">
-          @else
-            <input class="form-check-input" type="checkbox" id="homeless" name="homeless" value="1">
-          @endif
-              Homeless
+              <p>Homeless <i class="glyphicon {{ $client->homeless == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
           </label>
         </div>
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-          @if(old('shelter') && old('shelter') == 1)
-            <input class="form-check-input" type="checkbox" id="shelter" checked name="shelter" value="1">
-          @elseif($client->shelter == 1)
-            <input class="form-check-input" type="checkbox" id="shelter" checked name="shelter" value="1">
-          @else
-            <input class="form-check-input" type="checkbox" id="shelter" name="shelter" value="1">
-          @endif
-              Shelter
+              <p>Shelter <i class="glyphicon {{ $client->shelter == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
           </label>
         </div>
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-          @if(old('private_res') && old('private_res') == 1)
-            <input class="form-check-input" type="checkbox" id="private_res" checked name="private_res" value="1">
-          @elseif($client->private_res == 1)
-            <input class="form-check-input" type="checkbox" id="private_res" checked name="private_res" value="1">
-          @else
-            <input class="form-check-input" type="checkbox" id="private_res" name="private_res" value="1">
-          @endif
-              Private Residence
+              <p>Private Residence <i class="glyphicon {{ $client->private_res == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
           </label>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-          @if(old('section_8') && old('section_8') == 1)
-            <input class="form-check-input" type="checkbox" id="section_8" checked name="section_8" value="1">
-          @elseif($client->section_8 == 1)
-            <input class="form-check-input" type="checkbox" id="section_8" checked name="section_8" value="1">
-          @else
-            <input class="form-check-input" type="checkbox" id="section_8" name="section_8" value="1">
-          @endif
-             Section 8
+              <p>Section 8 <i class="glyphicon {{ $client->section_8 == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
           </label>
         </div>
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-          @if(old('arha') && old('arha') == 1)
-            <input class="form-check-input" type="checkbox" id="arha" checked name="arha" value="1">
-          @elseif($client->arha == 1)
-            <input class="form-check-input" type="checkbox" id="arha" checked name="arha" value="1">
-          @else
-            <input class="form-check-input" type="checkbox" id="arha" name="arha" value="1">
-          @endif
-              ARHA
+              <p>ARHA <i class="glyphicon {{ $client->arha == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
           </label>
         </div>
         <div class="col-md-2 form-check form-check-inline">
           <label class="form-check-label">
-          @if(old('other') && old('other') == 1)
-            <input class="form-check-input" type="checkbox" id="other" checked name="other" value="1">
-          @elseif($client->other == 1)
-            <input class="form-check-input" type="checkbox" id="other" checked name="other" value="1">
-          @else
-            <input class="form-check-input" type="checkbox" id="other" name="other" value="1">
-          @endif
-              Other
+              <p>Other <i class="glyphicon {{ $client->other == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
           </label>
         </div>
     </div>
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="apartment_name">Apartment Complex Name</label>
+            <label for="apartment_name">Apartment Complex</label>
         </div>
         <div class="col-md-5">
-            <input type="text" class="form-control" id="apartment_name" name="apartment_name" value="{{ old('apartment_name') ?? $client->apartment_name }}" />
+            <p>{{ $client->apartment_name }}</p>
         </div>
     </div>
 
@@ -189,9 +80,8 @@
         <div class="col-md-2">
             <label for="phone">Phone Number</label>
         </div>
-        <div class="col-md-2 input-group">
-            <input type="text" class="form-control bfh-phone" id="phone" name="phone" data-format="(ddd) ddd-dddd" value="{{ old('phone') ?? ($client->contact ? $client->contact->phone : '') }}">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <div class="col-md-2">
+            <p>{{ $client->contact->phone }}</p>
         </div>
     </div>
 
@@ -199,9 +89,8 @@
         <div class="col-md-2">
             <label for="emergency_phone">Emergency Contact Number</label>
         </div>
-        <div class="col-md-2 input-group">
-            <input type="text" class="form-control bfh-phone" id="emergency_phone" name="emergency_phone" data-format="(ddd) ddd-dddd" value="{{ old('emergency_phone') ?? ($client->contact ? $client->contact->emergency_phone : '') }}">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <div class="col-md-2">
+            <p>{{ $client->contact->emergency_phone }}</p>
         </div>
     </div>
 
@@ -209,48 +98,8 @@
         <div class="col-md-2">
             <label for="dob_month">Date of Birth</label>
         </div>
-        <div class="col-md-2">
-            <select type="text" class="form-control" id="dob_month" placeholder="Month" name="dob_month">
-                @foreach(['Select a Month', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $index => $month)
-                    @if(old('dob_month') && old('dob_month') == str_pad($index, 2, '0', STR_PAD_LEFT))
-                    <option value="{{ str_pad($index, 2, '0', STR_PAD_LEFT) }}" selected>{{ $month }}</option>
-                    @elseif($client->dob && $client->dob->format('m') == str_pad($index, 2, '0', STR_PAD_LEFT))
-                    <option value="{{ str_pad($index, 2, '0', STR_PAD_LEFT) }}" selected>{{ $month }}</option>
-                    @elseif(!old('dob_month') && !$client->dob)
-                    <option value="{{ str_pad($index, 2, '0', STR_PAD_LEFT) }}" {{ $loop->last ? 'selected' : '' }}>{{ $month }}</option>
-                    @else
-                    <option value="{{ str_pad($index, 2, '0', STR_PAD_LEFT) }}">{{ $month }}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-1">
-            <select type="text" class="form-control" id="dob_day" placeholder="Day" name="dob_day">
-                @foreach(range(1, 31) as $day)
-                @if(old('dob_day') && old('dob_day') == str_pad($day, 2, '0', STR_PAD_LEFT))
-                <option selected value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
-                @elseif($client->dob && $client->dob->format('d') == str_pad($day, 2, '0', STR_PAD_LEFT))
-                <option selected value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
-                @else
-                <option value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
-                @endif
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select type="text" class="form-control" id="dob_year" placeholder="Year" name="dob_year">
-                @foreach(range(1900, date('Y')) as $year)
-                @if(old('dob_year') && old('dob_year') == $year)
-                <option value="{{ $year }}" selected>{{ $year }}</option>
-                @elseif($client->dob && $client->dob->format('Y') == $year)
-                <option value="{{ $year }}" selected>{{ $year }}</option>
-                @elseif(!old('dob_year') && !$client->dob)
-                <option value="{{ $year }}" {{ $loop->last ? 'selected' : '' }}>{{ $year }}</option>
-                @else
-                <option value="{{ $year }}">{{ $year }}</option>
-                @endif
-                @endforeach
-            </select>
+        <div class="col-md-5">
+            <p>{{ $client->dob->format('m/d/Y') }}</p>
         </div>
     </div>
 
@@ -259,7 +108,7 @@
             <label for="gender">Gender</label>
         </div>
         <div class="col-md-1">
-            <input type="text" class="form-control" id="gender" name="gender" value="{{ old('gender') ?? $client->gender }}" />
+            <p>{{ $client->gender }}</p>
         </div>
     </div>
 
@@ -268,7 +117,7 @@
             <label for="ethnicity">Ethnicity</label>
         </div>
         <div class="col-md-2">
-            <input type="text" class="form-control" id="ethnicity" name="ethnicity" value="{{ old('ethnicity') ?? $client->ethnicity }}" />
+            <p>{{ $client->ethnicity }}</p>
         </div>
     </div>
 
@@ -277,7 +126,7 @@
             <label for="birth_country">Country of Birth</label>
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="birth_country" name="birth_country" value="{{ old('birth_country') ?? $client->birth_country }}" />
+            <p>{{ $client->birth_country }}</p>
         </div>
     </div>
     <div class="form-group row">
@@ -285,7 +134,7 @@
             <label for="veteran_status">Veteran Status</label>
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="veteran_status" name="veteran_status" value="{{ old('veteran_status') ?? $client->veteran_status }}" />
+            <p>{{ $client->veteran_status }}</p>
         </div>
     </div>
 
@@ -294,7 +143,7 @@
             <label for="incarceration">Incarceration History (if any)</label>
         </div>
         <div class="col-md-5">
-            <textarea class="form-control" rows="5" id="incarceration" name="incarceration">{{ old('incarceration') ?? $client->incarceration }}</textarea>
+            <p>{{ $client->incarceration }}</p>
         </div>
     </div>
 
@@ -303,11 +152,11 @@
             <label for="insurance_type">Medical Insurance?</label>
         </div>
         <div class="col-md-3">
-            <input type="text" class="form-control" id="insurance_type" name="insurance_type" value="{{ old('insurance_type') ?? $client->insurance_type }}" />
+            <p>{{ $client->insurance_type }}</p>
         </div>
     </div>
 
-    @include('clients.employment')
+    @include('clients.readonly-employment')
     <hr />
 
     <div class="row">
@@ -316,7 +165,6 @@
         </div>
 
         <div class="col-md-2">
-            <a href="{{ route('clients.families.create', $client->id) }}" class="btn btn-success">Add Family Member</a>
         </div>
     </div>
     <table class="table table-striped">
@@ -324,21 +172,25 @@
             <tr>
                 <th>Name</th>
                 <th>Relationship</th>
-                <th>Remove</th>
+                <th>Sex</th>
+                <th>Date of Birth</th>
+                <th>Country of Birth</th>
+                <th>Insurance</th>
             </tr>
         </thead>
         <tbody>
     @foreach($client->family as $family)
             <tr data-family-id="{{ $family->id }}">
-                <td><a href="{{ route('clients.families.edit', [$client->id, $family->id]) }}">{{ $family->name }}</a></td>
+                <td><a href="{{ route('clients.families.show', [$client->id, $family->id]) }}">{{ $family->name }}</a></td>
                 <td>{{ str_replace("_", " ", title_case($family->relationship)) }}</td>
-                <td><button onclick="removeFamilyMember({{ $family->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Family Member" data-confirm-content="Are you sure?" ></button></td>
+                <td>{{ $family->sex }}</td>
+                <td>{{ $family->dob->format('m/d/Y') }}</td>
+                <td>{{ $family->birth_country }}</td>
+                <td>{{ $family->insurance }}</td>
 
             </tr>
     @endforeach
         </tbody>
     </table>
-
-    <input type="submit" name="submit" value="Save Client" class="btn btn-primary" />
-</form>
+</div>
 @endsection
