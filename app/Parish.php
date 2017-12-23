@@ -4,10 +4,11 @@ namespace App;
 
 use App\Traits\HasContact;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Parish extends Model
 {
-    use HasContact;
+    use HasContact, SoftDeletes;
 
     protected $fillable = [
         'name'

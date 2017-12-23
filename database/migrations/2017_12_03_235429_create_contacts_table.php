@@ -28,6 +28,7 @@ class CreateContactsTable extends Migration
             $table->string('email')->nullable();
             $table->morphs('contactable');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

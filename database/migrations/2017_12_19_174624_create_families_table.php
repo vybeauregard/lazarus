@@ -23,6 +23,7 @@ class CreateFamiliesTable extends Migration
             $table->string('insurance')->nullable();
             $table->string('relationship');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -36,6 +36,7 @@ class CreateIncomeTable extends Migration
             $table->string('veteran_benefits')->nullable();
             $table->string('other_income')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -16,6 +16,7 @@ class CreateCounselorsTable extends Migration
         Schema::create('counselors', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

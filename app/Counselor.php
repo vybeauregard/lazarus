@@ -4,10 +4,11 @@ namespace App;
 
 use App\Traits\HasContact;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Counselor extends Model
 {
-    use HasContact;
+    use HasContact, SoftDeletes;
 
     protected $fillable = [];
 

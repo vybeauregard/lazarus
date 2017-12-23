@@ -31,6 +31,7 @@ class CreateClientsTable extends Migration
             $table->boolean('arha')->default(0);
             $table->boolean('other')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
