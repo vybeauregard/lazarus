@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use App\Counselor;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class CounselorController extends Controller
      */
     public function create()
     {
-        //
+        $counselor = new Counselor();
+        return view('counselors.create', compact('counselor'));
     }
 
     /**
@@ -36,7 +38,11 @@ class CounselorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $counselor = Counselor::create();
+        $contact = new Contact($request->all());
+        $counselor->contact()->save($contact);
+
+        return redirect()->route('counselors.index');
     }
 
     /**
@@ -47,7 +53,7 @@ class CounselorController extends Controller
      */
     public function show(Counselor $counselor)
     {
-        //
+        return view('counselors.show', compact('counselor'));
     }
 
     /**
@@ -58,7 +64,7 @@ class CounselorController extends Controller
      */
     public function edit(Counselor $counselor)
     {
-        //
+        return view('counselors.edit', compact('counselor'));
     }
 
     /**
@@ -70,7 +76,15 @@ class CounselorController extends Controller
      */
     public function update(Request $request, Counselor $counselor)
     {
-        //
+        if(is_null($counselor->contact)){
+            $contact = new Contact($request->all());
+            $counselor->contact()->save($contact);
+
+        } else {
+            $counselor->contact->fill($request->all());
+        }
+        $counselor->push();
+        return redirect()->route('counselors.index');
     }
 
     /**
@@ -81,6 +95,6 @@ class CounselorController extends Controller
      */
     public function destroy(Counselor $counselor)
     {
-        //
+        $counselor->delete();
     }
 }

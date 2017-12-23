@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         ], 'public');
 
         \View::composer(
-            ['clients.create', 'clients.edit'],
+            ['clients.create', 'clients.edit', 'counselors.create', 'counselors.edit'],
             'App\Http\ViewComposers\StateList'
         );
 
