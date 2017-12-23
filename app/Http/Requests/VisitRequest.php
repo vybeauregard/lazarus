@@ -33,7 +33,8 @@ class VisitRequest extends FormRequest
     public function rules()
     {
         return [
-            'client_id' => 'required'
+            'client_id' => 'required',
+            'counselor_id' => 'required',
         ];
     }
 
@@ -41,6 +42,7 @@ class VisitRequest extends FormRequest
     {
         return [
             'client_id.required' => 'Please specify a client. If the Client is unavailable, please <a href="' . route('clients.create') .'">create them</a>.',
+            'counselor_id.required' => 'Please specify a counselor. If the Counselor is unavailable, please <a href="' . route('counselors.create') .'">create them</a>.',
         ];
     }
 

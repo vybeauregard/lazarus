@@ -53,7 +53,8 @@ class VisitController extends Controller
      */
     public function show(Visit $visit)
     {
-        //
+        $visit->load('client', 'counselor');
+        return view('visits.show', compact('visit'));
     }
 
     /**
@@ -64,6 +65,7 @@ class VisitController extends Controller
      */
     public function edit(Visit $visit)
     {
+        $visit->load('client', 'counselor');
         return view('visits.edit', compact('visit'));
     }
 

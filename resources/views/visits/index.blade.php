@@ -17,7 +17,7 @@
     <tbody>
     @foreach($visits as $visit)
         <tr data-visit-id="{{ $visit->id }}">
-            <td><a href="{{ route('visits.edit', $visit->id) }}">{{ $visit->client->name }}</a></td>
+            <td><a href="{{ route('visits.show', $visit->id) }}">{{ $visit->client->name }}</a></td>
             <td>{{ $visit->date->format('m/d/Y') }}</td>
             <td>{{ $visit->counselor->name }}</td>
             <td><button onclick="removeVisit({{ $visit->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Visit" data-confirm-content="Are you sure?" ></button></td>
