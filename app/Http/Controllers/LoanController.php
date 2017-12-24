@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Loan;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoanRequest;
 
 class LoanController extends Controller
 {
@@ -25,7 +25,8 @@ class LoanController extends Controller
      */
     public function create()
     {
-        //
+        $loan = new Loan;
+        return view('loans.create', compact('loan'));
     }
 
     /**
@@ -34,9 +35,10 @@ class LoanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LoanRequest $request)
     {
-        //
+        $loan = Loan::create($request->all());
+        return redirect()->route('loans.index');
     }
 
     /**
@@ -47,7 +49,7 @@ class LoanController extends Controller
      */
     public function show(Loan $loan)
     {
-        //
+        return view('loans.show', compact('loan'));
     }
 
     /**
@@ -58,7 +60,7 @@ class LoanController extends Controller
      */
     public function edit(Loan $loan)
     {
-        //
+        return view('loans.edit', compact('loan'));
     }
 
     /**
@@ -68,9 +70,10 @@ class LoanController extends Controller
      * @param  \App\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Loan $loan)
+    public function update(LoanRequest $request, Loan $loan)
     {
-        //
+        $loan->fill($request->all())->save();
+        return redirect()->route('loans.index');
     }
 
     /**
@@ -81,6 +84,7 @@ class LoanController extends Controller
      */
     public function destroy(Loan $loan)
     {
-        //
+        $loan->delete();
+        return redirect()->route('loans.index');
     }
 }
