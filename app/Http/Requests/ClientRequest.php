@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Carbon\Carbon;
+use Facades\App\Client;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ClientRequest extends FormRequest
@@ -43,12 +44,17 @@ class ClientRequest extends FormRequest
         }
         $this->merge(['family' => $family]);
 
-        if ($this->has('phone')) {
-            $this->merge(["phone" => preg_replace("/[^0-9,.]/", "", $this->phone )]);
-        }
-        if ($this->has('emergency_phone')) {
-            $this->merge(["emergency_phone" => preg_replace("/[^0-9,.]/", "", $this->emergency_phone )]);
-        }
+        Client::getPhonesCollection()->each(function($phone_field){
+            if($this->has($phone_field)) {
+                $this->merge([$phone_field => preg_replace("/[^0-9,.]/", "", $this->$phone_field )]);
+            }
+        });
+
+        Client::getCheckboxesCollection()->each(function($checkbox_field){
+            if(!$this->has($checkbox_field)) {
+                $this->merge([$checkbox_field => 0]);
+            }
+        });
 
     }
 

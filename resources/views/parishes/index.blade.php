@@ -5,7 +5,7 @@
 <a href="{{ route('parishes.create') }}" class="btn btn-success">New Parish</a>
 {{ csrf_field() }}
 
-<table class="table">
+<table class="table table-striped" style="width:500px;">
     <thead>
         <tr>
             <th>Name</th>

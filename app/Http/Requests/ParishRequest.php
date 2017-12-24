@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Facades\App\Parish;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ParishRequest extends FormRequest
@@ -18,13 +19,11 @@ class ParishRequest extends FormRequest
 
     private function sanitize()
     {
-        if ($this->has('phone')) {
-            $this->merge(["phone" => preg_replace("/[^0-9,.]/", "", $this->phone )]);
-        }
-        if ($this->has('emergency_phone')) {
-            $this->merge(["emergency_phone" => preg_replace("/[^0-9,.]/", "", $this->emergency_phone )]);
-        }
-
+        Parish::getPhonesCollection()->each(function($phone_field){
+            if($this->has($phone_field)) {
+                $this->merge([$phone_field => preg_replace("/[^0-9,.]/", "", $this->$phone_field )]);
+            }
+        });
     }
 
     /**

@@ -6,3 +6,7 @@
  */
 
 $(".popconfirm").popConfirm();
+
+$(".input-group-addon").on('click', function(){
+    $(this).prev('input').focus();
+});

@@ -4,6 +4,11 @@ namespace App\Traits;
 
 trait HasContact
 {
+    protected $phones = [
+        'phone',
+        'emergency_phone'
+    ];
+
     public function getNameAttribute()
     {
         //Parishes have contact info, but name data lives on the parish model
@@ -59,6 +64,12 @@ trait HasContact
         }
         return $this->formatPhone($this->contact->emergency_phone);
     }
+
+    public function getPhonesCollection()
+    {
+        return collect($this->phones);
+    }
+
 
     public function typeahead()
     {

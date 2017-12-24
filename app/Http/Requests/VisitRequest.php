@@ -41,8 +41,8 @@ class VisitRequest extends FormRequest
     public function messages()
     {
         return [
-            'client_id.required' => 'Please specify a client. If the Client is unavailable, please <a href="' . route('clients.create') .'">create them</a>.',
-            'counselor_id.required' => 'Please specify a counselor. If the Counselor is unavailable, please <a href="' . route('counselors.create') .'">create them</a>.',
+            'client_id.required' => 'Please specify a client. If the client is unavailable, please <a href="' . route('clients.create') .'">add them</a>.',
+            'counselor_id.required' => 'Please specify a counselor. If the counselor is unavailable, please <a href="' . route('counselors.create') .'">add them</a>.',
         ];
     }
 

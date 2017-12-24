@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         ], 'public');
 
         \View::composer(
-            ['clients.create', 'clients.edit', 'counselors.create', 'counselors.edit', 'parishes.create', 'parishes.edit'],
+            ['clients.create', 'clients.edit', 'counselors.create', 'counselors.edit', 'parishes.form'],
             'App\Http\ViewComposers\StateList'
         );
 
@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         );
 
         \View::composer(
-            ['visits.form'],
+            ['visits.form', 'loans.form'],
             'App\Http\ViewComposers\ClientTypeahead'
         );
 

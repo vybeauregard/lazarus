@@ -29,7 +29,7 @@
     <div class="col-md-2">
         <label for="parish">Primary Parish</label>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 input-group">
         <input type="text"
                class="form-control typeahead"
                data-provide="typeahead"
@@ -37,6 +37,7 @@
                id="parish"
                name="parish"
                value="{{ old('parish') ?? ($counselor->parish ? $counselor->parish->name : '') }}" />
+        <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
         <input type="hidden" name="parish_id" value="{{ old('parish_id') ?? $counselor->parish_id }}" />
     </div>
     <div class="col-md-2">
@@ -136,6 +137,10 @@
         showHintOnFocus: "true",
         afterSelect: function(item) {
             $("input[name='parish_id']").val(item.id)
+        }
+    }).on('blur', function(){
+        if($(this).val() == "") {
+            $("input[name='parish_id']").val('');
         }
     });
 </script>

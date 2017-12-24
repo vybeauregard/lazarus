@@ -22,8 +22,8 @@
                id="client"
                name="client"
                value="{{ old('client') ?? ($visit->client ? $visit->client->name : '') }}" />
-        <input type="hidden" name="client_id" value="{{ old('client_id') ?? $visit->client_id }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="hidden" name="client_id" value="{{ old('client_id') ?? $visit->client_id }}" />
     </div>
     <div class="col-md-2">
     </div>
@@ -41,8 +41,8 @@
                id="counselor"
                name="counselor"
                value="{{ old('counselor') ?? ($visit->counselor ? $visit->counselor->name : '') }}" />
-        <input type="hidden" name="counselor_id" value="{{ old('counselor_id') ?? $visit->counselor_id }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="hidden" name="counselor_id" value="{{ old('counselor_id') ?? $visit->counselor_id }}" />
     </div>
     <div class="col-md-2">
     </div>
@@ -75,6 +75,10 @@
         afterSelect: function(item) {
             $("input[name='client_id']").val(item.id)
         }
+    }).on('blur', function(){
+        if($(this).val() == "") {
+            $("input[name='client_id']").val('');
+        }
     });
     $(".typeahead[name='counselor']").typeahead({
         provide: "typeahead",
@@ -82,6 +86,10 @@
         showHintOnFocus: "true",
         afterSelect: function(item) {
             $("input[name='counselor_id']").val(item.id)
+        }
+    }).on('blur', function(){
+        if($(this).val() == "") {
+            $("input[name='counselor_id']").val('');
         }
     });
 </script>

@@ -33,6 +33,15 @@ class Client extends Model
         'dob'
     ];
 
+    protected $checkboxes = [
+        'homeless',
+        'shelter',
+        'private_res',
+        'section_8',
+        'arha',
+        'other',
+    ];
+
     public function contact()
     {
         return $this->morphOne(Contact::class, 'contactable');
@@ -54,5 +63,10 @@ class Client extends Model
         $this->family()->delete();
         $this->income()->delete();
         parent::delete();
+    }
+
+    public function getCheckboxesCollection()
+    {
+        return collect($this->checkboxes);
     }
 }
