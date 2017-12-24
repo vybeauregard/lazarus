@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Counselors | Edit {{ $counselor->name }}
+@endsection
+
 @section('content')
 <h2>Counselor {{ $counselor->name }}</h2>
 

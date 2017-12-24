@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@section('title')
+| Parishes | {{ $parish->name }}
+@endsection
+
 @section('content')
-<h2>Parish {{ $parish->name }} <a href="{{ route('parishes.edit', $parish->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
+<h2>{{ $parish->name }} Parish <a href="{{ route('parishes.edit', $parish->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
 
 <div style="margin:14px;">
 

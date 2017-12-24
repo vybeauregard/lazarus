@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Counselors | Add Counselor
+@endsection
+
 @section('content')
 <h2>Add a Counselor</h2>
 

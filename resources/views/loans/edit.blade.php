@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Loans | Edit {{ $loan->client->name }}
+@endsection
+
 @section('content')
 <h2>Edit Loan for {{ $loan->client->name }}</h2>
 

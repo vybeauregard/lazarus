@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Clients | Edit {{ $client->name }}
+@endsection
+
 @section('content')
 <h3>{{ $client->name }}</h3>
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.update', $client->id) }}">

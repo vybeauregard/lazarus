@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Clients
+@endsection
+
 @section('content')
 <h3>Clients</h3>
 <a href="{{ route('clients.create') }}" class="btn btn-success">New Client</a>

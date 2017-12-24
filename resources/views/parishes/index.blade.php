@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Parishes
+@endsection
+
 @section('content')
 <h3>Parishes</h3>
 <a href="{{ route('parishes.create') }}" class="btn btn-success">New Parish</a>

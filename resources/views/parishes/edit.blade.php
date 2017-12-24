@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@section('title')
+| Parishes | Edit {{ $parish->name }}
+@endsection
+
 @section('content')
-<h2>Parish {{ $parish->name }}</h2>
+<h2>Edit {{ $parish->name }} Parish</h2>
 
 <form style="margin:14px;" class="" method="post" action="{{ route('parishes.update', $parish->id) }}">
     {{ csrf_field() }}

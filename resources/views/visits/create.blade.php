@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Visits | Add Visit
+@endsection
+
 @section('content')
 <h3>Add a new Visit</h3>
 <form style="margin:14px;" class="" method="post" action="{{ route('visits.store') }}">

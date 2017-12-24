@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Loans | {{ $loan->client->name }}
+@endsection
+
 @section('content')
 <h2>Loan for {{ $loan->client->name }} <a href="{{ route('loans.edit', $loan->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
 

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Counselors | {{ $counselor->name }}
+@endsection
+
 @section('content')
 <h2>Counselor {{ $counselor->name }} <a href="{{ route('counselors.edit', $counselor->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
 

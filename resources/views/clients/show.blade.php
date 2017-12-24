@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Clients | {{ $client->name }}
+@endsection
+
 @section('content')
 <h3>{{ $client->name }} <a href="{{ route('clients.edit', $client->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h3>
 <div style="margin:14px;">

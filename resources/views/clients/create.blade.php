@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@section('title')
+| Clients | Add Client
+@endsection
+
 @section('content')
-<h2>Create a new Client</h2>
+<h2>Add a new Client</h2>
 <form style="margin:14px;" class="" method="post" action="{{ route('clients.store') }}">
     {{ csrf_field() }}
     @include('clients.form')

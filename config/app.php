@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => array_key_exists('APP_NAME', $_SERVER) ? $_SERVER['APP_NAME'] : env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------

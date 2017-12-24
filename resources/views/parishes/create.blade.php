@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Parishes | Add Parish
+@endsection
+
 @section('content')
 <h2>Add a Parish</h2>
 

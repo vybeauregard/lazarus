@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Loans | Add Loan
+@endsection
+
 @section('content')
 <h2>Add a Loan</h2>
 

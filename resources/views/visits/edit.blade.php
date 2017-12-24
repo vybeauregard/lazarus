@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Visits | Edit {{ $visit->client->name }} {{ $visit->date->format('m/d/Y') }}
+@endsection
+
 @section('content')
 <h3>Edit Visit from {{ $visit->client->name }}</h3>
 <form style="margin:14px;" class="" method="post" action="{{ route('visits.update', $visit->id) }}">

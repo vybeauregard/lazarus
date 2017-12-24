@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+| Loans
+@endsection
+
 @section('content')
 <h3>Loans</h3>
 <a href="{{ route('loans.create') }}" class="btn btn-success">New Loan</a>
