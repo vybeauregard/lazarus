@@ -10,11 +10,18 @@ class Counselor extends Model
 {
     use HasContact, SoftDeletes;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'parish_id'
+    ];
 
     public function contact()
     {
         return $this->morphOne(Contact::class, 'contactable');
+    }
+
+    public function parish()
+    {
+        return $this->belongsTo(Parish::class);
     }
 
     public function delete()

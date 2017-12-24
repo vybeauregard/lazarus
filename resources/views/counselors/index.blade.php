@@ -12,6 +12,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Primary Parish</th>
                 <th>Remove</th>
             </tr>
         </thead>
@@ -19,7 +20,8 @@
         @foreach($counselors as $counselor)
             <tr data-counselor-id="{{ $counselor->id }}">
                 <td><a href="{{ route('counselors.show', $counselor->id) }}">{{ $counselor->name }}</a></td>
-            <td><button onclick="removeCounselor({{ $counselor->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Counselor" data-confirm-content="Are you sure?" ></button></td>
+                <td>{{ $counselor->parish ? $counselor->parish->name : '' }}</td>
+                <td><button onclick="removeCounselor({{ $counselor->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Counselor" data-confirm-content="Are you sure?" ></button></td>
             </tr>
         @endforeach
         </tbody>

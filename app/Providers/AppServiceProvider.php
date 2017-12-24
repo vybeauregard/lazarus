@@ -24,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
         );
 
         \View::composer(
+            ['counselors.form'],
+            'App\Http\ViewComposers\ParishTypeahead'
+        );
+
+        \View::composer(
             ['visits.form'],
             'App\Http\ViewComposers\CounselorTypeahead'
         );

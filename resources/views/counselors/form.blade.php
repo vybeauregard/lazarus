@@ -27,6 +27,24 @@
 
 <div class="form-group row">
     <div class="col-md-2">
+        <label for="parish">Primary Parish</label>
+    </div>
+    <div class="col-md-3">
+        <input type="text"
+               class="form-control typeahead"
+               data-provide="typeahead"
+               autocomplete="off"
+               id="parish"
+               name="parish"
+               value="{{ old('parish') ?? ($counselor->parish ? $counselor->parish->name : '') }}" />
+        <input type="hidden" name="parish_id" value="{{ old('parish_id') ?? $counselor->parish_id }}" />
+    </div>
+    <div class="col-md-2">
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-2">
         <label for="address1">Address 1</label>
     </div>
     <div class="col-md-5">
@@ -109,3 +127,16 @@
         <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
     </div>
 </div>
+
+@section('custom-js')
+<script>
+    $(".typeahead[name='parish']").typeahead({
+        provide: "typeahead",
+        source: {!! $parishes !!},
+        showHintOnFocus: "true",
+        afterSelect: function(item) {
+            $("input[name='parish_id']").val(item.id)
+        }
+    });
+</script>
+@endsection

@@ -38,7 +38,7 @@ class CounselorController extends Controller
      */
     public function store(CounselorRequest $request)
     {
-        $counselor = Counselor::create();
+        $counselor = Counselor::create($request->all());
         $contact = new Contact($request->all());
         $counselor->contact()->save($contact);
 
@@ -76,6 +76,7 @@ class CounselorController extends Controller
      */
     public function update(CounselorRequest $request, Counselor $counselor)
     {
+        $counselor->fill($request->all());
         if(is_null($counselor->contact)){
             $contact = new Contact($request->all());
             $counselor->contact()->save($contact);

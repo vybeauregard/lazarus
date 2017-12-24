@@ -16,6 +16,15 @@
 
     <div class="form-group row">
         <div class="col-md-2">
+            <label for="name">Primary Parish</label>
+        </div>
+        <div class="col-md-5">
+            <p>{{ $counselor->parish ? $counselor->parish->name : '' }}</p>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-2">
             <label for="address">Address</label>
         </div>
         <div class="col-md-2">
