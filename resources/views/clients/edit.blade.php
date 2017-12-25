@@ -15,12 +15,8 @@
     <hr />
 
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <h4>Family Members</h4>
-        </div>
-
-        <div class="col-md-2">
-            <a href="{{ route('clients.families.create', $client->id) }}" class="btn btn-success">Add Family Member</a>
         </div>
     </div>
     <table class="table table-striped">
@@ -42,9 +38,8 @@
     @endforeach
         </tbody>
     </table>
-    @else
-        <a href="{{ route('clients.families.create', $client->id) }}" class="btn btn-success">Add Family Member</a>
     @endif
+    <input type="submit" name="submit" value="Save Client and Add Family Member" class="btn btn-success" />
 
     <input type="submit" name="submit" value="Save Client" class="btn btn-primary" />
 </form>

@@ -78,6 +78,10 @@ class ClientController extends Controller
     public function update(ClientRequest $request, Client $client)
     {
         $client->updateWithRelations($request->all());
+
+        if($request->submit == "Save Client and Add Family Member") {
+            return redirect()->route('clients.families.create', $client->id);
+        }
         return redirect()->route('clients.index');
 
     }
