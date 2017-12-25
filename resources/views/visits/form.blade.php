@@ -21,6 +21,7 @@
                autocomplete="off"
                id="client"
                name="client"
+               placeholder="Type a name or click to select"
                value="{{ old('client') ?? ($visit->client ? $visit->client->name : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         <input type="hidden" name="client_id" value="{{ old('client_id') ?? $visit->client_id }}" />
@@ -40,6 +41,7 @@
                autocomplete="off"
                id="counselor"
                name="counselor"
+               placeholder="Type a name or click to select"
                value="{{ old('counselor') ?? ($visit->counselor ? $visit->counselor->name : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         <input type="hidden" name="counselor_id" value="{{ old('counselor_id') ?? $visit->counselor_id }}" />
@@ -71,9 +73,16 @@
     $(".typeahead[name='client']").typeahead({
         provide: "typeahead",
         source: {!! $clients !!},
-        showHintOnFocus: "true",
+        showHintOnFocus: "all",
+        autoSelect: false,
+        minLength: 2,
         afterSelect: function(item) {
             $("input[name='client_id']").val(item.id)
+        }
+    }).on('keyup', function(event){
+        if ((event.keyCode === 8 || event.keyCode === 46) && $(this).val() === '') {
+            $(this).blur();
+            $(this).focus();
         }
     }).on('blur', function(){
         if($(this).val() == "") {
@@ -83,9 +92,16 @@
     $(".typeahead[name='counselor']").typeahead({
         provide: "typeahead",
         source: {!! $counselors !!},
-        showHintOnFocus: "true",
+        showHintOnFocus: "all",
+        autoSelect: false,
+        minLength: 2,
         afterSelect: function(item) {
             $("input[name='counselor_id']").val(item.id)
+        }
+    }).on('keyup', function(event){
+        if ((event.keyCode === 8 || event.keyCode === 46) && $(this).val() === '') {
+            $(this).blur();
+            $(this).focus();
         }
     }).on('blur', function(){
         if($(this).val() == "") {

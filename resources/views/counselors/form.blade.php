@@ -36,6 +36,7 @@
                autocomplete="off"
                id="parish"
                name="parish"
+               placeholder="Type a name or click to select"
                value="{{ old('parish') ?? ($counselor->parish ? $counselor->parish->name : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
         <input type="hidden" name="parish_id" value="{{ old('parish_id') ?? $counselor->parish_id }}" />
@@ -80,9 +81,16 @@
     $(".typeahead[name='parish']").typeahead({
         provide: "typeahead",
         source: {!! $parishes !!},
-        showHintOnFocus: "true",
+        showHintOnFocus: "all",
+        autoSelect: false,
+        minLength: 2,
         afterSelect: function(item) {
             $("input[name='parish_id']").val(item.id)
+        }
+    }).on('keyup', function(event){
+        if ((event.keyCode === 8 || event.keyCode === 46) && $(this).val() === '') {
+            $(this).blur();
+            $(this).focus();
         }
     }).on('blur', function(){
         if($(this).val() == "") {
