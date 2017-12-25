@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
-use App\Contact;
-use App\Family;
 use App\Income;
-use App\State;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
 
@@ -44,13 +41,6 @@ class ClientController extends Controller
     public function store(ClientRequest $request)
     {
         $client = Client::create($request->all());
-        $contact = new Contact($request->all());
-        $income = new Income($request->all());
-        foreach($request->family as $person) {
-            $client->family()->save(new Family($person));
-        }
-        $client->contact()->save($contact);
-        $client->income()->save($income);
         return redirect()->route('clients.index');
     }
 
@@ -87,21 +77,7 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, Client $client)
     {
-        $client->fill($request->all());
-        if(is_null($client->contact)){
-            $contact = new Contact($request->all());
-            $client->contact()->save($contact);
-
-        } else {
-            $client->contact->fill($request->all());
-        }
-        if(is_null($client->income)){
-            $income = new Income($request->all());
-            $client->income()->save($income);
-        } else {
-            $client->income->fill($request->all());
-        }
-        $client->push();
+        $client->updateWithRelations($request->all());
         return redirect()->route('clients.index');
 
     }

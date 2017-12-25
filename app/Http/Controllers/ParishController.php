@@ -40,10 +40,6 @@ class ParishController extends Controller
     public function store(ParishRequest $request)
     {
         $parish = Parish::create($request->all());
-        $contact = new Contact($request->all());
-        $parish->contact()->save($contact);
-
-        $parish->push();
         return redirect()->route('parishes.index');
     }
 
@@ -55,6 +51,7 @@ class ParishController extends Controller
      */
     public function show(Parish $parish)
     {
+        $parish->load('contact');
         return view('parishes.show', compact('parish'));
     }
 
@@ -66,6 +63,7 @@ class ParishController extends Controller
      */
     public function edit(Parish $parish)
     {
+        $parish->load('contact');
         return view('parishes.edit', compact('parish'));
     }
 
@@ -78,16 +76,7 @@ class ParishController extends Controller
      */
     public function update(ParishRequest $request, Parish $parish)
     {
-        $parish->fill($request->all());
-        if(is_null($parish->contact)){
-            $contact = new Contact($request->all());
-            $parish->contact()->save($contact);
-
-        } else {
-            $parish->contact->fill($request->all());
-        }
-
-        $parish->push();
+        $parish->updateWithRelations($request->all());
         return redirect()->route('parishes.index');
 
     }

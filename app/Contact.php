@@ -21,8 +21,6 @@ class Contact extends Model
         'phone',
         'emergency_phone',
         'email',
-//        'contactable_id',
-//        'contactable_type',
     ];
 
     public function contactable()

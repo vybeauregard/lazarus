@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Contact;
 use App\Counselor;
 use App\Http\Requests\CounselorRequest;
 
@@ -15,7 +14,7 @@ class CounselorController extends Controller
      */
     public function index()
     {
-        $counselors = Counselor::with('contact')->get()->sortBy('contact.last_name');
+        $counselors = Counselor::with('contact', 'parish')->get()->sortBy('contact.last_name');
         return view('counselors.index', compact('counselors'));
     }
 
@@ -39,8 +38,6 @@ class CounselorController extends Controller
     public function store(CounselorRequest $request)
     {
         $counselor = Counselor::create($request->all());
-        $contact = new Contact($request->all());
-        $counselor->contact()->save($contact);
 
         return redirect()->route('counselors.index');
     }
@@ -53,6 +50,7 @@ class CounselorController extends Controller
      */
     public function show(Counselor $counselor)
     {
+        $counselor->load('contact', 'parish');
         return view('counselors.show', compact('counselor'));
     }
 
@@ -64,6 +62,7 @@ class CounselorController extends Controller
      */
     public function edit(Counselor $counselor)
     {
+        $counselor->load('contact', 'parish');
         return view('counselors.edit', compact('counselor'));
     }
 
@@ -76,15 +75,8 @@ class CounselorController extends Controller
      */
     public function update(CounselorRequest $request, Counselor $counselor)
     {
-        $counselor->fill($request->all());
-        if(is_null($counselor->contact)){
-            $contact = new Contact($request->all());
-            $counselor->contact()->save($contact);
 
-        } else {
-            $counselor->contact->fill($request->all());
-        }
-        $counselor->push();
+        $counselor->updateWithRelations($request->all());
         return redirect()->route('counselors.index');
     }
 
