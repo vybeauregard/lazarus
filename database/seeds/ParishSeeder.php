@@ -12,6 +12,7 @@ class ParishSeeder extends Seeder
      */
     public function run()
     {
+        Parish::reguard();
         $parishes = collect([
             "St. Paul's",
             "Resurrection",
@@ -19,7 +20,9 @@ class ParishSeeder extends Seeder
             "St. Rita's"
         ]);
         $parishes->each(function($parish) {
-            Parish::create(['name' => $parish]);
+            Parish::create([
+                'name' => $parish
+            ]);
         });
     }
 }
