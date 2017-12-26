@@ -125,6 +125,10 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'email' => array_key_exists('APP_ADMIN_EMAIL', $_SERVER) ? $_SERVER['APP_ADMIN_EMAIL'] : env('APP_ADMIN_EMAIL', ''),
+
+    'slack_webhook_url' => array_key_exists('APP_SLACK_WEBHOOK_URL', $_SERVER) ? $_SERVER['APP_SLACK_WEBHOOK_URL'] : env('APP_SLACK_WEBHOOK_URL', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

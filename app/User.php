@@ -37,4 +37,15 @@ class User extends Authenticatable
     {
         return !!$this->admin;
     }
+
+    /**
+     * Route notifications for the Slack channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForSlack()
+    {
+        return config('app.slack_webhook_url');
+        dd(config('app.slack_webhook_url'));
+    }
 }
