@@ -15,8 +15,8 @@ class CreateVisitsTable extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->unsigned();
-            $table->integer('counselor_id')->unsigned();
+            $table->integer('client_id')->unsigned()->index();
+            $table->integer('counselor_id')->unsigned()->index();
             $table->date('date');
             $table->text('request')->nullable();
             $table->text('action')->nullable();

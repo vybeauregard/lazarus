@@ -15,7 +15,7 @@ class CreateIncomeTable extends Migration
     {
         Schema::create('income', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->unsigned();
+            $table->integer('client_id')->unsigned()->index();
             $table->string('monthly_income')->nullable();
             $table->string('part_time')->nullable();
             $table->string('pt_employer')->nullable();
