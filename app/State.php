@@ -11,7 +11,6 @@ class State
         $this->states = collect([
             "AL" => "Alabama",
             "AK" => "Alaska",
-            "AS" => "American Samoa",
             "AZ" => "Arizona",
             "AR" => "Arkansas",
             "CA" => "California",
@@ -21,7 +20,6 @@ class State
             "DC" => "District Of Columbia",
             "FL" => "Florida",
             "GA" => "Georgia",
-            "GU" => "Guam",
             "HI" => "Hawaii",
             "ID" => "Idaho",
             "IL" => "Illinois",
@@ -31,7 +29,6 @@ class State
             "KY" => "Kentucky",
             "LA" => "Louisiana",
             "ME" => "Maine",
-            "MH" => "Marshall Islands",
             "MD" => "Maryland",
             "MA" => "Massachusetts",
             "MI" => "Michigan",
@@ -47,7 +44,6 @@ class State
             "NY" => "New York",
             "NC" => "North Carolina",
             "ND" => "North Dakota",
-            "MP" => "Northern Mariana Islands",
             "OH" => "Ohio",
             "OK" => "Oklahoma",
             "OR" => "Oregon",
@@ -60,12 +56,16 @@ class State
             "TX" => "Texas",
             "UT" => "Utah",
             "VT" => "Vermont",
-            "VI" => "Virgin Islands",
             "VA" => "Virginia",
             "WA" => "Washington",
             "WV" => "West Virginia",
             "WI" => "Wisconsin",
-            "WY" => "Wyoming"
+            "WY" => "Wyoming",
+            "AS" => "American Samoa",
+            "GU" => "Guam",
+            "MH" => "Marshall Islands",
+            "MP" => "Northern Mariana Islands",
+            "VI" => "Virgin Islands",
         ]);
     }
 
