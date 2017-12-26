@@ -17,6 +17,9 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        if(Auth::user() == $user) {
+            return response()->json(["error" => 'CANNOT MODIFY YOURSELF'], 422);
+        }
         $user->fill($request->all())->save();
         return $user;
     }
