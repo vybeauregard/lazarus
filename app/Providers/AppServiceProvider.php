@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         );
 
         \View::composer(
-            ['visits.form', 'loans.form'],
+            ['visits.form', 'loans.form', 'programs.form'],
             'App\Http\ViewComposers\ClientTypeahead'
         );
 

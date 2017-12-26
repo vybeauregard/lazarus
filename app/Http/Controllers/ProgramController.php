@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Program;
-use Illuminate\Http\Request;
+use App\Http\Requests\ProgramRequest;
 
 class ProgramController extends Controller
 {
@@ -14,7 +14,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = Program::all();
+        $programs = Program::with('client')->get();
         return view('programs.index', compact('programs'));
     }
 
@@ -25,7 +25,8 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        //
+        $program = new Program;
+        return view('programs.create', compact('program'));
     }
 
     /**
@@ -34,9 +35,10 @@ class ProgramController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProgramRequest $request)
     {
-        //
+        Program::create($request->all());
+        return redirect()->route('programs.index');
     }
 
     /**
@@ -47,7 +49,7 @@ class ProgramController extends Controller
      */
     public function show(Program $program)
     {
-        //
+        return view('programs.show', compact('program'));
     }
 
     /**
@@ -58,7 +60,7 @@ class ProgramController extends Controller
      */
     public function edit(Program $program)
     {
-        //
+        return view('programs.edit', compact('program'));
     }
 
     /**
@@ -68,9 +70,10 @@ class ProgramController extends Controller
      * @param  \App\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Program $program)
+    public function update(ProgramRequest $request, Program $program)
     {
-        //
+        $program->fill($request->all())->save();
+        return redirect()->route('programs.index');
     }
 
     /**
@@ -81,6 +84,6 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        $program->delete();
     }
 }
