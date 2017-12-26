@@ -17,9 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', function () {
+//    dd(Auth::user());
+//    return redirect('/');
+//})->name('home');
 
-Route::group(['middleware' => ['auth']], function () {
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
+
+    Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('visits', 'VisitController');
 
@@ -42,5 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('reports', function(){
         return view("reports.index");
     })->name('reports.index');
+
+    Route::resource('users', 'Auth\UserController')->only(['destroy', 'update', 'index'])->middleware('admin');
 
 });

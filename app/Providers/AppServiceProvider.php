@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -37,6 +39,13 @@ class AppServiceProvider extends ServiceProvider
             ['visits.form', 'loans.form'],
             'App\Http\ViewComposers\ClientTypeahead'
         );
+
+        Blade::if('verified', function() {
+            if (Auth::user()) {
+                return Auth::user()->isVerified();
+            }
+            return false;
+        });
 
     }
 
