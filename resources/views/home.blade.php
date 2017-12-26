@@ -17,9 +17,6 @@
                     You are logged in!
                 </div>
             </div>
-            <div class="panel">
-                @include('partials.nav')
-            </div>
         </div>
     </div>
 </div>

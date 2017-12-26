@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@if(Auth::check())
+@if(!Auth::check())
 @section('content')
 <div class="container">
     <div class="row">

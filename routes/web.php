@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('visits', 'VisitController');
 
@@ -43,4 +43,4 @@ Route::get('/home', 'HomeController@index')->name('home');
         return view("reports.index");
     })->name('reports.index');
 
-//});
+});

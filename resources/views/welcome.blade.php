@@ -81,12 +81,6 @@
                 <div class="title m-b-md">
                     Lazarus Ministry
                 </div>
-
-                @if(Auth::check())
-                <div class="links">
-                    @include('partials.nav')
-                </div>
-                @endif
             </div>
         </div>
     </body>
