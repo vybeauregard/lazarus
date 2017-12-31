@@ -24,7 +24,11 @@
             <td><a href="{{ route('visits.show', $visit->id) }}">{{ $visit->client->name }}</a></td>
             <td>{{ $visit->date->format('m/d/Y') }}</td>
             <td>{{ $visit->counselor->name }}</td>
-            <td><button onclick="removeVisit({{ $visit->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Visit" data-confirm-content="Are you sure?" ></button></td>
+            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                        data-toggle="confirmation"
+                        data-title="Remove this Visit?"
+                        data-on-confirm="removeVisit"></button>
+            </td>
         </tr>
     @endforeach
     </tbody>
@@ -35,6 +39,7 @@
 @section('custom-js')
 <script>
 function removeVisit(visit_id) {
+    var visit_id = $(this).closest('tr').data('visit-id');
     var url = "{{ route('visits.destroy', 0) }}";
     var ajax = {
         data: {

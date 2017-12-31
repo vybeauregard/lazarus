@@ -19,7 +19,6 @@
         @include('clients.family', ['fam_id' => 0])
     @endif
     <button class="btn btn-success add-family">Add a family member</button>
-<hr />
 
     <input type="submit" name="submit" value="Add Client" class="btn btn-primary" />
 </form>

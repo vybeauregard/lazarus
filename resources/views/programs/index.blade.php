@@ -22,9 +22,13 @@
     @foreach($programs as $program)
         <tr data-program-id="{{ $program->id }}">
             <td><a href="{{ route('programs.show', $program->id) }}">{{ $program->name }}</a></td>
-            <td> {{$program->client->name }} </td>
+            <td> {{ $program->client ? $program->client->name : '' }} </td>
             <td> {{ $program->application_submitted ? $program->application_submitted->format('m/d/Y') : 'not submitted' }} </td>
-            <td><button onclick="removeProgram({{ $program->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove program" data-confirm-content="Are you sure?" ></button></td>
+            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                        data-toggle="confirmation"
+                        data-title="Remove this Program?"
+                        data-on-confirm="removeProgram"></button>
+            </td>
         </tr>
     @endforeach
     </tbody>
@@ -33,7 +37,8 @@
 
 @section('custom-js')
 <script>
-function removeProgram(program_id) {
+function removeProgram() {
+    var program_id = $(this).closest('tr').data('program-id');
     var url = "{{ route('programs.destroy', 0) }}";
     var ajax = {
         data: {

@@ -24,7 +24,11 @@
             <td><a href="{{ route('loans.show', $loan->id) }}">{{ $loan->client->name }}</a></td>
             <td>{{ $loan->type }}</td>
             <td>${{ $loan->amount }}</td>
-            <td><button onclick="removeLoan({{ $loan->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Loan" data-confirm-content="Are you sure?" ></button></td>
+            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                        data-toggle="confirmation"
+                        data-title="Remove this Loan?"
+                        data-on-confirm="removeLoan"></button>
+            </td>
         </tr>
     @endforeach
     </tbody>
@@ -33,7 +37,8 @@
 
 @section('custom-js')
 <script>
-function removeLoan(loan_id) {
+function removeLoan() {
+    var loan_id = $(this).closest('tr').data('loan-id');
     var url = "{{ route('loans.destroy', 0) }}";
     var ajax = {
         data: {

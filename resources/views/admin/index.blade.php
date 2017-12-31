@@ -47,7 +47,11 @@
                 </label>
 
             </td>
-            <td><button onclick="removeUser({{ $user->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove User" data-confirm-content="Are you sure?" ></button></td>
+            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                        data-toggle="confirmation"
+                        data-title="Remove this User?"
+                        data-on-confirm="removeUser"></button>
+            </td>
         </tr>
     @endforeach
     </tbody>
@@ -76,7 +80,8 @@ $(".admin-user-table input[type='checkbox']").on('click', function(){
     $.post(ajax).then(function (){
     });
 });
-function removeUser(user_id) {
+function removeUser() {
+    var user_id = $(this).closest('tr').data('user-id');
     var url = "{{ route('users.destroy', 0) }}";
     var ajax = {
         data: {

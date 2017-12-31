@@ -94,5 +94,5 @@
             <input type="text" class="form-control" id="family_insurance_{{ $fam_id }}" name="family_insurance_{{ $fam_id }}" value="{{ old('family_insurance_' . $fam_id) }}" />
         </div>
     </div>
+    <hr />
 </div>
-<hr />

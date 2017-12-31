@@ -24,7 +24,11 @@
             <td><a href="{{ route('parishes.show', $parish->id) }}">{{ $parish->name }}</a></td>
             <td>{!! implode("<br>", $parish->formattedAddress) !!}</td>
             <td>{{ $parish->formattedPhone }}</td>
-            <td><button onclick="removeParish({{ $parish->id }})" class="btn btn-link popconfirm glyphicon glyphicon-trash no-underline" data-confirm-title="Remove Parish" data-confirm-content="Are you sure?" ></button></td>
+            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                        data-toggle="confirmation"
+                        data-title="Remove this Parish?"
+                        data-on-confirm="removeParish"></button>
+            </td>
         </tr>
     @endforeach
     </tbody>
@@ -33,7 +37,8 @@
 
 @section('custom-js')
 <script>
-function removeParish(parish_id) {
+function removeParish() {
+    var parish_id = $(this).closest('tr').data('parish-id');
     var url = "{{ route('parishes.destroy', 0) }}";
     var ajax = {
         data: {

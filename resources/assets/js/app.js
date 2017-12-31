@@ -5,7 +5,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-$(".popconfirm").popConfirm();
+$('[data-toggle=confirmation]').confirmation({
+    rootSelector: '[data-toggle=confirmation]',
+    singleton: true,
+    popout: true,
+});
 
 $(".input-group-addon").on('click', function(){
     $(this).prev('input').focus();
