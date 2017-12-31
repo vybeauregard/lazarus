@@ -57,7 +57,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="amount" name="amount" value="{{ old('amount') ?? $loan->amount }}" />
+        <input type="number" min="0" class="form-control" id="amount" name="amount" value="{{ old('amount') ?? $loan->amount }}" />
     </div>
 </div>
 
@@ -79,7 +79,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="remaining" name="remaining" value="{{ old('remaining') ?? $loan->remaining }}" />
+        <input type="number" min="0" class="form-control" id="remaining" name="remaining" value="{{ old('remaining') ?? $loan->remaining }}" />
     </div>
 </div>
 
@@ -88,7 +88,7 @@
         <label for="total_payments">Total Payments</label>
     </div>
     <div class="col-md-1 input-group">
-        <input type="text" class="form-control" id="total_payments" name="total_payments" value="{{ old('total_payments') ?? $loan->total_payments }}" />
+        <input type="number" min="0" class="form-control" id="total_payments" name="total_payments" value="{{ old('total_payments') ?? $loan->total_payments }}" />
     </div>
 </div>
 
@@ -97,7 +97,7 @@
         <label for="payment_count">Number of Payments</label>
     </div>
     <div class="col-md-1 input-group">
-        <input type="text" class="form-control" id="payment_count" name="payment_count" value="{{ old('payment_count') ?? $loan->payment_count }}" />
+        <input type="number" min="0" class="form-control" id="payment_count" name="payment_count" value="{{ old('payment_count') ?? $loan->payment_count }}" />
     </div>
 </div>
 

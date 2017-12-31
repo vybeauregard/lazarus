@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="monthly_income" name="monthly_income" value="{{ old('monthly_income') ? old('monthly_income') : ($client->income ? $client->income->monthly_income : '') }}" />
+        <input type="number" min="0" class="form-control" id="monthly_income" name="monthly_income" value="{{ old('monthly_income') ? old('monthly_income') : ($client->income ? $client->income->monthly_income : '') }}" />
     </div>
 </div>
 
@@ -59,7 +59,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="income" name="income" value="{{ old('income') ? old('income') : ($client->income ? $client->income->income : '') }}" />
+        <input type="number" min="0" class="form-control" id="income" name="income" value="{{ old('income') ? old('income') : ($client->income ? $client->income->income : '') }}" />
     </div>
 </div>
 
@@ -128,92 +128,24 @@
     </div>
 </div>
 
+@foreach([
+    'day_labor' => "Day Labor / Ad Hoc",
+    'rent' => "Monthly Rent",
+    'ssi' => "SSI",
+    'snap' => "Food Stamps/SNAP",
+    'tanf' => "TANF",
+    'child_support' => "Child Support",
+    'utility_benefits' => "Utility Benefit Check",
+    'veteran_benefits' => "Veteran Benefits",
+    'other_income' => "Other Sources of Income",
+] as $field => $label)
 <div class="form-group row">
     <div class="col-md-2">
-        <label for="day_labor">Day Labor / Ad Hoc</label>
+        <label for="{{ $field }}">{{ $label }}</label>
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="day_labor" name="day_labor" value="{{ old('day_labor') ? old('day_labor') : ($client->income ? $client->income->day_labor : '') }}" />
+        <input type="number" min="0" class="form-control" id="{{ $field }}" name="{{ $field }}" value="{{ old($field) ? old($field) : ($client->income ? $client->income->$field : '') }}" />
     </div>
 </div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="rent">Monthly Rent</label>
-    </div>
-    <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="rent" name="rent" value="{{ old('rent') ? old('rent') : ($client->income ? $client->income->rent : '') }}" />
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="ssi">SSI</label>
-    </div>
-    <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="ssi" name="ssi" value="{{ old('ssi') ? old('ssi') : ($client->income ? $client->income->ssi : '') }}" />
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="snap">Food Stamps/SNAP</label>
-    </div>
-    <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="snap" name="snap" value="{{ old('snap') ? old('snap') : ($client->income ? $client->income->snap : '') }}" />
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="tanf">TANF</label>
-    </div>
-    <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="tanf" name="tanf" value="{{ old('tanf') ? old('tanf') : ($client->income ? $client->income->tanf : '') }}" />
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="child_support">Child Support</label>
-    </div>
-    <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="child_support" name="child_support" value="{{ old('child_support') ? old('child_support') : ($client->income ? $client->income->child_support : '') }}" />
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="utility_benefits">Utility Benefit Check</label>
-    </div>
-    <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="utility_benefits" name="utility_benefits" value="{{ old('utility_benefits') ? old('utility_benefits') : ($client->income ? $client->income->utility_benefits : '') }}" />
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="veteran_benefits">Veteran Benefits</label>
-    </div>
-    <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="veteran_benefits" name="veteran_benefits" value="{{ old('veteran_benefits') ? old('veteran_benefits') : ($client->income ? $client->income->veteran_benefits : '') }}" />
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="other_income">Other Sources of Income</label>
-    </div>
-    <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="text" class="form-control" id="other_income" name="other_income" value="{{ old('other_income') ? old('other_income') : ($client->income ? $client->income->other_income : '') }}" />
-    </div>
-</div>
+@endforeach
