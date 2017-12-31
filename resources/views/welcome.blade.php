@@ -63,6 +63,7 @@
                 margin-bottom: 30px;
             }
         </style>
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -81,6 +82,11 @@
             @endif
 
             <div class="content">
+                @if(Session::has('registration'))
+                <div class="alert alert-info">
+                    {{ session('registration') }}
+                </div>
+                @endif
                 <div class="title m-b-md">
                     {{ config('app.name') }}
                 </div>

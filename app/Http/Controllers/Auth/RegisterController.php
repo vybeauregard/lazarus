@@ -88,5 +88,6 @@ class RegisterController extends Controller
     {
         event(new UserHasRegistered($user));
         Auth::logout();
+        request()->session()->flash('registration', 'Thank you for registering! Your account will be confirmed shortly.');
     }
 }
