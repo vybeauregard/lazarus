@@ -30,6 +30,7 @@
         <label for="parish">Primary Parish</label>
     </div>
     <div class="col-md-3 input-group">
+        @if($parishes->count() > 1)
         <input type="text"
                class="form-control typeahead"
                data-provide="typeahead"
@@ -40,6 +41,10 @@
                value="{{ old('parish') ?? ($counselor->parish ? $counselor->parish->name : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
         <input type="hidden" name="parish_id" value="{{ old('parish_id') ?? $counselor->parish_id }}" />
+        @else
+        <input class="form-control" disabled value="{{ $parishes->first()['name'] }}" >
+        <input type="hidden" name="parish_id" value="{{ $parishes->first()['id'] }}" />
+        @endif
     </div>
     <div class="col-md-2">
     </div>
