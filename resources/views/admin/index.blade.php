@@ -137,7 +137,7 @@ function removeUser() {
             },
             url: "{{ route('menus.update') }}"
         };
-        $.post(ajax).success(function (){
+        $.post(ajax).done(function (){
             location.reload();
         });
     });
