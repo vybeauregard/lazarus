@@ -49,6 +49,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return view("reports.index");
     })->name('reports.index');
 
-    Route::resource('users', 'Auth\UserController')->only(['destroy', 'update', 'index'])->middleware('admin');
+    Route::group(['middleware' => ['admin']], function(){
+        Route::resource('users', 'Auth\UserController')
+            ->only(['destroy', 'update', 'index']);
+        Route::patch('menus', 'Auth\MenuController@update')->name('menus.update');
+
+    });
 
 });
