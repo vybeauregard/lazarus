@@ -138,6 +138,13 @@ function removeUser() {
             url: "{{ route('menus.update') }}"
         };
         $.post(ajax).done(function (){
+            console.log('done');
+        }).then(function(){
+            console.log('then');
+        }).fail(function(){
+            console.log('fail');
+        }).always(function(){
+            console.log('always');
             location.reload();
         });
     });
