@@ -140,7 +140,7 @@ function removeUser() {
         $.post(ajax).always(function(){
             window.setTimeout(function(){
                 location.reload();
-            }, 1500);
+            }, 3000);
         });
     });
 </script>
