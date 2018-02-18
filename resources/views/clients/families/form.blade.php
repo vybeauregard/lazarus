@@ -17,14 +17,6 @@
             </select>
         </div>
     </div>
-    <div class="form-group row">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-5">
-        <p class="small"><i class="glyphicon glyphicon-exclamation-sign"></i> Child must be under 18 years old.</p>
-        <p class="small"><i class="glyphicon glyphicon-exclamation-sign"></i><i class="glyphicon glyphicon-exclamation-sign"></i> List adult children (18 and older) under "Other Adults"</p>
-        </div>
-    </div>
 
     <div class="form-group row">
         <div class="col-md-2">
