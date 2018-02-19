@@ -9995,7 +9995,7 @@ a.text-dark:focus {
 }
 
 .body {
-  margin: 0 5px;
+  margin: 5px;
 }
 
 .input-group[class*="col-"] {
