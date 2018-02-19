@@ -67,7 +67,7 @@
     </div>
     <div class="col-md-2">
         <label class="form-check-label">
-              <p><i class="glyphicon {{ $client->income->unemployed == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+              <p><i class="oi {{ $client->income->unemployed == 1 ? 'oi-check success' : 'oi-x danger' }}"></i></p>
         </label>
     </div>
 </div>
@@ -78,7 +78,7 @@
     </div>
     <div class="col-md-2">
         <label class="form-check-label">
-              <p><i class="glyphicon {{ $client->income->looking == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+              <p><i class="oi {{ $client->income->looking == 1 ? 'oi-check success' : 'oi-x danger' }}"></i></p>
         </label>
     </div>
 </div>

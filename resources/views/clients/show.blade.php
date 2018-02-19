@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h3>{{ $client->name }} <a href="{{ route('clients.edit', $client->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h3>
+<h3>{{ $client->name }} <a href="{{ route('clients.edit', $client->id) }}" class="oi oi-pencil no-underline"></a></h3>
 <div style="margin:14px;">
     <div class="form-group row">
         <div class="col-md-2">
@@ -172,7 +172,7 @@
         <div class="col-md-2">
         </div>
     </div>
-    <table class="table table-striped">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Name</th>

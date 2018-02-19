@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ old('date') ?? $visit->date->format('m/d/Y') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
     <div class="col-md-2">
     </div>
@@ -23,7 +23,7 @@
                name="client"
                placeholder="Type a name"
                value="{{ old('client') ?? ($visit->client ? $visit->client->name : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-person" title="client" aria-hidden="true"></i></span></div>
         <input type="hidden" name="client_id" value="{{ old('client_id') ?? $visit->client_id }}" />
     </div>
     <div class="col-md-2">
@@ -43,7 +43,7 @@
                name="counselor"
                placeholder="Type a name or click to select"
                value="{{ old('counselor') ?? ($visit->counselor ? $visit->counselor->name : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-person" title="counselor" aria-hidden="true"></i></span></div>
         <input type="hidden" name="counselor_id" value="{{ old('counselor_id') ?? $visit->counselor_id }}" />
     </div>
     <div class="col-md-2">

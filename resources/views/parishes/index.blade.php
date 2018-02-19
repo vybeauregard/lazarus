@@ -24,7 +24,7 @@
             <td><a href="{{ route('parishes.show', $parish->id) }}">{{ $parish->name }}</a></td>
             <td>{!! implode("<br>", $parish->formattedAddress) !!}</td>
             <td>{{ $parish->formattedPhone }}</td>
-            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+            <td><button class="btn btn-link oi oi-trash no-underline"
                         data-toggle="confirmation"
                         data-title="Remove this Parish?"
                         data-on-confirm="removeParish"></button>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h2><a href="{{ route('clients.show', $client->id) }}">{{ $client->contact->fullname }}</a> family: {{ $family->name }} <a href="{{ route('clients.families.edit', [$client->id, $family->id]) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
+<h2><a href="{{ route('clients.show', $client->id) }}">{{ $client->contact->fullname }}</a> family: {{ $family->name }} <a href="{{ route('clients.families.edit', [$client->id, $family->id]) }}" class="oi oi-pencil no-underline"></a></h2>
 
 <div style="margin:14px;">
 <div class="family-form" data-id="{{ $family->id ?? 0 }}">

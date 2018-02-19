@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h2>Counselor {{ $counselor->name }} <a href="{{ route('counselors.edit', $counselor->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
+<h2>Counselor {{ $counselor->name }} <a href="{{ route('counselors.edit', $counselor->id) }}" class="oi oi-pencil no-underline"></a></h2>
 
 <div style="margin:14px;">
 

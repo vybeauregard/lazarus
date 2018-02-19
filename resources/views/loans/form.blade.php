@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="request_date" name="request_date" data-provide="datepicker" value="{{ old('request_date') ?? ($loan->request_date ? $loan->request_date->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
     <div class="col-md-2">
     </div>
@@ -23,7 +23,7 @@
                name="client"
                placeholder="Type a name or click to select"
                value="{{ old('client') ?? ($loan->client ? $loan->client->name : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-person" title="client" aria-hidden="true"></i></span></div>
         <input type="hidden" name="client_id" value="{{ old('client_id') ?? $loan->client_id }}" />
     </div>
     <div class="col-md-2">
@@ -36,7 +36,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ old('date') ?? ($loan->date ? $loan->date->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
     <div class="col-md-2">
     </div>
@@ -56,7 +56,7 @@
         <label for="amount">Amount</label>
     </div>
     <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+        <div class="input-group-prepend"><span class="input-group-text"><i class="oi oi-dollar" title="dollar" aria-hidden="true"></i></span></div>
         <input type="number" min="0" class="form-control" id="amount" name="amount" value="{{ old('amount') ?? $loan->amount }}" />
     </div>
 </div>
@@ -67,7 +67,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="due_date" name="due_date" data-provide="datepicker" value="{{ old('due_date') ?? ($loan->due_date ? $loan->due_date->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
     <div class="col-md-2">
     </div>
@@ -78,7 +78,7 @@
         <label for="remaining">Amount Remaining</label>
     </div>
     <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+        <div class="input-group-prepend"><span class="input-group-text"><i class="oi oi-dollar" title="dollar" aria-hidden="true"></i></span></div>
         <input type="number" min="0" class="form-control" id="remaining" name="remaining" value="{{ old('remaining') ?? $loan->remaining }}" />
     </div>
 </div>
@@ -107,7 +107,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="last_payment" name="last_payment" data-provide="datepicker" value="{{ old('last_payment') ?? ($loan->last_payment ? $loan->last_payment->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
     <div class="col-md-2">
     </div>
@@ -149,7 +149,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="budget_date" name="budget_date" data-provide="datepicker" value="{{ old('budget_date') ?? ($loan->budget_date ? $loan->budget_date->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
     <div class="col-md-2">
     </div>

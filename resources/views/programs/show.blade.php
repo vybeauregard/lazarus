@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h3>Program {{ $program->name }} for {{ $program->client->name }} <a href="{{ route('programs.edit', $program->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h3>
+<h3>Program {{ $program->name }} for {{ $program->client->name }} <a href="{{ route('programs.edit', $program->id) }}" class="oi oi-pencil no-underline"></a></h3>
 
 <div style="margin:14px;">
 <div class="family-form" data-id="{{ $family->id ?? 0 }}">

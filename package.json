@@ -23,6 +23,7 @@
         "bootstrap-3-typeahead": "^4.0.2",
         "bootstrap-confirmation2": "^2.4.0",
         "bootstrap-datepicker": "^1.7.1",
-        "bootstrap-formhelpers": "git+https://github.com/vlamanna/BootstrapFormHelpers.git"
+        "bootstrap-formhelpers": "git+https://github.com/vlamanna/BootstrapFormHelpers.git",
+        "open-iconic": "^1.1.1"
     }
 }

@@ -9,7 +9,7 @@
 <a href="{{ route('programs.create') }}" class="btn btn-success">New Program</a>
 {{ csrf_field() }}
 
-<table class="table table-striped" style="width:500px;">
+<table class="table table-hover" style="width:500px;">
     <thead>
         <tr>
             <th>Name</th>
@@ -24,7 +24,7 @@
             <td><a href="{{ route('programs.show', $program->id) }}">{{ $program->name }}</a></td>
             <td> {{ $program->client ? $program->client->name : '' }} </td>
             <td> {{ $program->application_submitted ? $program->application_submitted->format('m/d/Y') : 'not submitted' }} </td>
-            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+            <td><button class="btn btn-link oi oi-trash no-underline"
                         data-toggle="confirmation"
                         data-title="Remove this Program?"
                         data-on-confirm="removeProgram"></button>

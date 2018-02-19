@@ -3,7 +3,7 @@
         <label for="monthly_income">Total Monthly Income</label>
     </div>
     <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+        <div class="input-group-prepend"><span class="input-group-text"><i class="oi oi-dollar" title="dollar" aria-hidden="true"></i></span></div>
         <input type="number" min="0" class="form-control" id="monthly_income" name="monthly_income" value="{{ old('monthly_income') ? old('monthly_income') : ($client->income ? $client->income->monthly_income : '') }}" />
     </div>
 </div>
@@ -58,7 +58,7 @@
         <label for="income">Income</label>
     </div>
     <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+        <div class="input-group-prepend"><span class="input-group-text"><i class="oi oi-dollar" title="dollar" aria-hidden="true"></i></span></div>
         <input type="number" min="0" class="form-control" id="income" name="income" value="{{ old('income') ? old('income') : ($client->income ? $client->income->income : '') }}" />
     </div>
 </div>
@@ -144,7 +144,7 @@
         <label for="{{ $field }}">{{ $label }}</label>
     </div>
     <div class="col-md-3 input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+        <div class="input-group-prepend"><span class="input-group-text"><i class="oi oi-dollar" title="dollar" aria-hidden="true"></i></span></div>
         <input type="number" min="0" class="form-control" id="{{ $field }}" name="{{ $field }}" value="{{ old($field) ? old($field) : ($client->income ? $client->income->$field : '') }}" />
     </div>
 </div>

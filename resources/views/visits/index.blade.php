@@ -9,7 +9,7 @@
 <a href="{{ route('visits.create') }}" class="btn btn-success">New Visit</a>
 {{ csrf_field() }}
 
-<table class="table table-striped" style="width:500px;">
+<table class="table table-hover" style="width:500px;">
     <thead>
         <tr>
             <th>Client</th>
@@ -24,7 +24,7 @@
             <td><a href="{{ route('visits.show', $visit->id) }}">{{ $visit->client->name }}</a></td>
             <td>{{ $visit->date->format('m/d/Y') }}</td>
             <td>{{ $visit->counselor->name }}</td>
-            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+            <td><button class="btn btn-link oi oi-trash no-underline"
                         data-toggle="confirmation"
                         data-title="Remove this Visit?"
                         data-on-confirm="removeVisit"></button>

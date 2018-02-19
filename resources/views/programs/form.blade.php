@@ -11,7 +11,7 @@
                name="client"
                placeholder="Type a name or click to select"
                value="{{ old('client') ?? ($program->client ? $program->client->name : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-person" title="client" aria-hidden="true"></i></span></div>
         <input type="hidden" name="client_id" value="{{ old('client_id') ?? $program->client_id }}" />
     </div>
     <div class="col-md-2">
@@ -33,7 +33,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="given_info" name="given_info" data-provide="datepicker" value="{{ old('given_info') ?? ($program->given_info ? $program->given_info->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
     <div class="col-md-2">
     </div>
@@ -45,7 +45,8 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="application_submitted" name="application_submitted" data-provide="datepicker" value="{{ old('application_submitted') ?? ($program->application_submitted ? $program->application_submitted->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
+
     </div>
     <div class="col-md-2">
     </div>
@@ -57,7 +58,8 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="application_approved" name="application_approved" data-provide="datepicker" value="{{ old('application_approved') ?? ($program->application_approved ? $program->application_approved->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
+
     </div>
     <div class="col-md-2">
     </div>
@@ -69,7 +71,8 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="program_start" name="program_start" data-provide="datepicker" value="{{ old('program_start') ?? ($program->program_start ? $program->program_start->format('m/d/Y') : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
+
     </div>
     <div class="col-md-2">
     </div>

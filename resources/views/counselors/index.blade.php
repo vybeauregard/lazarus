@@ -12,20 +12,20 @@
 
 <div>
     @if($counselors->count())
-    <table class="table table-striped" style="width:500px;">
+    <table class="table table-hover" style="width:500px;">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Primary Parish</th>
-                <th>Remove</th>
+                <th scope="col">Name</th>
+                <th scope="col">Primary Parish</th>
+                <th scope="col">Remove</th>
             </tr>
         </thead>
         <tbody>
         @foreach($counselors as $counselor)
-            <tr data-counselor-id="{{ $counselor->id }}">
+            <tr scope="row" data-counselor-id="{{ $counselor->id }}">
                 <td><a href="{{ route('counselors.show', $counselor->id) }}">{{ $counselor->name }}</a></td>
                 <td>{{ $counselor->parish ? $counselor->parish->name : '' }}</td>
-                <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                <td><button class="btn btn-link oi oi-trash no-underline"
                             data-toggle="confirmation"
                             data-title="Remove this Counselor?"
                             data-on-confirm="removeCounselor"></button>

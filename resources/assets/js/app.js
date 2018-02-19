@@ -11,6 +11,6 @@ $('[data-toggle=confirmation]').confirmation({
     popout: true,
 });
 
-$(".input-group-addon").on('click', function(){
+$(".input-group-append").on('click', function(){
     $(this).prev('input').focus();
 });

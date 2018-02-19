@@ -24,7 +24,7 @@
             <td><a href="{{ route('loans.show', $loan->id) }}">{{ $loan->client->name }}</a></td>
             <td>{{ $loan->type }}</td>
             <td>${{ $loan->amount }}</td>
-            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+            <td><button class="btn btn-link oi oi-trash no-underline"
                         data-toggle="confirmation"
                         data-title="Remove this Loan?"
                         data-on-confirm="removeLoan"></button>

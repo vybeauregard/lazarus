@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="start_date" name="start_date" data-provide="datepicker" value="{{ old('start_date') ? old('start_date') : Carbon\Carbon::now()->startOfMonth()->format('m/d/Y') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
 </div>
 <div class="form-group row">
@@ -22,7 +22,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="end_date" name="end_date" data-provide="datepicker" value="{{ old('end_date') ? old('end_date') : Carbon\Carbon::now()->format('m/d/Y') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
 </div>
 

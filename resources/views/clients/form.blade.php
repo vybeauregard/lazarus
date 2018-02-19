@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ old('date') ?? ($client->date ? $client->date->format('m/d/Y') : Carbon\Carbon::now()->format('m/d/Y')) }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-calendar" title="calendar" aria-hidden="true"></i></span></div>
     </div>
     <div class="col-md-2">
     </div>
@@ -131,7 +131,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="tel" class="form-control bfh-phone" id="phone" name="phone" data-format="(ddd) ddd-dddd" value="{{ old('phone') ?? ($client->contact ? $client->contact->phone : '') }}">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <div class="input-group-prepend"><span class="input-group-text"><i class="oi oi-phone" title="phone" aria-hidden="true"></i></span></div>
     </div>
 </div>
 
@@ -141,7 +141,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="tel" class="form-control bfh-phone" id="emergency_phone" name="emergency_phone" data-format="(ddd) ddd-dddd" value="{{ old('emergency_phone') ?? ($client->contact ? $client->contact->emergency_phone : '') }}">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <div class="input-group-prepend"><span class="input-group-text"><i class="oi oi-phone" title="phone" aria-hidden="true"></i></span></div>
     </div>
 </div>
 

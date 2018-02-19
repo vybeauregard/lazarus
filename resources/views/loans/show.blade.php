@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h2>Loan for {{ $loan->client->name }} <a href="{{ route('loans.edit', $loan->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
+<h2>Loan for {{ $loan->client->name }} <a href="{{ route('loans.edit', $loan->id) }}" class="oi oi-pencil no-underline"></a></h2>
 
 <div style="margin:14px;">
 

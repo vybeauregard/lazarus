@@ -19,7 +19,7 @@
             <h4>Family Members</h4>
         </div>
     </div>
-    <table class="table table-striped family-display">
+    <table class="table table-hover family-display">
         <thead>
             <tr>
                 <th>Name</th>
@@ -32,7 +32,7 @@
             <tr data-family-id="{{ $family->id }}">
                 <td><a href="{{ route('clients.families.edit', [$client->id, $family->id]) }}">{{ $family->name }}</a></td>
                 <td>{{ str_replace("_", " ", title_case($family->relationship)) }}</td>
-                <td><a class="btn btn-link glyphicon glyphicon-trash no-underline"
+                <td><a class="btn btn-link oi oi-trash no-underline"
                             data-toggle="confirmation"
                             data-title="Remove this Family member?"
                             data-on-confirm="removeFamilyMember"></a>

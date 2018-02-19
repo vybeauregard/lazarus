@@ -39,7 +39,7 @@
                name="parish"
                placeholder="Type a name or click to select"
                value="{{ old('parish') ?? ($counselor->parish ? $counselor->parish->name : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+        <div class="input-group-prepend"><span class="input-group-text"><i class="oi oi-book" title="dollar" aria-hidden="true"></i></span></div>
         <input type="hidden" name="parish_id" value="{{ old('parish_id') ?? $counselor->parish_id }}" />
         @else
         <input class="form-control" disabled value="{{ $parishes->first()['name'] }}" >
@@ -67,7 +67,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="tel" class="form-control bfh-phone" id="phone" name="phone" data-format="(ddd) ddd-dddd" value="{{ old('phone') ?? ($counselor->contact ? $counselor->contact->phone : '') }}">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-phone" title="phone" aria-hidden="true"></i></span></div>
     </div>
 </div>
 
@@ -77,7 +77,7 @@
     </div>
     <div class="col-md-2 input-group">
         <input type="tel" class="form-control bfh-phone" id="emergency_phone" name="emergency_phone" data-format="(ddd) ddd-dddd" value="{{ old('emergency_phone') ?? ($counselor->contact ? $counselor->contact->emergency_phone : '') }}">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+        <div class="input-group-append"><span class="input-group-text"><i class="oi oi-phone" title="phone" aria-hidden="true"></i></span></div>
     </div>
 </div>
 

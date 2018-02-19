@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<h2>{{ $parish->name }} Parish <a href="{{ route('parishes.edit', $parish->id) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
+<h2>{{ $parish->name }} Parish <a href="{{ route('parishes.edit', $parish->id) }}" class="oi oi-pencil no-underline"></a></h2>
 
 <div style="margin:14px;">
 

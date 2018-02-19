@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('title')
-| Users
+| Admin
 @endsection
 
 @section('content')
 {{ csrf_field() }}
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col">
         <h3>Users</h3>
-        <table class="table table-striped admin-user-table" style="width:500px;">
+        <table class="table table-hover admin-user-table" style="width:500px;">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -28,11 +28,11 @@
                     <td class="text-center">
                         <label class="form-check-label">
                           @if(old('verified') && old('verified') == 1)
-                            <input class="form-check-input" type="checkbox" id="verified" name="verified" checked>
+                            <input class="" type="checkbox" id="verified" name="verified" checked>
                           @elseif($user->verified == 1)
-                            <input class="form-check-input" type="checkbox" id="verified" name="verified" checked>
+                            <input class="" type="checkbox" id="verified" name="verified" checked>
                           @else
-                            <input class="form-check-input" type="checkbox" id="verified" name="verified">
+                            <input class="" type="checkbox" id="verified" name="verified">
                           @endif
                         </label>
 
@@ -40,16 +40,16 @@
                     <td class="text-center">
                         <label class="form-check-label">
                           @if(old('admin') && old('admin') == 1)
-                            <input class="form-check-input" type="checkbox" id="admin" name="admin" checked>
+                            <input class="" type="checkbox" id="admin" name="admin" checked>
                           @elseif($user->admin == 1)
-                            <input class="form-check-input" type="checkbox" id="admin" name="admin" checked>
+                            <input class="" type="checkbox" id="admin" name="admin" checked>
                           @else
-                            <input class="form-check-input" type="checkbox" id="admin" name="admin">
+                            <input class="" type="checkbox" id="admin" name="admin">
                           @endif
                         </label>
 
                     </td>
-                    <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                    <td><button class="btn btn-link oi oi-trash no-underline"
                                 data-toggle="confirmation"
                                 data-title="Remove this User?"
                                 data-on-confirm="removeUser"></button>
@@ -60,11 +60,10 @@
         </table>
     </div>
 
-    <div class="col-md-2"></div>
-    <h3>Menus</h3>
 
-    <div class="col-md-5">
-        <table class="table table-striped admin-menu-table float-left" style="width:500px;">
+    <div class="col">
+        <h3>Menus</h3>
+        <table class="table table-hover admin-menu-table float-left" style="width:500px;">
             <thead>
                 <th>Page</th>
                 <th>Visible</th>
@@ -76,9 +75,9 @@
                     <td>
                         <label class="form-check-label">
                           @if($value == 1)
-                            <input class="form-check-input menu-config" type="checkbox" id="{{ $menu }}" name="{{ $menu }}" checked>
+                            <input class="menu-config" type="checkbox" id="{{ $menu }}" name="{{ $menu }}" checked>
                           @else
-                            <input class="form-check-input menu-config" type="checkbox" id="{{ $menu }}" name="{{ $menu }}">
+                            <input class="menu-config" type="checkbox" id="{{ $menu }}" name="{{ $menu }}">
                           @endif
                         </label>
                     </td>
