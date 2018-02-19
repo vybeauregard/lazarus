@@ -26,4 +26,9 @@ class Family extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function getTypeaheadNameAttribute()
+    {
+        return "{$this->name} ({$this->dob->format('m/d/Y')})";
+    }
 }

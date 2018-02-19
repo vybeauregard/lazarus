@@ -98,8 +98,14 @@ class Client extends Model
         return parent::delete();
     }
 
+    public function getTypeaheadNameAttribute()
+    {
+        return "{$this->name} ({$this->dob->format('m/d/Y')})";
+    }
+
     public function getCheckboxesCollection()
     {
         return collect($this->checkboxes);
     }
+
 }

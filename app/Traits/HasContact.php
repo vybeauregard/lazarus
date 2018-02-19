@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use App\Client;
+use App\Family;
+
 trait HasContact
 {
     protected $phones = [
@@ -74,11 +77,28 @@ trait HasContact
     public function typeahead()
     {
         return $this->query()
-            ->with('contact')
+            ->when(get_class($this) == Client::class, function($query){
+                return $query->with(['contact', 'family']);
+            }, function($query){
+                return $query->with('contact');
+            })
             ->get()
-            ->map(function ($contact){
+            ->pipe(function ($typeahead) {
+                //include family members in collection
+                return $typeahead->each(function($client) use ($typeahead) {
+                    if ($client->family) {
+                        $typeahead->push($client->family);
+                    }
+                });
+            })
+            ->flatten()
+            ->map(function ($contact) {
+                if (get_class($contact) == Family::class) {
+                    //remap family ids to the related client id
+                    $contact->id = $contact->client_id;
+                }
                 return [
-                    'name' => $contact->name,
+                    'name'  => $contact->typeaheadName,
                     'id'    => $contact->id,
                 ];
             });

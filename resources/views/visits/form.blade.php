@@ -21,7 +21,7 @@
                autocomplete="off"
                id="client"
                name="client"
-               placeholder="Type a name or click to select"
+               placeholder="Type a name"
                value="{{ old('client') ?? ($visit->client ? $visit->client->name : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         <input type="hidden" name="client_id" value="{{ old('client_id') ?? $visit->client_id }}" />
@@ -73,7 +73,7 @@
     $(".typeahead[name='client']").typeahead({
         provide: "typeahead",
         source: {!! $clients !!},
-        showHintOnFocus: "all",
+        showHintOnFocus: false,
         autoSelect: false,
         minLength: 2,
         afterSelect: function(item) {
@@ -84,6 +84,9 @@
             $(this).blur();
             $(this).focus();
         }
+        if (event.keyCode === 27) {
+            $(this).val(null);
+        }
     }).on('blur', function(){
         if($(this).val() == "") {
             $("input[name='client_id']").val('');
@@ -92,9 +95,10 @@
     $(".typeahead[name='counselor']").typeahead({
         provide: "typeahead",
         source: {!! $counselors !!},
-        showHintOnFocus: "all",
+        showHintOnFocus: false,
         autoSelect: false,
         minLength: 2,
+        items: "all",
         afterSelect: function(item) {
             $("input[name='counselor_id']").val(item.id)
         }
@@ -102,6 +106,9 @@
         if ((event.keyCode === 8 || event.keyCode === 46) && $(this).val() === '') {
             $(this).blur();
             $(this).focus();
+        }
+        if (event.keyCode === 27) {
+            $(this).val(null);
         }
     }).on('blur', function(){
         if($(this).val() == "") {
