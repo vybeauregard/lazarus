@@ -53,10 +53,4 @@ class Counselor extends Model
         return parent::delete();
     }
 
-    public function getTypeaheadNameAttribute()
-    {
-        return $this->name;
-    }
-
-
 }

@@ -27,6 +27,14 @@ class Family extends Model
         return $this->belongsTo(Client::class);
     }
 
+    public function getTypeaheadFormattedAttribute()
+    {
+        return [
+            'name'  => $this->typeaheadName,
+            'id'    => $this->client_id,
+        ];
+    }
+
     public function getTypeaheadNameAttribute()
     {
         return "{$this->name} ({$this->dob->format('m/d/Y')})";

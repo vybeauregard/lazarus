@@ -57,7 +57,13 @@ class Client extends Model
         return $this->hasOne(Income::class);
     }
 
-    public static function create($attributes = []) {
+    public function scopeTypeaheadRelations($query)
+    {
+        return $query->with(['contact', 'family']);
+    }
+
+    public static function create($attributes = [])
+    {
         $model = static::query()->create($attributes);
         $contact = new Contact($attributes);
         $income = new Income($attributes);
@@ -69,7 +75,8 @@ class Client extends Model
         return $model;
     }
 
-    public function updateWithRelations($attributes = []) {
+    public function updateWithRelations($attributes = [])
+    {
         parent::fill($attributes);
         if(is_null($this->contact)){
             $contact = new Contact($attributes);
