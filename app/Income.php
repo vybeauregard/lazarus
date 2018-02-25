@@ -33,6 +33,10 @@ class Income extends Model
         'other_income',
     ];
 
+    protected $dates = [
+        'date'
+    ];
+
     public function client()
     {
         return $this->belongsTo(Client::class);

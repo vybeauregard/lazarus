@@ -160,7 +160,42 @@
         </div>
     </div>
 
-    @include('clients.readonly-employment')
+    {{-- @include('clients.readonly-employment') --}}
+
+    @if($client->income->count())
+    <hr />
+    <div class="row">
+        <div class="col-md-10">
+            <h4>Income</h4>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>date</th>
+                <th>column</th>
+                <th>column</th>
+                <th>column</th>
+                <th>column</th>
+                <th>column</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($client->income as $income)
+            <tr data-income-id="{{ $income->id }}">
+                <td><a href="{{ route('clients.income.show', [$client->id, $income->id]) }}">{{ $income->date->format('m/d/Y') }}</a></td>
+                <td>{{ $income->created_at->format('m/d/Y') }}</td>
+                <td>{{ $income->updated_at->format('m/d/Y') }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @else
+    <em>No income data provided</em>
+    @endif
 
 @if($client->family->count())
     <hr />
@@ -197,6 +232,8 @@
     @endforeach
         </tbody>
     </table>
+@else
+    <em>No family data provided</em>
 @endif
 </div>
 @endsection

@@ -54,7 +54,7 @@ class Client extends Model
 
     public function income()
     {
-        return $this->hasOne(Income::class);
+        return $this->hasMany(Income::class);
     }
 
     public function scopeTypeaheadRelations($query)

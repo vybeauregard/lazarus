@@ -33,6 +33,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('clients.families', 'FamilyController')->except(['index']);
 
+    Route::resource('clients.income', 'IncomeController')->except(['index']);
+
     Route::resource('programs', 'ProgramController');
 
     Route::resource('loans', 'LoanController');
