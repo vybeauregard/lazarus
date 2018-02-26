@@ -1,9 +1,16 @@
+@extends('layouts.app')
+
+@section('content')
+<h2><a href="{{ route('clients.show', $client->id) }}">{{ $client->contact->fullname }}</a> income: {{ $income->date->format('m/d/Y') }} <a href="{{ route('clients.income.edit', [$client->id, $income->id]) }}" class="glyphicon glyphicon-pencil no-underline"></a></h2>
+
+<div style="margin:14px;">
+    <div class="family-form" data-id="{{ $income->id ?? 0 }}">
 <div class="form-group row">
     <div class="col-md-2">
         <label for="monthly_income">Total Monthly Income</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->monthly_income ?? '0.00' }}</p>
+        <p>${{ $income->monthly_income ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -12,7 +19,7 @@
         <label for="part_time">Part Time Job</label>
     </div>
     <div class="col-md-5">
-        <p>{{ $client->income->part_time }}</p>
+        <p>{{ $income->part_time }}</p>
     </div>
 </div>
 
@@ -21,7 +28,7 @@
         <label for="pt_employer">Employer</label>
     </div>
     <div class="col-md-3">
-        <p>{{ $client->income->pt_employer }}</p>
+        <p>{{ $income->pt_employer }}</p>
     </div>
 </div>
 
@@ -30,7 +37,7 @@
         <label for="full_time">Full Time Job</label>
     </div>
     <div class="col-md-5">
-        <p>{{ $client->income->full_time }}</p>
+        <p>{{ $income->full_time }}</p>
     </div>
 </div>
 
@@ -39,7 +46,7 @@
         <label for="ft_employer">Employer</label>
     </div>
     <div class="col-md-3">
-        <p>{{ $client->income->ft_employer }}</p>
+        <p>{{ $income->ft_employer }}</p>
     </div>
 </div>
 
@@ -48,7 +55,7 @@
         <label for="position">Position</label>
     </div>
     <div class="col-md-5">
-        <p>{{ $client->income->position }}</p>
+        <p>{{ $income->position }}</p>
     </div>
 </div>
 
@@ -57,7 +64,7 @@
         <label for="income">Income</label>
     </div>
     <div class="col-md-3">
-        <p>${{ $client->income->income ?? '0.00' }}</p>
+        <p>${{ $income->income ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -67,7 +74,7 @@
     </div>
     <div class="col-md-2">
         <label class="form-check-label">
-              <p><i class="glyphicon {{ $client->income->unemployed == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+              <p><i class="glyphicon {{ $income->unemployed == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
         </label>
     </div>
 </div>
@@ -78,7 +85,7 @@
     </div>
     <div class="col-md-2">
         <label class="form-check-label">
-              <p><i class="glyphicon {{ $client->income->looking == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+              <p><i class="glyphicon {{ $income->looking == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
         </label>
     </div>
 </div>
@@ -88,7 +95,7 @@
         <label for="applying">Applying for jobs where?</label>
     </div>
     <div class="col-md-5">
-        <p>{{ $client->income->applying }}</p>
+        <p>{{ $income->applying }}</p>
     </div>
 </div>
 
@@ -97,7 +104,7 @@
         <label for="day_labor">Day Labor / Ad Hoc</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->day_labor ?? '0.00' }}</p>
+        <p>${{ $income->day_labor ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -106,7 +113,7 @@
         <label for="rent">Monthly Rent</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->rent ?? '0.00' }}</p>
+        <p>${{ $income->rent ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -115,7 +122,7 @@
         <label for="ssi">SSI</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->ssi ?? '0.00' }}</p>
+        <p>${{ $income->ssi ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -124,7 +131,7 @@
         <label for="snap">Food Stamps/SNAP</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->snap ?? '0.00' }}</p>
+        <p>${{ $income->snap ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -133,7 +140,7 @@
         <label for="tanf">TANF</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->tanf ?? '0.00' }}</p>
+        <p>${{ $income->tanf ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -142,7 +149,7 @@
         <label for="child_support">Child Support</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->child_support ?? '0.00' }}</p>
+        <p>${{ $income->child_support ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -151,7 +158,7 @@
         <label for="utility_benefits">Utility Benefit Check</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->utility_benefits ?? '0.00' }}</p>
+        <p>${{ $income->utility_benefits ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -160,7 +167,7 @@
         <label for="veteran_benefits">Veteran Benefits</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->veteran_benefits ?? '0.00' }}</p>
+        <p>${{ $income->veteran_benefits ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -169,6 +176,10 @@
         <label for="other_income">Other Sources of Income</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $client->income->other_income ?? '0.00' }}</p>
+        <p>${{ $income->other_income ?? '0.00' }}</p>
     </div>
 </div>
+
+    </div>
+</div>
+@endsection

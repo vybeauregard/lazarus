@@ -160,8 +160,6 @@
         </div>
     </div>
 
-    {{-- @include('clients.readonly-employment') --}}
-
     @if($client->income->count())
     <hr />
     <div class="row">
@@ -176,8 +174,8 @@
         <thead>
             <tr>
                 <th>date</th>
-                <th>column</th>
-                <th>column</th>
+                <th>Total Monthly Income</th>
+                <th>Employer</th>
                 <th>column</th>
                 <th>column</th>
                 <th>column</th>
@@ -187,7 +185,7 @@
             @foreach($client->income as $income)
             <tr data-income-id="{{ $income->id }}">
                 <td><a href="{{ route('clients.income.show', [$client->id, $income->id]) }}">{{ $income->date->format('m/d/Y') }}</a></td>
-                <td>{{ $income->created_at->format('m/d/Y') }}</td>
+                <td>${{ $income->monthly_income ?? '0.00' }}</td>
                 <td>{{ $income->updated_at->format('m/d/Y') }}</td>
             </tr>
             @endforeach

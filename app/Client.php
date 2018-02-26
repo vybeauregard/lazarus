@@ -85,12 +85,12 @@ class Client extends Model
         } else {
             $this->contact->fill($attributes);
         }
-        if(is_null($this->income)){
-            $income = new Income($attributes);
-            $this->income()->save($income);
-        } else {
-            $this->income->fill($attributes);
-        }
+//        if(is_null($this->income)){
+//            $income = new Income($attributes);
+//            $this->income()->save($income);
+//        } else {
+//            $this->income->fill($attributes);
+//        }
 
         $this->push();
 

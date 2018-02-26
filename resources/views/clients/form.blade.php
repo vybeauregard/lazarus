@@ -246,5 +246,3 @@
         <input type="text" class="form-control" id="insurance_type" name="insurance_type" value="{{ old('insurance_type') ?? $client->insurance_type }}" />
     </div>
 </div>
-
-@include('clients.employment')

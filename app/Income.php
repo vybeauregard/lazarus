@@ -12,6 +12,7 @@ class Income extends Model
     protected $table = "income";
 
     protected $fillable = [
+        'date',
         'monthly_income',
         'part_time',
         'pt_employer',

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Income;
+use App\Http\Requests\IncomeRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class IncomeController extends Controller
@@ -16,7 +18,10 @@ class IncomeController extends Controller
      */
     public function create(Client $client)
     {
-        //
+        $income = new Income([
+            'date' => Carbon::now(),
+        ]);
+        return view('clients.income.create', compact('client', 'income'));
     }
 
     /**
@@ -26,9 +31,10 @@ class IncomeController extends Controller
      * @param  \App\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Client $client)
+    public function store(IncomeRequest $request, Client $client)
     {
-        //
+        $client->income()->save(new Income($request->all()));
+        return redirect()->route('clients.edit', $client->id);
     }
 
     /**
@@ -40,7 +46,7 @@ class IncomeController extends Controller
      */
     public function show(Client $client, Income $income)
     {
-        return [$client, $income];
+        return view('clients.income.show', compact('client', 'income'));
     }
 
     /**
@@ -52,7 +58,7 @@ class IncomeController extends Controller
      */
     public function edit(Client $client, Income $income)
     {
-        //
+        return view('clients.income.edit', compact('client', 'income'));
     }
 
     /**
@@ -63,9 +69,10 @@ class IncomeController extends Controller
      * @param  \App\Income  $income
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client, Income $income)
+    public function update(IncomeRequest $request, Client $client, Income $income)
     {
-        //
+        $income->fill($request->all())->save();
+        return redirect()->route('clients.edit', $client->id);
     }
 
     /**
@@ -77,6 +84,6 @@ class IncomeController extends Controller
      */
     public function destroy(Client $client, Income $income)
     {
-        //
+        $income->delete();
     }
 }

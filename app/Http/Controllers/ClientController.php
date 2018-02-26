@@ -79,11 +79,29 @@ class ClientController extends Controller
     {
         $client->updateWithRelations($request->all());
 
-        if($request->submit == "Save Client and Add Family Member") {
-            return redirect()->route('clients.families.create', $client->id);
-        }
-        return redirect()->route('clients.index');
+        $route = $this->getRedirectRouteOnUpdate($client);
 
+        return redirect($route);
+
+    }
+
+    /**
+     * Get the redirect route based on what button was clicked.
+     *
+     * @param  \App\Client  $client
+     * @return string
+     */
+    private function getRedirectRouteOnUpdate($client)
+    {
+        switch (request('submit'))
+        {
+            case "Save Client and Add Family Member":
+                return route('clients.families.create', $client->id);
+            case "Save Client and Add Income information":
+                return route('clients.income.create', $client->id);
+            default:
+                return route('clients.index');
+        }
     }
 
     /**
