@@ -32,14 +32,37 @@ class Income extends Model
         'utility_benefits',
         'veteran_benefits',
         'other_income',
+        'apartment_name',
+        'insurance_type',
+        'homeless',
+        'shelter',
+        'private_res',
+        'section_8',
+        'arha',
+        'other',
     ];
 
     protected $dates = [
         'date'
     ];
 
+    protected $checkboxes = [
+        'homeless',
+        'shelter',
+        'private_res',
+        'section_8',
+        'arha',
+        'other',
+    ];
+
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function getCheckboxesCollection()
+    {
+        return collect($this->checkboxes);
+    }
+
 }

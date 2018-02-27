@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Carbon\Carbon;
+use Facades\App\Income;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IncomeRequest extends FormRequest
@@ -21,6 +22,13 @@ class IncomeRequest extends FormRequest
     {
         $input = $this->except(['_token', '_method', 'submit']);
         $input['date'] = Carbon::createFromFormat("m/d/Y", $input['date']);
+
+        Income::getCheckboxesCollection()->each(function($checkbox_field){
+            if(!$this->has($checkbox_field)) {
+                $this->merge([$checkbox_field => 0]);
+            }
+        });
+
         $this->merge($input);
 
     }
@@ -33,7 +41,7 @@ class IncomeRequest extends FormRequest
     public function rules()
     {
         return [
-//            'name'  =>  'required',
+            'apartment_name'    => 'max:255',
         ];
     }
 

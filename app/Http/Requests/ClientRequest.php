@@ -50,12 +50,6 @@ class ClientRequest extends FormRequest
             }
         });
 
-        Client::getCheckboxesCollection()->each(function($checkbox_field){
-            if(!$this->has($checkbox_field)) {
-                $this->merge([$checkbox_field => 0]);
-            }
-        });
-
     }
 
     /**
@@ -73,7 +67,6 @@ class ClientRequest extends FormRequest
             'address2'    => 'max:255',
             'city'    => 'max:255',
             'state'    => 'size:2',
-            'apartment_name'    => 'max:255',
             'phone'    => 'max:14',
             'emergency_phone'    => 'max:14',
             'dob_year'  => 'numeric|between:1900,2017',

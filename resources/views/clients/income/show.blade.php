@@ -10,7 +10,7 @@
         <label for="monthly_income">Total Monthly Income</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->monthly_income ?? '0.00' }}</p>
+        <p>${{ number_format($income->monthly_income) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -64,9 +64,53 @@
         <label for="income">Income</label>
     </div>
     <div class="col-md-3">
-        <p>${{ $income->income ?? '0.00' }}</p>
+        <p>${{ number_format($income->income) ?? '0.00' }}</p>
     </div>
 </div>
+
+    <div class="form-group row">
+        <div class="col-md-2 form-check form-check-inline">
+          <label class="form-check-label">
+              <p>Homeless <i class="glyphicon {{ $income->homeless == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+          </label>
+        </div>
+        <div class="col-md-2 form-check form-check-inline">
+          <label class="form-check-label">
+              <p>Shelter <i class="glyphicon {{ $income->shelter == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+          </label>
+        </div>
+        <div class="col-md-2 form-check form-check-inline">
+          <label class="form-check-label">
+              <p>Private Residence <i class="glyphicon {{ $income->private_res == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+          </label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 form-check form-check-inline">
+          <label class="form-check-label">
+              <p>Section 8 <i class="glyphicon {{ $income->section_8 == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+          </label>
+        </div>
+        <div class="col-md-2 form-check form-check-inline">
+          <label class="form-check-label">
+              <p>ARHA <i class="glyphicon {{ $income->arha == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+          </label>
+        </div>
+        <div class="col-md-2 form-check form-check-inline">
+          <label class="form-check-label">
+              <p>Other <i class="glyphicon {{ $income->other == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
+          </label>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-2">
+            <label for="apartment_name">Apartment Complex</label>
+        </div>
+        <div class="col-md-5">
+            <p>{{ $income->apartment_name }}</p>
+        </div>
+    </div>
 
 <div class="form-group row">
     <div class="col-md-2">
@@ -104,7 +148,7 @@
         <label for="day_labor">Day Labor / Ad Hoc</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->day_labor ?? '0.00' }}</p>
+        <p>${{ number_format($income->day_labor) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -113,7 +157,7 @@
         <label for="rent">Monthly Rent</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->rent ?? '0.00' }}</p>
+        <p>${{ number_format($income->rent) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -122,7 +166,7 @@
         <label for="ssi">SSI</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->ssi ?? '0.00' }}</p>
+        <p>${{ number_format($income->ssi) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -131,7 +175,7 @@
         <label for="snap">Food Stamps/SNAP</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->snap ?? '0.00' }}</p>
+        <p>${{ number_format($income->snap) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -140,7 +184,7 @@
         <label for="tanf">TANF</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->tanf ?? '0.00' }}</p>
+        <p>${{ number_format($income->tanf) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -149,7 +193,7 @@
         <label for="child_support">Child Support</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->child_support ?? '0.00' }}</p>
+        <p>${{ number_format($income->child_support) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -158,7 +202,7 @@
         <label for="utility_benefits">Utility Benefit Check</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->utility_benefits ?? '0.00' }}</p>
+        <p>${{ number_format($income->utility_benefits) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -167,7 +211,7 @@
         <label for="veteran_benefits">Veteran Benefits</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->veteran_benefits ?? '0.00' }}</p>
+        <p>${{ number_format($income->veteran_benefits) ?? '0.00' }}</p>
     </div>
 </div>
 
@@ -176,7 +220,7 @@
         <label for="other_income">Other Sources of Income</label>
     </div>
     <div class="col-md-3 input-group">
-        <p>${{ $income->other_income ?? '0.00' }}</p>
+        <p>${{ number_format($income->other_income) ?? '0.00' }}</p>
     </div>
 </div>
 

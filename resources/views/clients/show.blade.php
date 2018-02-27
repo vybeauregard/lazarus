@@ -37,50 +37,6 @@
     </div>
 
     <div class="form-group row">
-        <div class="col-md-2 form-check form-check-inline">
-          <label class="form-check-label">
-              <p>Homeless <i class="glyphicon {{ $client->homeless == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
-          </label>
-        </div>
-        <div class="col-md-2 form-check form-check-inline">
-          <label class="form-check-label">
-              <p>Shelter <i class="glyphicon {{ $client->shelter == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
-          </label>
-        </div>
-        <div class="col-md-2 form-check form-check-inline">
-          <label class="form-check-label">
-              <p>Private Residence <i class="glyphicon {{ $client->private_res == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
-          </label>
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-md-2 form-check form-check-inline">
-          <label class="form-check-label">
-              <p>Section 8 <i class="glyphicon {{ $client->section_8 == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
-          </label>
-        </div>
-        <div class="col-md-2 form-check form-check-inline">
-          <label class="form-check-label">
-              <p>ARHA <i class="glyphicon {{ $client->arha == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
-          </label>
-        </div>
-        <div class="col-md-2 form-check form-check-inline">
-          <label class="form-check-label">
-              <p>Other <i class="glyphicon {{ $client->other == 1 ? 'glyphicon-ok success' : 'glyphicon-remove danger' }}"></i></p>
-          </label>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="apartment_name">Apartment Complex</label>
-        </div>
-        <div class="col-md-5">
-            <p>{{ $client->apartment_name }}</p>
-        </div>
-    </div>
-
-    <div class="form-group row">
         <div class="col-md-2">
             <label for="phone">Phone Number</label>
         </div>
