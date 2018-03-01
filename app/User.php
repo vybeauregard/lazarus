@@ -46,6 +46,5 @@ class User extends Authenticatable
     public function routeNotificationForSlack()
     {
         return config('app.slack_webhook_url');
-        dd(config('app.slack_webhook_url'));
     }
 }
