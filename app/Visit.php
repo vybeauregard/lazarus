@@ -30,4 +30,9 @@ class Visit extends Model
     {
         return $this->belongsTo(Counselor::class);
     }
+
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
+    }
 }

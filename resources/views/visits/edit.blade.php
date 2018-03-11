@@ -10,6 +10,8 @@
     {{ csrf_field() }}
     {{ method_field('PUT') }}
 @include('visits.form')
-    <input type="submit" class="btn btn-primary" value="Save Visit" />
+    <input type="submit" name="submit" value="Save Visit and Add Request" class="btn btn-success" />
+
+    <input type="submit" name="submit" value="Save Visit" class="btn btn-primary" />
 </form>
 @endsection

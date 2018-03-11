@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('visits', 'VisitController');
 
+    Route::resource('visits.requests', 'RequestController')->except(['index']);
+
     Route::resource('clients', 'ClientController');
 
     Route::resource('clients.families', 'FamilyController')->except(['index']);

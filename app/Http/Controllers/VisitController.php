@@ -79,7 +79,28 @@ class VisitController extends Controller
     public function update(VisitRequest $request, Visit $visit)
     {
         $visit->update($request->all());
-        return redirect()->route('visits.index');
+
+        $route = $this->getRedirectRouteOnUpdate($visit);
+
+        return redirect($route);
+
+    }
+
+    /**
+     * Get the redirect route based on what button was clicked.
+     *
+     * @param  \App\Visit  $visit
+     * @return string
+     */
+    private function getRedirectRouteOnUpdate($visit)
+    {
+        switch (request('submit'))
+        {
+            case "Save Visit and Add Request":
+                return route('visits.requests.create', $visit->id);
+            default:
+                return route('visits.index');
+        }
     }
 
     /**

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Family;
 use App\Http\Requests\FamilyRequest;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class FamilyController extends Controller

@@ -32,21 +32,36 @@
         </div>
     </div>
 
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="request">Request</label>
+@if($visit->requests->count())
+    <hr />
+    <div class="row">
+        <div class="col-md-10">
+            <h4>Requests</h4>
         </div>
-        <div class="col-md-5">
-            <p class="" rows="5" id="request" name="request">{{ old('request') ?? $visit->request }}</p>
-        </div>
-    </div>
 
-    <div class="form-group row">
         <div class="col-md-2">
-            <label for="action">Action</label>
-        </div>
-        <div class="col-md-5">
-            <p class="" rows="5" id="action" name="action">{{ old('action') ?? $visit->action }}</p>
         </div>
     </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach($visit->requests as $request)
+            <tr data-request-id="{{ $request->id }}">
+                <td><a href="{{ route('visits.requests.show', [$visit->id, $request->id]) }}">{{ $request->formattedType }}</a></td>
+                <td>{{ $request->amount }}</td>
+                <td>{{ $request->action }}</td>
+
+            </tr>
+    @endforeach
+        </tbody>
+    </table>
+@else
+    <em>No request data provided</em>
+@endif
 </div>

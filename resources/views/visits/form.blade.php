@@ -50,23 +50,39 @@
     </div>
 </div>
 
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="request">Request</label>
-    </div>
-    <div class="col-md-5">
-        <textarea class="form-control" rows="5" id="request" name="request">{{ old('request') ?? $visit->request }}</textarea>
+@if($visit->requests->count())
+<hr />
+<div class="row request-display">
+    <div class="col-md-9">
+        <h4>Requests</h4>
     </div>
 </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Action</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach($visit->requests as $request)
+            <tr data-request-id="{{ $request->id }}">
+                <td><a href="{{ route('visits.requests.edit', [$visit->id, $request->id]) }}">{{ $request->formattedType }}</a></td>
+                <td>{{ $request->amount }}</td>
+                <td>{{ $request->action }}</td>
+                <td><a class="btn btn-link glyphicon glyphicon-trash no-underline"
+                            data-toggle="confirmation"
+                            data-title="Remove this Request?"
+                            data-on-confirm="removeRequest"></a>
+                </td>
 
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="action">Action</label>
-    </div>
-    <div class="col-md-5">
-        <textarea class="form-control" rows="5" id="action" name="action">{{ old('action') ?? $visit->action }}</textarea>
-    </div>
-</div>
+            </tr>
+    @endforeach
+        </tbody>
+    </table>
+@endif
 
 @section('custom-js')
 <script>
@@ -115,5 +131,30 @@
             $("input[name='counselor_id']").val('');
         }
     });
+
+function removeRequest() {
+    var request_id = $(this).closest('tr').data('request-id');
+    var url = "{{ route('visits.requests.destroy', [$visit->id, 0]) }}";
+    var ajax = {
+        data: {
+            _token: $("input[name='_token']").val(),
+            _method: "DELETE"
+        },
+        url: url.substr(0, (url.length - 1)) + request_id
+    };
+    $.post(ajax).then(function(){
+        $row = $('tr[data-request-id="'+request_id+'"]');
+        $table = $row.closest(".table");
+        if ($row.length) {
+            $row.remove();
+        } else {
+            $(".request-display").remove();
+        }
+        if ($row.siblings().length == 0) {
+            $table.remove();
+        }
+    });
+}
+
 </script>
 @endsection
