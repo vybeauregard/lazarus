@@ -45,14 +45,12 @@
         <div class="col-md-1">
             <select type="text" class="form-control" id="dob_day" placeholder="Day" name="dob_day">
                 @foreach(range(1, 31) as $day)
-                @if(old('dob_month') || $family->dob)
-                    @if(old('dob_day') ?? $family->dob->format('d') == str_pad($day, 2, '0', STR_PAD_LEFT))
-                    <option selected value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
-                    @else
-                    <option value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
-                    @endif
+                @if(!old('dob_day') && $family->dob)
+                <option value="{{ $day }}" {{ old('dob_day') ?? $family->dob->format('d') == $day ? 'selected' : '' }}>{{ $day }}</option>
+                @elseif($family->dob != null)
+                <option value="{{ $day }}" {{ $loop->last ? 'selected' : '' }}>{{ $day }}</option>
                 @else
-                <option value="{{ str_pad($day, 2, '0', STR_PAD_LEFT) }}">{{ $day }}</option>
+                <option value="{{ $day }}">{{ $day }}</option>
                 @endif
                 @endforeach
             </select>
@@ -60,10 +58,12 @@
         <div class="col-md-2">
             <select type="text" class="form-control" id="dob_year" placeholder="Year" name="dob_year">
                 @foreach(range(1900, date('Y')) as $year)
-                @if(old('dob_year') ?? $family->relationship)
+                @if(!old('dob_year') && $family->dob)
                 <option value="{{ $year }}" {{ old('dob_year') ?? $family->dob->format('Y') == $year ? 'selected' : '' }}>{{ $year }}</option>
-                @else
+                @elseif($family->dob != null)
                 <option value="{{ $year }}" {{ $loop->last ? 'selected' : '' }}>{{ $year }}</option>
+                @else
+                <option value="{{ $year }}">{{ $year }}</option>
                 @endif
                 @endforeach
             </select>

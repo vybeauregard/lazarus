@@ -28,7 +28,7 @@
             <label for="dob_month">Date of Birth</label>
         </div>
         <div class="col-md-5">
-            <p>{{ $family->dob->format('m/d/Y') }}</p>
+            <p>{{ $family->dob != null ?? $family->dob->format('m/d/Y') }}</p>
         </div>
     </div>
 

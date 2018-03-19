@@ -179,7 +179,7 @@
                 <td><a href="{{ route('clients.families.show', [$client->id, $family->id]) }}">{{ $family->name }}</a></td>
                 <td>{{ str_replace("_", " ", title_case($family->relationship)) }}</td>
                 <td>{{ $family->sex }}</td>
-                <td>{{ $family->dob->format('m/d/Y') }}</td>
+                <td>{{ $family->dob !== null ?? $family->dob->format('m/d/Y') }}</td>
                 <td>{{ $family->birth_country }}</td>
                 <td>{{ $family->insurance }}</td>
 
