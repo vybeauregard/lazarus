@@ -2,12 +2,24 @@
 
 namespace App\Traits;
 
+use App\Contact;
+
 trait HasContact
 {
     protected $phones = [
         'phone',
         'emergency_phone'
     ];
+
+    public function findByNameOrCreate($array)
+    {
+        extract($array);
+        $contact = Contact::where('first_name', $first_name)->where('last_name', $last_name)->get();
+        if($contact->count()) {
+            return $contact->first()->contactable;
+        }
+        return static::create($array);
+    }
 
     public function getNameAttribute()
     {

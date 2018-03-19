@@ -40,6 +40,11 @@ class Client extends Model
         return $this->hasMany(Income::class);
     }
 
+    public function visit()
+    {
+        return $this->hasMany(Visit::class);
+    }
+
     public function scopeTypeaheadRelations($query)
     {
         return $query->with(['contact', 'family']);
@@ -50,8 +55,10 @@ class Client extends Model
         $model = static::query()->create($attributes);
         $contact = new Contact($attributes);
         $income = new Income($attributes);
-        foreach($attributes['family'] as $person) {
-            $model->family()->save(new Family($person));
+        if(array_key_exists('family', $attributes)) {
+            foreach($attributes['family'] as $person) {
+                $model->family()->save(new Family($person));
+            }
         }
         $model->contact()->save($contact);
         $model->income()->save($income);

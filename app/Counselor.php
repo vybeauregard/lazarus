@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\HasContact;
+use App\Contact;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -31,6 +32,15 @@ class Counselor extends Model
         $model->contact()->save($contact);
         $model->push();
         return $model;
+    }
+
+    public static function findByFirstName($name)
+    {
+        return Contact::where('contactable_type', SELF::class)
+            ->where('first_name', $name)
+            ->get()
+            ->first()
+            ->contactable_id;
     }
 
     public function updateWithRelations($attributes = [])
