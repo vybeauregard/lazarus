@@ -13,8 +13,6 @@ class Visit extends Model
         'date',
         'client_id',
         'counselor_id',
-        'request',
-        'action'
     ];
 
     protected $dates = [

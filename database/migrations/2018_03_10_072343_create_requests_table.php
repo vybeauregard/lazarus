@@ -17,9 +17,9 @@ class CreateRequestsTable extends Migration
             $table->increments('id');
             $table->integer('visit_id')->index();
             $table->integer('type');
-            $table->decimal('amount', 7, 2);
+            $table->decimal('amount', 7, 2)->default(0);
             $table->string('action');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -36,11 +36,14 @@ class Counselor extends Model
 
     public static function findByFirstName($name)
     {
-        return Contact::where('contactable_type', SELF::class)
+        $contact = Contact::where('contactable_type', SELF::class)
             ->where('first_name', $name)
             ->get()
-            ->first()
-            ->contactable_id;
+            ->first();
+        if ($contact) {
+            return $contact->contactable_id;
+        }
+        return null;
     }
 
     public function updateWithRelations($attributes = [])

@@ -18,6 +18,7 @@ class Client extends Model
         'birth_country',
         'veteran_status',
         'incarceration',
+        'source',
     ];
 
     public $dates = [

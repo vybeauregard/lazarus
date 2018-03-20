@@ -46,6 +46,11 @@ class Request extends Model
         return collect($this->requestTypes);
     }
 
+    public function getTypeId($type)
+    {
+        return $this->types->search($type);
+    }
+
     public function getFormattedTypeAttribute()
     {
         return $this->requestTypes[$this->type];

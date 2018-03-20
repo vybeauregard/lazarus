@@ -6,6 +6,8 @@ use Facades\App\Client;
 use App\Counselor;
 use App\Family;
 use App\Income;
+use Facades\App\Request as RequestFacade;
+use App\Request;
 use App\Visit;
 use Carbon\Carbon;
 use File;
@@ -73,13 +75,29 @@ class ImportVisits extends Command
             'dob' => Carbon::parse($visitor['Date of Birth']),
             'date' => Carbon::parse($visitor['Date of STPLM Visit']),
             'monthly_income' => $visitor['Monthly Income'],
-            'family' => [
+            'source' => $visitor['Source'],
+            'type' => RequestFacade::getTypeId($visitor['Help Requested']),
+            'action' => $visitor['Action Taken'],
+        ];
+        if (is_numeric($visitor['Action Taken'])) {
+            $visitordata['amount'] = $visitor['Action Taken'];
+            $visitordata['action'] = "";
+        } else {
+            $visitordata['action'] = $visitor['Action Taken'];
+        }
+        if ($visitor['Spouse'] !== "") {
+            $visitordata['family'] = [
                 [
                     'name' => $visitor['Spouse'],
                     'relationship' => 'spouse'
                 ],
-            ]
-        ];
+            ];
+        }
+
+        if ($visitordata['address1'] == "Homeless") {
+            $visitordata['homeless'] = true;
+        }
+
         for ($i=1;$i<=$visitor['No Of Children Under 18'];$i++) {
             $visitordata['family'][] = [
                 'name' => "child $i",
@@ -107,6 +125,8 @@ class ImportVisits extends Command
         $visitordata['counselor_id'] = Counselor::findByFirstName($visitor['Counselor']);
 
         $visit = $client->visit()->save(new Visit($visitordata));
+
+        $request = $visit->requests()->save(new Request($visitordata));
 
 //        dd('one done');
     }

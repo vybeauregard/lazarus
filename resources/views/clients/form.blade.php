@@ -154,6 +154,15 @@
 
 <div class="form-group row">
     <div class="col-md-2">
+        <label for="source">Source</label>
+    </div>
+    <div class="col-md-5">
+        <input type="text" class="form-control" id="source" name="source" value="{{ old('source') ?? $client->source }}" />
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-2">
         <label for="insurance_type">Medical Insurance?</label>
     </div>
     <div class="col-md-3">
