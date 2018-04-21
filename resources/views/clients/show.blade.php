@@ -199,5 +199,31 @@
 @else
     <em>No family data provided</em>
 @endif
+    
+@if($client->visit->count())
+    <hr />
+    <div class="row">
+        <div class="col-md-10">
+            <h4>Visits</h4>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+    </div>
+    <table class="table table-striped">
+    @foreach($client->visit->sortBy('date') as $visit)
+    <tr>
+        <td>
+            <a href="{{ route('visits.show', $visit->id) }}">{{ $visit->date->format('m/d/Y') }}</a>
+        </td>
+        <td>
+            {{ $visit->requests }}
+        </td>
+    </tr>
+    @endforeach
+    </table>
+@else
+    <em>No visit data provided</em>
+@endif
 </div>
 @endsection
