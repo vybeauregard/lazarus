@@ -10,6 +10,6 @@
     {{ csrf_field() }}
     {{ method_field('POST') }}
 @include('visits.form')
-    <input type="submit" class="btn btn-primary" value="Add Visit" />
+    <input type="submit" name="submit" value="Add Visit and Add Request" class="btn btn-success" />
 </form>
 @endsection

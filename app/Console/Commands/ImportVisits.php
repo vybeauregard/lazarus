@@ -50,11 +50,14 @@ class ImportVisits extends Command
         $file = storage_path('app/import/visits_' . $year . '.csv');
         $data = explode("\n", File::get($file));
         $header = str_getcsv(array_shift($data));
-        $data = collect($data)->map(function($line) use ($header) {
+        $counter = 0;
+        $data = collect($data)->map(function($line) use ($header, &$counter) {
             $array = str_getcsv($line);
             $visitor = array_combine($header, $array);
+            $counter++;
             return $this->interpretVisit($visitor);
         });
+        $this->line("$counter records imported for $year");
         //items are matched with their column headings
     }
 

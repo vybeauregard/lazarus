@@ -40,8 +40,8 @@ class VisitController extends Controller
      */
     public function store(VisitRequest $request)
     {
-        Visit::create($request->all());
-        return redirect()->route('visits.index');
+        $visit = Visit::create($request->all());
+        return redirect()->route('visits.requests.create', $visit);
 
     }
 
