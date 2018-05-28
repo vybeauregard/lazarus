@@ -14,6 +14,7 @@
         <tr>
             <th>Name</th>
             <th>Date</th>
+            <th>Visits</th>
             <th>Remove</th>
         </tr>
     </thead>
@@ -22,6 +23,7 @@
         <tr data-client-id="{{ $client->id }}">
             <td><a href="{{ route('clients.show', $client->id) }}">{{ $client->name }}</a></td>
             <td>{{ $client->date->format('m/d/Y') }}</td>
+            <td>{{ $client->visit->count() }}</td>
             <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
                         data-toggle="confirmation"
                         data-title="Remove this Client?"

@@ -71,7 +71,7 @@ class ImportVisits extends Command
             'apartment_name' => $visitor['Apartment Complex'],
             'dob' => Carbon::parse($visitor['Date of Birth']),
             'date' => Carbon::parse($visitor['Date of STPLM Visit']),
-            'monthly_income' => $visitor['Monthly Income'],
+            'monthly_income' => $visitor['Monthly Income'] == "Homeless" ? "0.00" : $visitor['Monthly Income'],
             'source' => $visitor['Source'],
             'type' => RequestFacade::getTypeId($visitor['Help Requested']),
             'action' => $visitor['Action Taken'],
