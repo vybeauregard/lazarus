@@ -56,13 +56,10 @@ class ImportVisits extends Command
             return $this->interpretVisit($visitor);
         });
         //items are matched with their column headings
-        dump($data->first());
-
     }
 
     private function interpretVisit($visitor)
     {
-        dump($visitor);
         $visitordata = [
             'first_name' => $visitor['First Name'],
             'last_name' => $visitor['Last Name'],
@@ -119,15 +116,24 @@ class ImportVisits extends Command
             ];
         }
 
-//        dd($visitor);
         $client = Client::findByNameOrCreate($visitordata);
 
         $visitordata['counselor_id'] = Counselor::findByFirstName($visitor['Counselor']);
 
-        $visit = $client->visit()->save(new Visit($visitordata));
+        //look at existing visits. if date and counselor id match, attach this request to that visit.
+        //otherwise create a new visit
+
+        $visit = new Visit($visitordata);
+
+        if($client->visit->count() > 1) {
+            if ($client->visit->where('date', $visitordata['date'])->count()) {
+                $visit = $client->visit->where('date', $visitordata['date'])->first();
+            }
+        }
+
+        $visit = $client->visit()->save($visit);
 
         $request = $visit->requests()->save(new Request($visitordata));
 
-//        dd('one done');
     }
 }
