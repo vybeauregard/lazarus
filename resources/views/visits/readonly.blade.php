@@ -15,7 +15,7 @@
             <label for="client">Client</label>
         </div>
         <div class="col-md-3">
-            <p id="client" name="client">{{ $visit->client->name }}</p>
+            <p id="client" name="client"><a href="{{ route('clients.show', $visit->client_id) }}">{{ $visit->client->name }}</a></p>
         </div>
         <div class="col-md-2">
         </div>
@@ -26,7 +26,7 @@
             <label for="counselor">Counselor</label>
         </div>
         <div class="col-md-3">
-            <p id="counselor" name="counselor">{{ $visit->counselor->name }}</p>
+            <p id="counselor" name="counselor">{{ $visit->counselor->fullName }}</p>
         </div>
         <div class="col-md-2">
         </div>
@@ -54,7 +54,7 @@
     @foreach($visit->requests as $request)
             <tr data-request-id="{{ $request->id }}">
                 <td><a href="{{ route('visits.requests.show', [$visit->id, $request->id]) }}">{{ $request->formattedType }}</a></td>
-                <td>{{ $request->amount }}</td>
+                <td>${{ ($request->amount) }}</td>
                 <td>{{ $request->action }}</td>
 
             </tr>

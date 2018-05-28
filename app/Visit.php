@@ -33,4 +33,11 @@ class Visit extends Model
     {
         return $this->hasMany(Request::class);
     }
+
+    public function getFormattedRequestsAttribute()
+    {
+        return $this->requests->map(function($request){
+            return $request->formattedType;
+        })->implode(', ');
+    }
 }

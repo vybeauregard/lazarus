@@ -211,16 +211,32 @@
         </div>
     </div>
     <table class="table table-striped">
-    @foreach($client->visit->sortBy('date') as $visit)
-    <tr>
-        <td>
-            <a href="{{ route('visits.show', $visit->id) }}">{{ $visit->date->format('m/d/Y') }}</a>
-        </td>
-        <td>
-            {{ $visit->requests }}
-        </td>
-    </tr>
-    @endforeach
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Counselor</th>
+                <th>Request Type</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($client->visit->sortByDesc('date') as $visit)
+            <tr>
+                <td>
+                    <a href="{{ route('visits.show', $visit->id) }}">{{ $visit->date->format('m/d/Y') }}</a>
+                </td>
+                <td>
+                    {{ $visit->counselor->name }}
+                </td>
+                <td>
+                    {{ $visit->formattedRequests }}
+                </td>
+                <td>
+                    ${{ number_format($visit->requests->sum('amount'), 2) }}
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
     </table>
 @else
     <em>No visit data provided</em>
