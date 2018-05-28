@@ -25,6 +25,7 @@
     </div>
 </div>
 
+{{--
 <div class="form-group row">
     <div class="col-md-2">
         <label for="parish">Primary Parish</label>
@@ -49,6 +50,7 @@
     <div class="col-md-2">
     </div>
 </div>
+--}}
 
 @include('layouts.address', ['model' => $counselor])
 
