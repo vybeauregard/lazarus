@@ -120,3 +120,4 @@ Food Bag
 -once children birthdays are captured, automatically change relationship to Other Adult on birthday
 
 Counselor index - remove parish add phone and email
+keep total monthly income in place but make it add up all monetary fields below (js, readonly field)
