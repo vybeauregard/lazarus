@@ -107,3 +107,17 @@ income
 living_conditions
 - client_id
 - conditions
+
+Add to request total amount needed, amount provided
+
+
+St. Pauls Lazarus Ministry
+ALIVE
+Old Presbyterian Meeting House
+Food Bag
+(multiselect)
+
+-once children birthdays are captured, automatically change relationship to Other Adult on birthday
+
+Counselor index - remove parish add phone and email
+keep total monthly income in place but make it add up all monetary fields below (js, readonly field)
