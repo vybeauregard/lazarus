@@ -16,7 +16,8 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Primary Parish</th>
+                <th>Phone</th>
+                <th>email</th>
                 <th>Remove</th>
             </tr>
         </thead>
@@ -24,7 +25,8 @@
         @foreach($counselors as $counselor)
             <tr data-counselor-id="{{ $counselor->id }}">
                 <td><a href="{{ route('counselors.show', $counselor->id) }}">{{ $counselor->name }}</a></td>
-                <td>{{ $counselor->parish ? $counselor->parish->name : '' }}</td>
+                <td>{{ $counselor->contact->formattedPhone }}</td>
+                <td>{!! $counselor->contact->linkedEmail !!}</td>
                 <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
                             data-toggle="confirmation"
                             data-title="Remove this Counselor?"

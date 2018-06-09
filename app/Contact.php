@@ -32,4 +32,30 @@ class Contact extends Model
     {
         return "{$this->first_name} {$this->last_name}";
     }
+
+    public function getFormattedPhoneAttribute()
+    {
+        if (!$this->phone) {
+            return "No phone listed";
+        }
+
+        return implode("", [
+            "(",
+            substr($this->phone, 0, 3),
+            ")",
+            " ",
+            substr($this->phone, 3, 3),
+            "-",
+            substr($this->phone, 6),
+        ]);
+    }
+
+    public function getLinkedEmailAttribute()
+    {
+        if (!$this->email) {
+            return "No email listed";
+        }
+        return '<a href="mailto:' . $this->email . '">' . $this->email . '</a>';
+    }
+
 }
