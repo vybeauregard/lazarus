@@ -32,7 +32,15 @@
         <label for="action">Action</label>
     </div>
     <div class="col-md-5">
-        <input class="form-control" rows="5" id="action" name="action" value="{{ old('action') ?? $request->action }}" />
+        <select multiple name="actions[]" class="form-control">
+        @foreach($actions as $value => $action)
+            @if(old('action') == $value || $request->actions->where('type', $action)->count())
+            <option value="{{ $value }}" selected>{{ $action }}</option>
+            @else
+            <option value="{{ $value }}" >{{ $action }}</option>
+            @endif
+        @endforeach
+        </select>
     </div>
 </div>
 

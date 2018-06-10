@@ -71,7 +71,7 @@
             <tr data-request-id="{{ $request->id }}">
                 <td><a href="{{ route('visits.requests.edit', [$visit->id, $request->id]) }}">{{ $request->formattedType }}</a></td>
                 <td>{{ $request->amount }}</td>
-                <td>{{ $request->action }}</td>
+                <td>{{ $request->formattedActions }}</td>
                 <td><a class="btn btn-link glyphicon glyphicon-trash no-underline"
                             data-toggle="confirmation"
                             data-title="Remove this Request?"

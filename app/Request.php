@@ -13,7 +13,7 @@ class Request extends Model
         "visit_id",
         "type",
         "amount",
-        "action",
+        "actions",
         "notes",
     ];
 
@@ -41,6 +41,11 @@ class Request extends Model
         return $this->belongsTo(Visit::class);
     }
 
+    public function actions()
+    {
+        return $this->belongsToMany(Action::class);
+    }
+
     public function getTypesAttribute()
     {
         return collect($this->requestTypes);
@@ -55,4 +60,23 @@ class Request extends Model
     {
         return $this->requestTypes[$this->type];
     }
+
+    public function getFormattedActionsAttribute()
+    {
+        return $this->actions->pluck('type')->implode(', ');
+    }
+
+    /**
+     * Set the request action(s).
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setActionsAttribute($value)
+    {
+        if($this->exists) {
+            $this->actions()->sync($value);
+        }
+    }
+
 }

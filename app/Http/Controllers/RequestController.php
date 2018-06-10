@@ -27,7 +27,10 @@ class RequestController extends Controller
      */
     public function store(RequestRequest $request, Visit $visit)
     {
-        $visit->requests()->save(new Request($request->all()));
+        $visit->requests()
+            ->save(new Request($request->all()))
+            ->actions()
+            ->attach($request->actions);
         return redirect()->route('visits.edit', $visit->id);
     }
 

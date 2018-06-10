@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Auth;
+use View;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,22 +21,27 @@ class AppServiceProvider extends ServiceProvider
             __DIR__.'/../../resources/assets/css' => public_path('css'),
         ], 'public');
 
-        \View::composer(
+        View::composer(
             ['layouts.address'],
             'App\Http\ViewComposers\StateList'
         );
 
-        \View::composer(
+        View::composer(
             ['counselors.form'],
             'App\Http\ViewComposers\ParishTypeahead'
         );
 
-        \View::composer(
+        View::composer(
             ['visits.form'],
             'App\Http\ViewComposers\CounselorTypeahead'
         );
 
-        \View::composer(
+        View::composer(
+            ['visits.requests.form'],
+            'App\Http\ViewComposers\ActionList'
+        );
+
+        View::composer(
             ['visits.form', 'loans.form', 'programs.form'],
             'App\Http\ViewComposers\ClientTypeahead'
         );

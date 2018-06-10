@@ -17,10 +17,10 @@
 
         <div class="form-group row">
             <div class="col-md-2">
-                <label for="name">Action</label>
+                <label for="name">Action{{ $request->actions->count() > 1 ? 's' : ''}}</label>
             </div>
             <div class="col-md-5">
-                <p>{{ $request->action }}</p>
+                <p>{{ $request->formattedActions }}</p>
             </div>
         </div>
 

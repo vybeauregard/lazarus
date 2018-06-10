@@ -55,7 +55,7 @@
             <tr data-request-id="{{ $request->id }}">
                 <td><a href="{{ route('visits.requests.show', [$visit->id, $request->id]) }}">{{ $request->formattedType }}</a></td>
                 <td>${{ ($request->amount) }}</td>
-                <td>{{ $request->action }}</td>
+                <td>{{ $request->formattedActions }}</td>
 
             </tr>
     @endforeach
