@@ -13,17 +13,17 @@
         "axios": "^0.17",
         "bootstrap": "^3.3.7",
         "bootstrap-sass": "^3.3.7",
-        "popper.js": "^1.12",
-        "cross-env": "^5.1",
+        "cross-env": "^5.1.6",
         "jquery": "^3.2",
-        "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
-        "vue": "^2.5.7"
+        "laravel-mix": "^2.1.11",
+        "lodash": "^4.17.10",
+        "popper.js": "^1.14.3",
+        "vue": "^2.5.16"
     },
     "dependencies": {
         "bootstrap-3-typeahead": "^4.0.2",
-        "bootstrap-confirmation2": "^2.4.0",
-        "bootstrap-datepicker": "^1.7.1",
+        "bootstrap-confirmation2": "^2.4.1",
+        "bootstrap-datepicker": "^1.8.0",
         "bootstrap-formhelpers": "git+https://github.com/vlamanna/BootstrapFormHelpers.git"
     }
 }

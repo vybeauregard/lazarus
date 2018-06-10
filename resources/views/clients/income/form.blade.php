@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-3 input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-        <input type="number" min="0" class="form-control" id="monthly_income" name="monthly_income" value="{{ old('monthly_income') ? old('monthly_income') : ($income ? $income->monthly_income : '') }}" />
+        <input type="number" min="0" class="form-control" id="monthly_income" name="monthly_income" readonly value="{{ old('monthly_income') ? old('monthly_income') : ($income ? $income->monthly_income : '') }}" />
     </div>
 </div>
 
@@ -245,3 +245,26 @@
     </div>
 </div>
 @endforeach
+
+
+@section('custom-js')
+<script>
+    $income_fields = $('.income-form .glyphicon-usd').map(function(){
+        var $element = $(this).closest(".input-group-addon").next('input').not('[readonly]');
+        $element.on('change', function(){
+            $("#monthly_income").val(calculateTotalIncome());
+        });
+        return $element;
+    });
+
+    function calculateTotalIncome() {
+        return $income_fields.map(function(){
+            return $(this).val();
+        }).filter(function(){
+            return $.isNumeric(this);
+        }).toArray().reduce(function(total, current){
+            return parseInt(total) + parseInt(current);
+        });
+    }
+</script>
+@endsection
