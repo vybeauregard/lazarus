@@ -30,14 +30,86 @@
     <div class="col-md-2">
         <label for="report_type" class="pull-right">Report Type</label>
     </div>
-    <div class="col-md-2">
-        <select class="form-control" name="report_type" id="report_type">
-            @foreach(['parishes', 'counselors', 'visit', 'loans', 'programs', 'requests', 'visits', 'employment', 'income', 'request type', 'new guest', 'living conditions', 'gender', 'ethnicity', 'citizenship'] as $report)
-            <option value="{{ snake_case($report) }}">{{ ucwords($report) }}</option>
-            @endforeach
-        </select>
-    </div>
 </div>
 
-<div id="report"></div>
+<div id="report">
+    <div class="form-group">
+    Total Visits:
+    </div>
+    <div class="form-group">
+    Total Clients:
+    </div>
+    <div class="form-group">
+    New Clients: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Repeat New Clients: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Average weekly visitors (Tuesdays only):
+    </div>
+    <div class="form-group">
+    Average weekly turn-aways:
+    </div>
+    <div class="form-group">
+    One-time visitors: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Two-time visitors: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Three or more-time visitors: <span id="count"></span> <span id="percent"></span>
+    </div>
+
+    <div class="form-group">
+    Male: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Female: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Age ranges: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Number in household: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Children 18 and under: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    ARHA/Section 8 clients: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Birthplace: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Ethnicity: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Zipcode: <span id="count"></span> <span id="percent"></span>
+    </div>
+
+    <div class="form-group">
+    Average income:
+    </div>
+    <div class="form-group">
+    Multiple forms of income assistance: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Help request type: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    ALIVE Referrals: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    OPMH Referrals: <span id="count"></span> <span id="percent"></span>
+    </div>
+    <div class="form-group">
+    Amount owed: [tbd]
+    </div>
+
+
+
+
+</div>
 @endsection
