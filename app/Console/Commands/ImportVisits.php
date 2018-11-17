@@ -121,7 +121,15 @@ class ImportVisits extends Command
 
         $client = Client::findByNameOrCreate($visitordata);
 
+        if ($visitor['Counselor'] == "") {
+            dump($visitordata);
+            throw new \Exception('No counselor entered for visitor');
+        }
         $visitordata['counselor_id'] = Counselor::findByFirstName($visitor['Counselor']);
+
+        if (is_null($visitordata['counselor_id'])) {
+            throw new \Exception('No counselor match for ' . $visitor['Counselor']);
+        }
 
         //look at existing visits. if date and counselor id match, attach this request to that visit.
         //otherwise create a new visit
