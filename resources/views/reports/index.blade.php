@@ -33,41 +33,106 @@
 </div>
 
 <div id="report">
+
     <div class="form-group">
+<code>#SELECT
+COUNT(*) AS total_visits,
+COUNT(DISTINCT client_id) AS unique_clients
+FROM visits
+WHERE `date` BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)</code>
     Total Visits:
     </div>
     <div class="form-group">
     Total Clients:
     </div>
     <div class="form-group">
+<code>SELECT COUNT(*) AS new_clients
+FROM clients
+WHERE `date` BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE);</code>
     New Clients: <span id="count"></span> <span id="percent"></span>
     </div>
     <div class="form-group">
+<code>SELECT c.id, COUNT(*) as repeats
+FROM clients c
+LEFT JOIN visits v ON v.client_id = c.id
+WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
+GROUP BY c.id;</code>
     Repeat New Clients: <span id="count"></span> <span id="percent"></span>
     </div>
     <div class="form-group">
+<code>SELECT COUNT(*) as visits, v.date
+FROM visits v
+WHERE v.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
+AND WEEKDAY(v.date) = 1
+GROUP BY v.date;</code>
     Average weekly visitors (Tuesdays only):
     </div>
     <div class="form-group">
+        <code>???</code>
     Average weekly turn-aways:
     </div>
     <div class="form-group">
+<code>
+SELECT c.id, COUNT(*) as repeats, WEEKDAY(v.date) AS day_of_week
+FROM clients c
+LEFT JOIN visits v ON v.client_id = c.id
+WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
+GROUP BY c.id, v.date
+HAVING COUNT(*) = 1;
+</code>
     One-time visitors: <span id="count"></span> <span id="percent"></span>
     </div>
     <div class="form-group">
+<code>
+SELECT c.id, COUNT(*) as repeats, WEEKDAY(v.date) AS day_of_week
+FROM clients c
+LEFT JOIN visits v ON v.client_id = c.id
+WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
+GROUP BY c.id, v.date
+HAVING COUNT(*) = 2;
+</code>
     Two-time visitors: <span id="count"></span> <span id="percent"></span>
     </div>
     <div class="form-group">
+<code>
+SELECT c.id, COUNT(*) as repeats, WEEKDAY(v.date) AS day_of_week
+FROM clients c
+LEFT JOIN visits v ON v.client_id = c.id
+WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
+GROUP BY c.id, v.date
+HAVING COUNT(*) > 2;
+</code>
     Three or more-time visitors: <span id="count"></span> <span id="percent"></span>
     </div>
 
     <div class="form-group">
+<code>SELECT c.gender
+FROM clients c
+LEFT JOIN visits v ON v.client_id = c.id
+WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
+AND gender = 'Male'
+GROUP BY v.id, c.gender;
+</code>
     Male: <span id="count"></span> <span id="percent"></span>
     </div>
     <div class="form-group">
+<code>SELECT c.gender
+FROM clients c
+LEFT JOIN visits v ON v.client_id = c.id
+WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
+AND gender = 'Male'
+GROUP BY v.id, c.gender;
+</code>
     Female: <span id="count"></span> <span id="percent"></span>
     </div>
     <div class="form-group">
+<code>
+"SELECT c.dob, TIMESTAMPDIFF(YEAR,c.dob,CURDATE()) AS age
+FROM clients c
+LEFT JOIN visits v ON v.client_id = c.id
+WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
+AND c.dob <> '';"
+</code>
     Age ranges: <span id="count"></span> <span id="percent"></span>
     </div>
     <div class="form-group">

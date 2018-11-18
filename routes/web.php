@@ -49,9 +49,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         return view("clients.family", compact('fam_id'));
     })->name('clients.families.form');
 
-    Route::get('reports', function(){
-        return view("reports.index");
-    })->name('reports.index');
+    Route::view('reports', "reports.index")->name('reports.index');
 
     Route::group(['middleware' => ['admin']], function(){
         Route::resource('users', 'Auth\UserController')

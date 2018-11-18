@@ -29,6 +29,8 @@ class ImportVisits extends Command
      */
     protected $description = 'Import Client Visits from csv';
 
+    protected $year = 0;
+
     /**
      * Create a new command instance.
      *
@@ -46,8 +48,8 @@ class ImportVisits extends Command
      */
     public function handle()
     {
-        $year = $this->choice('What year do you need to import?', [2017, 2018], 0);
-        $file = storage_path('app/import/visits_' . $year . '.csv');
+        $this->year = $this->choice('What year do you need to import?', [2017, 2018], 0);
+        $file = storage_path('app/import/visits_' . $this->year . '.csv');
         $data = explode("\n", File::get($file));
         $header = str_getcsv(array_shift($data));
         $counter = 0;
@@ -57,7 +59,7 @@ class ImportVisits extends Command
             $counter++;
             return $this->interpretVisit($visitor);
         });
-        $this->line("$counter records imported for $year");
+        $this->line("$counter records imported for {$this->year}");
         //items are matched with their column headings
     }
 
@@ -72,8 +74,9 @@ class ImportVisits extends Command
             'ethnicity' => $visitor['Ethnicity'],
             'birth_country' => $visitor['Country of Birth'],
             'apartment_name' => $visitor['Apartment Complex'],
-            'dob' => Carbon::parse($visitor['Date of Birth']),
+            'dob' => Carbon::parse($visitor['Date of Birth'])->isPast() ? Carbon::parse($visitor['Date of Birth']) : Carbon::parse($visitor['Date of Birth'])->subYears(100),
             'date' => Carbon::parse($visitor['Date of STPLM Visit']),
+            'client_date' => $visitor['New to STP'] == "Yes" ? Carbon::parse($visitor['Date of STPLM Visit']) : Carbon::create(2016, 1, 1)->subDay()->format('Y-m-d'),
             'monthly_income' => $visitor['Monthly Income'] == "Homeless" ? "0.00" : $visitor['Monthly Income'],
             'source' => $visitor['Source'],
             'type' => RequestFacade::getTypeId($visitor['Help Requested']),
@@ -118,8 +121,16 @@ class ImportVisits extends Command
                 'relationship' => "other adult"
             ];
         }
-
-        $client = Client::findByNameOrCreate($visitordata);
+        if ($visitordata['dob'] == Carbon::today()) {
+            unset($visitordata['dob']);
+        }
+        if ($visitordata['date'] != $visitordata['client_date']) {
+            $vdata = $visitordata;
+            $vdata['date'] = $vdata['client_date'];
+            $client = Client::findByNameOrCreate($vdata);
+        } else {
+            $client = Client::findByNameOrCreate($visitordata);
+        }
 
         if ($visitor['Counselor'] == "") {
             dump($visitordata);
