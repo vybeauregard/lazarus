@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('counselors', 'CounselorController');
 
+    Route::resource('turn-aways', 'TurnAwayController');
+
     Route::get('load-family-form/{fam_id}', function($fam_id){
         return view("clients.family", compact('fam_id'));
     })->name('clients.families.form');
