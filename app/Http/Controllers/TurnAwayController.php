@@ -24,10 +24,8 @@ class TurnAwayController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(TurnAways $turn_away)
     {
-        $turn_away = new TurnAways;
-
         $turn_away->date = Carbon::now()->format('Y-m-d');
 
         return view('turn-aways.create', compact('turn_away'));
@@ -39,43 +37,15 @@ class TurnAwayController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, TurnAways $turn_away)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $request->validate([
+            'date' => 'required|date_format:m/d/Y',
+            'total' => 'required|numeric'
+        ]);
+        $request->merge(['date' => Carbon::createFromFormat('m/d/Y', $request->date)]);
+        $turn_away->fill($request->all())->save();
+        return redirect()->route('turn-aways.index');
     }
 
     /**
