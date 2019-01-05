@@ -20,7 +20,7 @@
     <tbody>
     @foreach($turn_aways as $date)
         <tr data-date="{{ $date->date->format('Y-m-d') }}">
-            <td><a href="{{ route('turn-aways.show', $date->date->format('Y-m-d')) }}">{{ $date->date->format('m/d/Y') }}</a></td>
+            <td>{{ $date->date->format('m/d/Y') }}</td>
             <td>{{ $date->total }}</td>
 
             <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"

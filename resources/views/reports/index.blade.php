@@ -6,175 +6,236 @@
 
 @section('content')
 <h3>Reports</h3>
+<form method="post">
+    <div class="text-center">
 
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="start_date" class="pull-right">Start Date</label>
-    </div>
-    <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="start_date" name="start_date" data-provide="datepicker" value="{{ old('start_date') ? old('start_date') : Carbon\Carbon::now()->startOfMonth()->format('m/d/Y') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-    </div>
-</div>
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="end_date" class="pull-right">End Date</label>
-    </div>
-    <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="end_date" name="end_date" data-provide="datepicker" value="{{ old('end_date') ? old('end_date') : Carbon\Carbon::now()->format('m/d/Y') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-    </div>
-</div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="start_date" class="pull-right">Start Date</label>
+            </div>
+            <div class="col-md-2 input-group">
+                <input type="text" class="form-control datepicker" id="start_date" name="start_date" data-provide="datepicker" value="{{ old('start_date') ? old('start_date') : isset($reports) ? $reports->start_date->format('m/d/Y') : Carbon\Carbon::now()->startOfMonth()->format('m/d/Y') }}" />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="end_date" class="pull-right">End Date</label>
+            </div>
+            <div class="col-md-2 input-group">
+                <input type="text" class="form-control datepicker" id="end_date" name="end_date" data-provide="datepicker" value="{{ old('end_date') ? old('end_date') : isset($reports) ? $reports->end_date->format('m/d/Y') : Carbon\Carbon::now()->format('m/d/Y') }}" />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+        </div>
 
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="report_type" class="pull-right">Report Type</label>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label for="report_type" class="pull-right">Report Type</label>
+            </div>
+        </div>
+        @csrf
+        <div class="form-group row">
+            <div class="col-md-2 col-md-offset-2">
+                <button class="btn btn-primary">Run Report</button>
+            </div>
+        </div>
     </div>
-</div>
+</form>
 
+@if(isset($reports))
 <div id="report">
 
     <div class="form-group">
-<code>#SELECT
-COUNT(*) AS total_visits,
-COUNT(DISTINCT client_id) AS unique_clients
-FROM visits
-WHERE `date` BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)</code>
-    Total Visits:
+    Total Visits: {{ $reports->totalVisits->total_visits }}
     </div>
     <div class="form-group">
-    Total Clients:
+    Total Clients: {{ $reports->totalVisits->unique_clients }}
     </div>
     <div class="form-group">
-<code>SELECT COUNT(*) AS new_clients
-FROM clients
-WHERE `date` BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE);</code>
-    New Clients: <span id="count"></span> <span id="percent"></span>
+    New Clients:
+        <span class="count">{{ $reports->newClients }}</span>
+        <span class="percent">{{ ceil(100 * $reports->newClients / $reports->totalVisits->unique_clients) }}%</span>
     </div>
     <div class="form-group">
-<code>SELECT c.id, COUNT(*) as repeats
-FROM clients c
-LEFT JOIN visits v ON v.client_id = c.id
-WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
-GROUP BY c.id;</code>
-    Repeat New Clients: <span id="count"></span> <span id="percent"></span>
+    Repeat New Clients:
+        <span class="count">{{ $reports->repeatNewClients }}</span>
+        <span class="percent">{{ ceil(100 * $reports->repeatNewClients / $reports->totalVisits->unique_clients) }}%</span>
     </div>
     <div class="form-group">
-<code>SELECT COUNT(*) as visits, v.date
-FROM visits v
-WHERE v.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
-AND WEEKDAY(v.date) = 1
-GROUP BY v.date;</code>
-    Average weekly visitors (Tuesdays only):
+    Average weekly visitors (Tuesdays only): {{ $reports->averageWeeklyVisitors }}
     </div>
     <div class="form-group">
-        <code>???</code>
-    Average weekly turn-aways:
+    Average weekly turn-aways: {{ $reports->averageWeeklyTurnAways }}
     </div>
     <div class="form-group">
-<code>
-SELECT c.id, COUNT(*) as repeats, WEEKDAY(v.date) AS day_of_week
-FROM clients c
-LEFT JOIN visits v ON v.client_id = c.id
-WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
-GROUP BY c.id, v.date
-HAVING COUNT(*) = 1;
-</code>
-    One-time visitors: <span id="count"></span> <span id="percent"></span>
+    One-time visitors:
+        <span class="count">{{ $reports->oneTimeVisitors }}</span>
+        <span class="percent">{{ ceil(100 * $reports->oneTimeVisitors / $reports->totalVisits->unique_clients) }}%</span>
     </div>
     <div class="form-group">
-<code>
-SELECT c.id, COUNT(*) as repeats, WEEKDAY(v.date) AS day_of_week
-FROM clients c
-LEFT JOIN visits v ON v.client_id = c.id
-WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
-GROUP BY c.id, v.date
-HAVING COUNT(*) = 2;
-</code>
-    Two-time visitors: <span id="count"></span> <span id="percent"></span>
+    Two-time visitors:
+        <span class="count">{{ $reports->twoTimeVisitors }}</span>
+        <span class="percent">{{ ceil(100 * $reports->twoTimeVisitors / $reports->totalVisits->unique_clients) }}%</span>
     </div>
     <div class="form-group">
-<code>
-SELECT c.id, COUNT(*) as repeats, WEEKDAY(v.date) AS day_of_week
-FROM clients c
-LEFT JOIN visits v ON v.client_id = c.id
-WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
-GROUP BY c.id, v.date
-HAVING COUNT(*) > 2;
-</code>
-    Three or more-time visitors: <span id="count"></span> <span id="percent"></span>
+    Three or more-time visitors:
+        <span class="count">{{ $reports->threeOrMoreTimeVisitors }}</span>
+        <span class="percent">{{ ceil(100 * $reports->threeOrMoreTimeVisitors / $reports->totalVisits->unique_clients) }}%</span>
     </div>
 
     <div class="form-group">
-<code>SELECT c.gender
-FROM clients c
-LEFT JOIN visits v ON v.client_id = c.id
-WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
-AND gender = 'Male'
-GROUP BY v.id, c.gender;
-</code>
-    Male: <span id="count"></span> <span id="percent"></span>
+    Male:
+        <span class="count">{{ $reports->maleClients }}</span>
+        <span class="percent">{{ ceil(100 * $reports->maleClients / $reports->totalVisits->total_visits) }}%</span>
     </div>
     <div class="form-group">
-<code>SELECT c.gender
-FROM clients c
-LEFT JOIN visits v ON v.client_id = c.id
-WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
-AND gender = 'Male'
-GROUP BY v.id, c.gender;
-</code>
-    Female: <span id="count"></span> <span id="percent"></span>
+    Female:
+        <span class="count">{{ $reports->femaleClients }}</span>
+        <span class="percent">{{ ceil(100 * $reports->femaleClients / $reports->totalVisits->total_visits) }}%</span>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4">
+            Age ranges:
+            <table class="table">
+                <thead>
+                    <th>cohort</th>
+                    <th>count</th>
+                    <th>percent</th>
+                </thead>
+                <tbody>
+                @foreach($reports->ageRanges as $cohort)
+                <tr>
+                    <td>{{ $cohort->cohort }}</td>
+                    <td>{{ $cohort->count }}</td>
+                    <td>{{ ceil(100 * $cohort->count / $reports->ageRanges->sum('count')) }}%</td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-4">
+            Number in household:
+            <table class="table">
+                <thead>
+                    <th>household size</th>
+                    <th>count</th>
+                    <th>percent</th>
+                </thead>
+                <tbody>
+                @foreach($reports->householdSizes as $household)
+                <tr>
+                    <td>{{ $household->household_size }}</td>
+                    <td>{{ $household->count }}</td>
+                    <td>{{ ceil(100 * $household->count / $reports->householdSizes->sum('count')) }}%</td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="form-group">
-<code>
-"SELECT c.dob, TIMESTAMPDIFF(YEAR,c.dob,CURDATE()) AS age
-FROM clients c
-LEFT JOIN visits v ON v.client_id = c.id
-WHERE c.date BETWEEN CAST('2017-01-01' AS DATE) AND CAST('2017-12-31' AS DATE)
-AND c.dob <> '';"
-</code>
-    Age ranges: <span id="count"></span> <span id="percent"></span>
+    Children 18 and under:
+        <span class="badge">coming soon</span>
+        <span class="count"></span> <span class="percent"></span>
     </div>
     <div class="form-group">
-    Number in household: <span id="count"></span> <span id="percent"></span>
+    ARHA/Section 8 clients:
+        <span class="count">{{ $reports->arha_sec8 }}</span> <span class="percent">{{ ceil(100 * $reports->arha_sec8 / $reports->totalVisits->total_visits) }}%</span>
     </div>
-    <div class="form-group">
-    Children 18 and under: <span id="count"></span> <span id="percent"></span>
+    <div class="form-group row">
+        <div class="col-md-4">
+            Birthplace:
+            <table class="table">
+                <thead>
+                    <th>country</th>
+                    <th>count</th>
+                    <th>percent</th>
+                </thead>
+                <tbody>
+                @foreach($reports->birthplaces as $birthplace)
+                <tr>
+                    <td>{{ $birthplace->birth_country }}</td>
+                    <td>{{ $birthplace->count }}</td>
+                    <td>{{ ceil(100 * $birthplace->count / $reports->birthplaces->sum('count')) }}%</td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="form-group">
-    ARHA/Section 8 clients: <span id="count"></span> <span id="percent"></span>
+    <div class="form-group row">
+        <div class="col-md-4">
+            Ethnicity:
+            <table class="table">
+                <thead>
+                    <th>ethnicity</th>
+                    <th>count</th>
+                    <th>percent</th>
+                </thead>
+                <tbody>
+                @foreach($reports->ethnicities as $ethnicity)
+                <tr>
+                    <td>{{ $ethnicity->ethnicity }}</td>
+                    <td>{{ $ethnicity->count }}</td>
+                    <td>{{ ceil(100 * $ethnicity->count / $reports->ethnicities->sum('count')) }}%</td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="form-group">
-    Birthplace: <span id="count"></span> <span id="percent"></span>
-    </div>
-    <div class="form-group">
-    Ethnicity: <span id="count"></span> <span id="percent"></span>
-    </div>
-    <div class="form-group">
-    Zipcode: <span id="count"></span> <span id="percent"></span>
+    <div class="form-group row">
+        <div class="col-md-4">
+            Zipcode:
+            <table class="table">
+                <thead>
+                    <th>zip code</th>
+                    <th>count</th>
+                    <th>percent</th>
+                </thead>
+                <tbody>
+                @foreach($reports->zipcodes as $zipcode)
+                <tr>
+                    <td>{{ $zipcode->zip }}</td>
+                    <td>{{ $zipcode->count }}</td>
+                    <td>{{ ceil(100 * $zipcode->count / $reports->zipcodes->sum('count')) }}%</td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="form-group">
     Average income:
+        ${{ $reports->averageMonthlyIncome }}
     </div>
     <div class="form-group">
-    Multiple forms of income assistance: <span id="count"></span> <span id="percent"></span>
+    Multiple forms of income assistance:
+        <span class="badge">coming soon</span>
+        <span class="count"></span> <span class="percent"></span>
     </div>
     <div class="form-group">
-    Help request type: <span id="count"></span> <span id="percent"></span>
+    Help request type:
+        <span class="badge">coming soon</span>
+        <span class="count"></span> <span class="percent"></span>
     </div>
     <div class="form-group">
-    ALIVE Referrals: <span id="count"></span> <span id="percent"></span>
+    ALIVE Referrals:
+        <span class="count">{{ $reports->aliveReferrals }}</span>
+        <span class="percent">{{ ceil(100 * $reports->aliveReferrals / $reports->totalVisits->total_visits) }}%</span>
     </div>
     <div class="form-group">
-    OPMH Referrals: <span id="count"></span> <span id="percent"></span>
+    OPMH Referrals:
+        <span class="badge">coming soon</span>
+        <span class="count"></span> <span class="percent"></span>
     </div>
     <div class="form-group">
-    Amount owed: [tbd]
+    Amount owed:
+        <span class="badge">tbd</span>
     </div>
-
-
-
-
 </div>
+@endif
 @endsection
