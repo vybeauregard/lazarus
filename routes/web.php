@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     })->name('clients.families.form');
 
     Route::get('reports', "ReportsController@index")->name('reports.index');
-    Route::post('reports', "ReportsController@show")->name('reports.index');
+    Route::post('reports', "ReportsController@show")->name('reports.show');
 
     Route::group(['middleware' => ['admin']], function(){
         Route::resource('users', 'Auth\UserController')
