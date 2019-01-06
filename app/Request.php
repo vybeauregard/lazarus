@@ -17,7 +17,7 @@ class Request extends Model
         "notes",
     ];
 
-    protected $requestTypes = [
+    public $requestTypes = [
         "0" => "Clothing",
         "1" => "Clothing Voucher",
         "2" => "Electric",
@@ -64,6 +64,12 @@ class Request extends Model
     public function getFormattedActionsAttribute()
     {
         return $this->actions->pluck('type')->implode(', ');
+    }
+
+    public static function getFormattedType($type)
+    {
+        $model = new SELF;
+        return $model->requestTypes[$type];
     }
 
     /**

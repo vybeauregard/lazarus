@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use App\Request as Requests;
 use Jenssegers\Model\Model;
 
 class Reports extends Model
@@ -24,11 +25,13 @@ class Reports extends Model
     public $femaleClients;
     public $ageRanges;
     public $householdSizes;
+    public $under18;
     public $arha_sec8;
     public $birthplaces;
     public $ethnicities;
     public $zipcodes;
     public $averageMonthlyIncome;
+    public $requestTypes;
     public $aliveReferrals;
 
     protected $queries = [
@@ -44,11 +47,13 @@ class Reports extends Model
         'getFemaleClients',
         'getAgeRanges',
         'getHouseholdSizes',
+        'getUnder18Clients',
         'getARHA_Section8Clients',
         'getBirthplaces',
         'getEthnicities',
         'getZipcodes',
         'getAverageMonthlyIncome',
+        'getRequestTypes',
         'getAliveReferrals',
     ];
 
@@ -92,14 +97,19 @@ class Reports extends Model
 
     public function getRepeatNewClients()
     {
-        $this->repeatNewClients = DB::table('clients as c')
-            ->select('c.id')
-            ->selectRaw('COUNT(*) AS repeats')
-            ->leftJoin('visits as v', 'v.client_id', '=', 'c.id')
-            ->whereBetween('c.date', [$this->start_date->startOfDay(), $this->end_date->endOfDay()])
-            ->groupBy('c.id')
-            ->get()
-            ->first()->repeats;
+        $this->repeatNewClients = DB::query()
+            ->selectRaw('COUNT(*) as count')
+            ->fromSub(function ($query) {
+                $query->select('c.id')
+                    ->selectRaw('COUNT(*) as repeats')
+                    ->from('clients as c')
+                    ->leftJoin('visits as v', 'v.client_id', '=', 'c.id')
+                    ->whereBetween('c.date', [$this->start_date->startOfDay(), $this->end_date->endOfDay()])
+                    ->whereBetween('v.date', [$this->start_date->startOfDay(), $this->end_date->endOfDay()])
+                    ->groupBy('c.id');
+            }, 'repeat_table')
+            ->where('repeats', '>', 1)
+            ->get()->first()->count ?? null;
     }
 
     public function getAverageWeeklyVisitors()
@@ -167,7 +177,7 @@ class Reports extends Model
             ->groupBy('c.gender')
             ->get()
             ->first()
-            ->count;
+            ->count ?? null;
     }
 
     public function getMaleClients()
@@ -216,6 +226,20 @@ class Reports extends Model
             ->get();
     }
 
+    public function getUnder18Clients()
+    {
+        $this->under18 = DB::query()
+            ->selectRaw('COUNT(*) AS count')
+            ->fromSub(function ($query){
+                $query->selectRaw('TIMESTAMPDIFF(YEAR,c.dob,v.date) AS age')
+                    ->from('clients as c')
+                    ->leftJoin('visits AS v', 'v.client_id', '=', 'c.id')
+                    ->whereBetween('v.date', [$this->start_date->startOfDay(), $this->end_date->endOfDay()])
+                    ->having('age', '<=', 18)
+                    ->having('age', '>', 0);
+            }, 'ages')
+            ->get()->first()->count;
+    }
     public function getARHA_Section8Clients()
     {
         $this->arha_sec8 = DB::table('income')
@@ -282,6 +306,21 @@ class Reports extends Model
 
     }
 
+    public function getRequestTypes()
+    {
+        $this->requestTypes = DB::table('visits AS v')
+            ->select('r.type')
+            ->selectRaw('COUNT(*) AS count')
+            ->leftJoin('requests AS r', 'r.visit_id', '=', 'v.id')
+            ->whereBetween('v.date', [$this->start_date->startOfDay(), $this->end_date->endOfDay()])
+            ->groupBy('r.type')
+            ->orderByDesc('count')
+            ->get()
+            ->map(function($row){
+                $row->type = Requests::getFormattedType($row->type);
+                return $row;
+            });
+    }
     public function getAliveReferrals()
     {
         $this->aliveReferrals = DB::table('clients AS c')

@@ -17,6 +17,9 @@ class ReportsController extends Controller
     {
         $reports->validateDates();
 
+        if(!$reports->totalVisits->unique_clients) {
+            return redirect()->back()->withError('No visitors logged in this date range!');
+        }
         return view('reports.index', compact('reports'));
     }
 }
