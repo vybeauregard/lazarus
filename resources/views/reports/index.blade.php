@@ -51,8 +51,7 @@
                         'one-time-visitors' => 'One Time Visitors',
                         'two-time-visitors' => 'Two Time Visitors',
                         'three-time-visits' => 'Three or More Time Visitors',
-                        'male' => 'Male',
-                        'female' => 'Female',
+                        'gender' => 'Gender',
                         'age-ranges' => 'Age Ranges',
                         'number-in-household' => 'Number in Household',
                         'children-18-under' => 'Children 18 & Under',
@@ -127,15 +126,20 @@
         <span class="percent">{{ ceil(100 * $reports->threeOrMoreTimeVisitors / $reports->totalVisits->unique_clients) }}%</span>
     </div>
 
-    <div class="form-group" id="male" style="display:none;">
-        <h2>Male:</h2>
-        <span class="count">{{ $reports->maleClients }}</span>
-        <span class="percent">{{ ceil(100 * $reports->maleClients / $reports->totalVisits->total_visits) }}%</span>
-    </div>
-    <div class="form-group" id="female" style="display:none;">
-        <h2>Female:</h2>
-        <span class="count">{{ $reports->femaleClients }}</span>
-        <span class="percent">{{ ceil(100 * $reports->femaleClients / $reports->totalVisits->total_visits) }}%</span>
+    <div class="form-group" id="gender" style="display:none;">
+        <h2>Gender:</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Male:</h3>
+                <span class="count">{{ $reports->maleClients }}</span>
+                <span class="percent">{{ ceil(100 * $reports->maleClients / $reports->totalVisits->total_visits) }}%</span>
+            </div>
+            <div class="col-md-3">
+                <h3>Female:</h3>
+                <span class="count">{{ $reports->femaleClients }}</span>
+                <span class="percent">{{ ceil(100 * $reports->femaleClients / $reports->totalVisits->total_visits) }}%</span>
+            </div>
+        </div>
     </div>
     <div class="form-group row" id="age-ranges" style="display:none;">
         <div class="col-md-4">

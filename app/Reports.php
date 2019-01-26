@@ -193,7 +193,13 @@ class Reports extends Model
     public function getAgeRanges($cohort_size = 15)
     {
         $this->ageRanges = DB::query()
-            ->selectRaw("CONCAT($cohort_size*FLOOR(age/$cohort_size), '-', $cohort_size*FLOOR(age/$cohort_size) + $cohort_size - 1) as cohort")
+            ->selectRaw("CASE
+                WHEN age BETWEEN 0 AND 17 THEN '0-17'
+                WHEN age BETWEEN 18 AND 25 THEN '18-25'
+                WHEN age BETWEEN 26 AND 40 THEN '26-40'
+                WHEN age BETWEEN 41 AND 65 THEN '41-65'
+                WHEN age > 65 THEN '65+'
+                END AS cohort")
             ->selectRaw('COUNT(*) as count')
             ->fromSub(function ($query) {
                 $query->selectRaw('TIMESTAMPDIFF(YEAR,c.dob,v.date) AS age')
