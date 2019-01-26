@@ -115,11 +115,10 @@ class Reports extends Model
     public function getAverageWeeklyVisitors()
     {
         $this->averageWeeklyVisitors = ceil(DB::table('visits')
-            ->select('date')
+            ->selectRaw('YEARWEEK(date) as yearweek')
             ->selectRaw('COUNT(*) as visits')
-            ->whereRaw('WEEKDAY(date) = 1')
             ->whereBetween('date', [$this->start_date->startOfDay(), $this->end_date->endOfDay()])
-            ->groupBy('date')
+            ->groupBy('yearweek')
             ->get()
             ->avg('visits'));
     }

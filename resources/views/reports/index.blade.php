@@ -103,7 +103,7 @@
         <span class="percent">{{ ceil(100 * $reports->repeatNewClients / $reports->totalVisits->unique_clients) }}%</span>
     </div>
     <div class="form-group" id="avg-weekly-visitors" style="display:none;">
-    <h2>Average weekly visitors (Tuesdays only):</h2>
+    <h2>Average weekly visitors:</h2>
         {{ $reports->averageWeeklyVisitors }}
     </div>
     <div class="form-group" id="avg-weekly-turnaways" style="display:none;">
