@@ -248,13 +248,12 @@ class Reports extends Model
     public function getARHA_Section8Clients()
     {
         $this->arha_sec8 = DB::table('income')
-            ->selectRaw('COUNT(*) AS count')
+            ->selectRaw('SUM(arha) as arha')
+            ->selectRaw('SUM(section_8) as section_8')
+            ->selectRaw("(SELECT COUNT(*) FROM income WHERE arha = 1 AND section_8 = 1 AND date
+                BETWEEN '$this->start_date->startOfDay()' AND '$this->end_date->startOfDay()') as `both`")
             ->whereBetween('date', [$this->start_date->startOfDay(), $this->end_date->endOfDay()])
-            ->where(function ($query) {
-                $query->where('arha', '=', '1')
-                    ->orWhere('section_8', '=', '1');
-            })
-            ->get()->first()->count;
+            ->get()->first();
 
     }
 

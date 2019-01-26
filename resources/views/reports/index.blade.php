@@ -189,7 +189,20 @@
     </div>
     <div class="form-group" id="arha-sec-8" style="display:none;">
         <h2>ARHA/Section 8 clients:</h2>
-        <span class="count">{{ $reports->arha_sec8 }}</span> <span class="percent">{{ ceil(100 * $reports->arha_sec8 / $reports->totalVisits->total_visits) }}%</span>
+        <div class="row">
+            <div class="col-md-3">
+                <h3>ARHA</h3>
+                <span class="count">{{ $reports->arha_sec8->arha }}</span> <span class="percent">{{ ceil(100 * $reports->arha_sec8->arha / $reports->totalVisits->total_visits) }}%</span>
+            </div>
+            <div class="col-md-3">
+                <h3>Section 8</h3>
+                <span class="count">{{ $reports->arha_sec8->section_8 }}</span> <span class="percent">{{ ceil(100 * $reports->arha_sec8->section_8 / $reports->totalVisits->total_visits) }}%</span>
+            </div>
+            <div class="col-md-3">
+                <h3>Both</h3>
+                <span class="count">{{ $reports->arha_sec8->both }}</span> <span class="percent">{{ ceil(100 * $reports->arha_sec8->both / $reports->totalVisits->total_visits) }}%</span>
+            </div>
+        </div>
     </div>
     <div class="form-group row" id="birthplace" style="display:none;">
         <div class="col-md-4">
