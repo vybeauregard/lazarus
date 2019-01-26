@@ -79,6 +79,8 @@ class ImportVisits extends Command
             'client_date' => $visitor['New to STP'] == "Yes" ? Carbon::parse($visitor['Date of STPLM Visit']) : Carbon::create(2016, 1, 1)->subDay()->format('Y-m-d'),
             'monthly_income' => $visitor['Monthly Income'] == "Homeless" ? "0.00" : $visitor['Monthly Income'],
             'source' => $visitor['Source'],
+            'arha' => array_key_exists('ARHA', $visitor) && stristr($visitor['ARHA'], 'arha') !== false,
+            'section_8' => array_key_exists('ARHA', $visitor) && stristr($visitor['ARHA'], 'section 8') !== false,
             'type' => RequestFacade::getTypeId($visitor['Help Requested']),
             'action' => $visitor['Action Taken'],
         ];
