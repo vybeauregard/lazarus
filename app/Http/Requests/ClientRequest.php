@@ -69,7 +69,7 @@ class ClientRequest extends FormRequest
             'state'    => 'size:2',
             'phone'    => 'max:14',
             'emergency_phone'    => 'max:14',
-            'dob_year'  => 'numeric|between:1900,2017',
+            'dob_year'  => 'numeric|min:1900|max:' . date('Y'),
             'dob_month'  => 'numeric|between:1,12',
             'dob_day'  => 'numeric|between:1,31',
             'zip'   =>  'numeric|nullable'
