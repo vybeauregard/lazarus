@@ -6,21 +6,21 @@ use DB;
 use Schema;
 use Illuminate\Console\Command;
 
-class DropTables extends Command
+class TruncateTables extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:drop-tables';
+    protected $signature = 'app:truncate-tables';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Drop all tables from the database. FOR DEPLOYMENT ONLY';
+    protected $description = 'Truncate imported tables from the database. FOR DEPLOYMENT ONLY';
 
     /**
      * Create a new command instance.
@@ -39,9 +39,20 @@ class DropTables extends Command
      */
     public function handle()
     {
-        foreach(DB::select('SHOW TABLES') as $table) {
-            $table_array = get_object_vars($table);
-            Schema::drop($table_array[key($table_array)]);
+        $tables = [
+            'clients',
+            'contacts',
+            'counselors',
+            'families',
+            'income',
+            'loans',
+            'parishes',
+            'requests',
+            'turn_aways',
+            'visits'
+        ];
+        foreach($tables as $table) {
+            DB::table($table)->truncate();
         }
     }
 }
