@@ -15,7 +15,7 @@ class VisitController extends Controller
      */
     public function index()
     {
-        $visits = Visit::all();
+        $visits = Visit::all()->sortByDesc('date');
         return view('visits.index', compact('visits'));
     }
 

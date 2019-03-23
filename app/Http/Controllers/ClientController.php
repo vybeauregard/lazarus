@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Contact;
 use App\Income;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class ClientController extends Controller
     public function create()
     {
         $client = new Client;
+        $client->contact = new Contact;
         $client->income = new Income;
         return view('clients.create', compact('client'));
     }
@@ -41,7 +43,7 @@ class ClientController extends Controller
     public function store(ClientRequest $request)
     {
         $client = Client::create($request->all());
-        return redirect()->route('clients.index');
+        return redirect()->route('visits.create');
     }
 
     /**

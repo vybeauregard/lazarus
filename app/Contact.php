@@ -23,6 +23,11 @@ class Contact extends Model
         'email',
     ];
 
+    protected $attributes = [
+        'city' => 'Alexandria',
+        'state' => 'VA',
+    ];
+
     public function contactable()
     {
         return $this->morphTo();

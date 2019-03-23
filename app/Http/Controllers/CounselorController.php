@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contact;
 use App\Counselor;
 use App\Http\Requests\CounselorRequest;
 
@@ -26,6 +27,7 @@ class CounselorController extends Controller
     public function create()
     {
         $counselor = new Counselor();
+        $counselor->contact = new Contact();
         return view('counselors.create', compact('counselor'));
     }
 
