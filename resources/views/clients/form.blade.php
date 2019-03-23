@@ -163,9 +163,9 @@
 
 <div class="form-group row">
     <div class="col-md-2">
-        <label for="insurance_type">Medical Insurance?</label>
+        <label for="insurance">Medical Insurance?</label>
     </div>
     <div class="col-md-3">
-        <input type="text" class="form-control" id="insurance_type" name="insurance_type" value="{{ old('insurance_type') ?? $client->insurance_type }}" />
+        <input type="text" class="form-control" id="insurance" name="insurance" value="{{ old('insurance') ?? $client->insurance }}" />
     </div>
 </div>

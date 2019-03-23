@@ -33,7 +33,6 @@ class Income extends Model
         'veteran_benefits',
         'other_income',
         'apartment_name',
-        'insurance_type',
         'homeless',
         'shelter',
         'private_res',
