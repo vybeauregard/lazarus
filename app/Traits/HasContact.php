@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Counselor;
 use App\Contact;
 
 trait HasContact
@@ -97,6 +98,9 @@ trait HasContact
 
     public function scopeTypeaheadRelations($query)
     {
+        if ($query->getModel() instanceOf Counselor) {
+            $query->where('active', 1);
+        }
         return $query->with('contact');
     }
 
