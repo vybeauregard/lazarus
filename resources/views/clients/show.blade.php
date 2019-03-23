@@ -118,10 +118,10 @@
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="insurance_type">Medical Insurance?</label>
+            <label for="insurance">Medical Insurance?</label>
         </div>
         <div class="col-md-3">
-            <p>{{ $client->insurance_type }}</p>
+            <p>{{ $client->insurance }}</p>
         </div>
     </div>
 
