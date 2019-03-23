@@ -48,7 +48,7 @@ class ImportVisits extends Command
      */
     public function handle()
     {
-        $this->year = $this->choice('What year do you need to import?', [2017, 2018], 0);
+        $this->year = $this->choice('What year do you need to import?', [2017, 2018, 2019], 0);
         $file = storage_path('app/import/visits_' . $this->year . '.csv');
         $data = explode("\n", File::get($file));
         $header = str_getcsv(array_shift($data));
@@ -84,6 +84,9 @@ class ImportVisits extends Command
             'type' => RequestFacade::getTypeId($visitor['Help Requested']),
             'action' => $visitor['Action Taken'],
         ];
+        if (!is_numeric($visitordata['monthly_income'])) {
+            $visitordata['monthly_income'] = null;
+        }
         if (is_numeric($visitor['Action Taken'])) {
             $visitordata['amount'] = $visitor['Action Taken'];
             $visitordata['action'] = "";

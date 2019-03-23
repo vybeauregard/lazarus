@@ -158,6 +158,15 @@
         <input type="text" class="form-control" id="apartment_name" name="apartment_name" value="{{ old('apartment_name') ?? $income->apartment_name }}" />
     </div>
 </div>
+<div class="form-group row">
+    <div class="col-md-2">
+        <label for="monthly_rent">Monthly Rent</label>
+    </div>
+    <div class="col-md-3 input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-usd no-calculate"></i></span>
+        <input type="number" min="0" class="form-control" id="monthly_rent" name="monthly_rent" value="{{ old('monthly_rent') ? old('monthly_rent') : ($income ? $income->monthly_rent : '') }}" />
+    </div>
+</div>
 
 <div class="form-group row">
     <div class="col-md-2">
@@ -226,7 +235,6 @@
 
 @foreach([
     'day_labor' => "Day Labor / Ad Hoc",
-    'rent' => "Monthly Rent",
     'ssi' => "SSI",
     'snap' => "Food Stamps/SNAP",
     'tanf' => "TANF",
@@ -249,9 +257,9 @@
 
 @section('custom-js')
 <script>
-    $income_fields = $('.income-form .glyphicon-usd').map(function(){
+    $income_fields = $('.income-form .glyphicon-usd:not(.no-calculate)').map(function(){
         var $element = $(this).closest(".input-group-addon").next('input').not('[readonly]');
-        $element.on('change', function(){
+        $element.on('keyup', function(){
             $("#monthly_income").val(calculateTotalIncome());
         });
         return $element;
@@ -264,7 +272,7 @@
             return $.isNumeric(this);
         }).toArray().reduce(function(total, current){
             return parseInt(total) + parseInt(current);
-        });
+        }, 0);
     }
 </script>
 @endsection
