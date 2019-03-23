@@ -7,7 +7,7 @@
 @section('content')
 <h2>Add a Loan</h2>
 
-<form style="margin:14px;" class="" method="post" action="{{ route('loans.store') }}">
+<form style="margin:14px;" class="" method="post" action="{{ route('loans.store') }}" autocomplete="off">
     {{ csrf_field() }}
     @include('loans.form')
     <input type="submit" name="submit" value="Add Loan" class="btn btn-primary" />

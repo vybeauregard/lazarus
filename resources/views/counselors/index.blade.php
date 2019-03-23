@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<div class="container">
 <h3>Counselors</h3>
 
 <a href="{{ route('counselors.create') }}" class="btn btn-success">New Counselor</a>
@@ -37,6 +38,7 @@
         </tbody>
     </table>
     @endif
+</div>
 @endsection
 
 @section('custom-js')

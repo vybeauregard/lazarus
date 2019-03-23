@@ -6,7 +6,7 @@
 
 @section('content')
 <h2>Add a new Client</h2>
-<form style="margin:14px;" class="" method="post" action="{{ route('clients.store') }}">
+<form style="margin:14px;" class="" method="post" action="{{ route('clients.store') }}" autocomplete="off">
     {{ csrf_field() }}
     @include('clients.form')
 <hr />

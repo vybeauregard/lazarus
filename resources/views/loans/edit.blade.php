@@ -7,7 +7,7 @@
 @section('content')
 <h2>Edit Loan for {{ $loan->client->name }}</h2>
 
-<form style="margin:14px;" class="" method="post" action="{{ route('loans.update', $loan->id) }}">
+<form style="margin:14px;" class="" method="post" action="{{ route('loans.update', $loan->id) }}" autocomplete="off">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     @include('loans.form')

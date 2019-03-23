@@ -12,7 +12,9 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <a href="{{ route('clients.create') }}" class="btn btn-success">Add new Client</a>
+                    <a href="{{ route('visits.create') }}" class="btn btn-primary">Add new Visit for an existing client</a>
+                    <a href="{{ route('reports.index') }}" class="btn btn-info">View Reports</a>
                 </div>
             </div>
         </div>

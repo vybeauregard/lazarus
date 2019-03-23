@@ -6,7 +6,7 @@
 
 @section('content')
 <h3>Add a new Visit</h3>
-<form style="margin:14px;" class="" method="post" action="{{ route('visits.store') }}">
+<form style="margin:14px;" class="" method="post" action="{{ route('visits.store') }}" autocomplete="off">
     {{ csrf_field() }}
     {{ method_field('POST') }}
 @include('visits.form')

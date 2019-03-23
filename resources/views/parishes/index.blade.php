@@ -5,34 +5,36 @@
 @endsection
 
 @section('content')
-<h3>Parishes</h3>
-<a href="{{ route('parishes.create') }}" class="btn btn-success">New Parish</a>
-{{ csrf_field() }}
+<div class="container">
+    <h3>Parishes</h3>
+    <a href="{{ route('parishes.create') }}" class="btn btn-success">New Parish</a>
+    {{ csrf_field() }}
 
-<table class="table table-striped" style="width:500px;">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Remove</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach($parishes as $parish)
-        <tr data-parish-id="{{ $parish->id }}">
-            <td><a href="{{ route('parishes.show', $parish->id) }}">{{ $parish->name }}</a></td>
-            <td>{!! implode("<br>", $parish->formattedAddress) !!}</td>
-            <td>{{ $parish->formattedPhone }}</td>
-            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
-                        data-toggle="confirmation"
-                        data-title="Remove this Parish?"
-                        data-on-confirm="removeParish"></button>
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+    <table class="table table-striped" style="width:500px;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($parishes as $parish)
+            <tr data-parish-id="{{ $parish->id }}">
+                <td><a href="{{ route('parishes.show', $parish->id) }}">{{ $parish->name }}</a></td>
+                <td>{!! implode("<br>", $parish->formattedAddress) !!}</td>
+                <td>{{ $parish->formattedPhone }}</td>
+                <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                            data-toggle="confirmation"
+                            data-title="Remove this Parish?"
+                            data-on-confirm="removeParish"></button>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection
 
 @section('custom-js')

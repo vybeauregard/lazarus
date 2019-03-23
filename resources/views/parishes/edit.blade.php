@@ -7,7 +7,7 @@
 @section('content')
 <h2>Edit {{ $parish->name }} Parish</h2>
 
-<form style="margin:14px;" class="" method="post" action="{{ route('parishes.update', $parish->id) }}">
+<form style="margin:14px;" class="" method="post" action="{{ route('parishes.update', $parish->id) }}" autocomplete="off">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     @include('parishes.form')

@@ -5,34 +5,35 @@
 @endsection
 
 @section('content')
-<h3>Turn Aways</h3>
-<a href="{{ route('turn-aways.create') }}" class="btn btn-success">Log Turn-aways</a>
-{{ csrf_field() }}
+<div class="container">
+    <h3>Turn Aways</h3>
+    <a href="{{ route('turn-aways.create') }}" class="btn btn-success">Log Turn-aways</a>
+    {{ csrf_field() }}
 
-<table class="table table-striped" style="width:500px;">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Total</th>
-            <th>Remove</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach($turn_aways as $date)
-        <tr data-date="{{ $date->date->format('Y-m-d') }}">
-            <td>{{ $date->date->format('m/d/Y') }}</td>
-            <td>{{ $date->total }}</td>
+    <table class="table table-striped" style="width:500px;">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($turn_aways as $date)
+            <tr data-date="{{ $date->date->format('Y-m-d') }}">
+                <td>{{ $date->date->format('m/d/Y') }}</td>
+                <td>{{ $date->total }}</td>
 
-            <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
-                        data-toggle="confirmation"
-                        data-title="Remove this Date?"
-                        data-on-confirm="removeDate"></button>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
+                <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
+                            data-toggle="confirmation"
+                            data-title="Remove this Date?"
+                            data-on-confirm="removeDate"></button>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection
 
 @section('custom-js')

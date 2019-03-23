@@ -6,7 +6,7 @@
 
 @section('content')
 <h3>Edit {{ $request->formattedType }} Request from {{ $visit->client->fullname }} on {{ $visit->date->format('m/d/Y') }}</h3>
-<form style="margin:14px;" class="" method="post" action="{{ route('visits.requests.update', [$visit->id, $request->id]) }}">
+<form style="margin:14px;" class="" method="post" action="{{ route('visits.requests.update', [$visit->id, $request->id]) }}" autocomplete="off">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
 @include('visits.requests.form')

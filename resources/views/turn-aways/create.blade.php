@@ -6,7 +6,7 @@
 
 @section('content')
 <h3>Log Turn Aways</h3>
-<form style="margin:14px;" class="" method="post" action="{{ route('turn-aways.store') }}">
+<form style="margin:14px;" class="" method="post" action="{{ route('turn-aways.store') }}" autocomplete="off">
     {{ csrf_field() }}
     <div class="form-group row">
         <div class="col-md-2">

@@ -6,7 +6,7 @@
 
 @section('content')
 <h3>Edit Visit from {{ $visit->client->name }}</h3>
-<form style="margin:14px;" class="" method="post" action="{{ route('visits.update', $visit->id) }}">
+<form style="margin:14px;" class="" method="post" action="{{ route('visits.update', $visit->id) }}" autocomplete="off">
     {{ csrf_field() }}
     {{ method_field('PUT') }}
 @include('visits.form')
