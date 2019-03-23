@@ -43,7 +43,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('parishes', 'ParishController');
 
-    Route::resource('counselors', 'CounselorController');
+    Route::match(['PUT', 'PATCH'], 'counselors/toggle-active/{counselor}', 'CounselorController@toggleActive')->name('counselors.toggle-active');
+    Route::resource('counselors', 'CounselorController')->except('destroy');
 
     Route::resource('turn-aways', 'TurnAwayController')->except(['edit', 'update', 'show']);
 

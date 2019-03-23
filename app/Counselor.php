@@ -12,7 +12,8 @@ class Counselor extends Model
     use HasContact, SoftDeletes;
 
     protected $fillable = [
-        'parish_id'
+        'parish_id',
+        'active'
     ];
 
     public function contact()
@@ -60,10 +61,5 @@ class Counselor extends Model
         return $this;
     }
 
-    public function delete()
-    {
-        $this->contact()->delete();
-        return parent::delete();
-    }
 
 }

@@ -88,8 +88,9 @@ class CounselorController extends Controller
      * @param  \App\Counselor  $counselor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Counselor $counselor)
+    public function toggleActive(Counselor $counselor)
     {
-        $counselor->delete();
+        $counselor->active = !$counselor->active;
+        $counselor->save();
     }
 }

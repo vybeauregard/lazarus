@@ -19,7 +19,7 @@
                 <th>Name</th>
                 <th>Phone</th>
                 <th>email</th>
-                <th>Remove</th>
+                <th>Active</th>
             </tr>
         </thead>
         <tbody>
@@ -28,10 +28,8 @@
                 <td><a href="{{ route('counselors.show', $counselor->id) }}">{{ $counselor->name }}</a></td>
                 <td>{{ $counselor->contact->formattedPhone }}</td>
                 <td>{!! $counselor->contact->linkedEmail !!}</td>
-                <td><button class="btn btn-link glyphicon glyphicon-trash no-underline"
-                            data-toggle="confirmation"
-                            data-title="Remove this Counselor?"
-                            data-on-confirm="removeCounselor"></button>
+                <td>
+                    <input name="active" type="checkbox" {{ $counselor->active ? 'checked' : '' }} onchange="deactivateCounselor(this)" />
                 </td>
             </tr>
         @endforeach
@@ -43,18 +41,19 @@
 
 @section('custom-js')
 <script>
-function removeCounselor() {
-    var counselor_id = $(this).closest('tr').data('counselor-id');
-    var url = "{{ route('counselors.destroy', 0) }}";
+function deactivateCounselor(element) {
+    var counselor_id = $(element).closest('tr').data('counselor-id');
+    var url = "{{ route('counselors.toggle-active', 0) }}";
+    console.log(counselor_id);
     var ajax = {
         data: {
             _token: $("input[name='_token']").val(),
-            _method: "DELETE"
+            _method: "PATCH"
         },
         url: url.substr(0, (url.length - 1)) + counselor_id
     };
     $.post(ajax).then(function (){
-        $('tr[data-counselor-id="'+counselor_id+'"]').remove();
+        //$('tr[data-counselor-id="'+counselor_id+'"]').remove();
     });
 }
 </script>
