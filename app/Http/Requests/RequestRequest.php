@@ -26,7 +26,7 @@ class RequestRequest extends FormRequest
         return [
             'visit_id' => 'required',
             'type' => 'required',
-            'amount' => 'numeric'
+            'amount' => 'numeric|max:99999.99'
         ];
     }
 }

@@ -133,7 +133,7 @@
     });
 
 function removeRequest() {
-    var request_id = $(this).closest('tr').data('request-id');
+    var request_id = $(this).closest('tr').attr('data-request-id');
     var url = "{{ route('visits.requests.destroy', [$visit->id, 0]) }}";
     var ajax = {
         data: {
@@ -146,12 +146,13 @@ function removeRequest() {
         $row = $('tr[data-request-id="'+request_id+'"]');
         $table = $row.closest(".table");
         if ($row.length) {
-            $row.remove();
+            if ($row.siblings().length == 0) {
+                $table.remove();
+            } else {
+                $row.remove();
+            }
         } else {
             $(".request-display").remove();
-        }
-        if ($row.siblings().length == 0) {
-            $table.remove();
         }
     });
 }
