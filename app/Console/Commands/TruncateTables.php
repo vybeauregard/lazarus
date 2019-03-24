@@ -40,6 +40,7 @@ class TruncateTables extends Command
     public function handle()
     {
         $tables = [
+            'actions',
             'clients',
             'contacts',
             'counselors',
