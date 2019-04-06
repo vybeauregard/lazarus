@@ -13,6 +13,7 @@ class Request extends Model
         "visit_id",
         "type",
         "amount",
+        "original_amount",
         "actions",
         "notes",
     ];

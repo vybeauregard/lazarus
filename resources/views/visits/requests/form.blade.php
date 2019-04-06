@@ -29,6 +29,16 @@
 
 <div class="form-group row">
     <div class="col-md-2">
+        <label for="original_amount">Original Amount</label>
+    </div>
+    <div class="input-group col-md-5">
+        <div class="input-group-addon"><span class="glyphicon glyphicon-usd"></span></div>
+        <input class="form-control" rows="5" id="original_amount" name="original_amount" value="{{ old('original_amount') ?? $request->original_amount }}" />
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-2">
         <label for="action">Action</label>
     </div>
     <div class="col-md-5">
