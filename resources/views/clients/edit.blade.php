@@ -11,6 +11,50 @@
     {{ method_field('PUT') }}
     @include('clients.form')
 
+    @if($client->visit->count())
+    <hr />
+
+    <div class="row income-display">
+        <div class="col-md-9">
+            <h4>Visits</h4>
+        </div>
+    </div>
+    <table class="table table-striped visit-display">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Counselor</th>
+                <th>Request Type</th>
+                <th>Amount</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($client->visit as $visit)
+            <tr data-visit-id="{{ $visit->id }}">
+                <td><a href="{{ route('visits.show', $visit) }}">{{ $visit->date->format('m/d/Y') }}</a></td>
+                <td>
+                    {{ $visit->counselor->name }}
+                </td>
+                <td>
+                    {{ $visit->formattedRequests }}
+                </td>
+                <td>
+                    ${{ number_format($visit->requests->sum('amount'), 2) }}
+                </td>
+                <td><a class="btn btn-link glyphicon glyphicon-trash no-underline"
+                            data-toggle="confirmation"
+                            data-title="Remove this Visit data?"
+                            data-on-confirm="removeVisit"></a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    @else
+    @endif
+    <input type="submit" name="submit" value="Save Client and Add Visit information" class="btn btn-success" />
+
     @if($client->income->count())
     <hr />
 
@@ -125,6 +169,25 @@ function removeIncome() {
             $row.remove();
         } else {
             $(".income-display").remove();
+        }
+    });
+}
+function removeVisit() {
+    var visit_id = $(this).closest('tr').data('visit-id');
+    var url = "{{ route('visits.destroy', 0) }}";
+    var ajax = {
+        data: {
+            _token: $("input[name='_token']").val(),
+            _method: "DELETE"
+        },
+        url: url.substr(0, (url.length - 1)) + visit_id
+    };
+    $.post(ajax).then(function(){
+        $row = $('tr[data-visit-id="'+visit_id+'"]');
+        if ($row.siblings().length) {
+            $row.remove();
+        } else {
+            $(".visit-display").remove();
         }
     });
 }

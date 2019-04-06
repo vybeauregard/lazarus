@@ -14,19 +14,22 @@
     <div class="col-md-2">
         <label for="client">Client</label>
     </div>
-    <div class="col-md-3 input-group">
-        <input type="text"
-               class="form-control typeahead"
-               data-provide="typeahead"
-               autocomplete="off"
-               id="client"
-               name="client"
-               placeholder="Type a name"
-               value="{{ old('client') ?? ($visit->client ? $visit->client->name : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input type="hidden" name="client_id" value="{{ old('client_id') ?? $visit->client_id }}" />
+    <div class="col-md-3">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control typeahead"
+                   data-provide="typeahead"
+                   autocomplete="off"
+                   id="client"
+                   name="client"
+                   placeholder="Type a name"
+                   value="{{ old('client') ?? ($visit->client ? $visit->client->name : '') }}" />
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="hidden" name="client_id" value="{{ old('client_id') ?? $visit->client_id }}" />
+        </div>
     </div>
     <div class="col-md-2">
+        <a href="{{ route('clients.create') }}" class="btn btn-link">Add new Client</a>
     </div>
 </div>
 
@@ -34,19 +37,22 @@
     <div class="col-md-2">
         <label for="counselor">Counselor</label>
     </div>
-    <div class="col-md-3 input-group">
-        <input type="text"
-               class="form-control typeahead"
-               data-provide="typeahead"
-               autocomplete="off"
-               id="counselor"
-               name="counselor"
-               placeholder="Type a name or click to select"
-               value="{{ old('counselor') ?? ($visit->counselor ? $visit->counselor->name : '') }}" />
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input type="hidden" name="counselor_id" value="{{ old('counselor_id') ?? $visit->counselor_id }}" />
+    <div class="col-md-3">
+        <div class="input-group">
+            <input type="text"
+                   class="form-control typeahead"
+                   data-provide="typeahead"
+                   autocomplete="off"
+                   id="counselor"
+                   name="counselor"
+                   placeholder="Type a name or click to select"
+                   value="{{ old('counselor') ?? ($visit->counselor ? $visit->counselor->name : '') }}" />
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input type="hidden" name="counselor_id" value="{{ old('counselor_id') ?? $visit->counselor_id }}" />
+        </div>
     </div>
     <div class="col-md-2">
+        <a href="{{ route('counselors.create') }}" class="btn btn-link">Add new Counselor</a>
     </div>
 </div>
 

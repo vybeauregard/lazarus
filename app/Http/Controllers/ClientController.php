@@ -97,6 +97,8 @@ class ClientController extends Controller
     {
         switch (request('submit'))
         {
+            case "Save Client and Add Visit information":
+                return route('visits.create', ['client_id' => $client->id]);
             case "Save Client and Add Family Member":
                 return route('clients.families.create', $client->id);
             case "Save Client and Add Income information":

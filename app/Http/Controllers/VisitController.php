@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\Visit;
 use Carbon\Carbon;
 use App\Http\Requests\VisitRequest;
@@ -29,6 +30,9 @@ class VisitController extends Controller
         $visit = new Visit([
             'date' => Carbon::now(),
         ]);
+        if(request()->has('client_id')) {
+            $visit->client = Client::findOrFail(request()->client_id);
+        }
         return view('visits.create', compact('visit'));
     }
 
@@ -41,6 +45,9 @@ class VisitController extends Controller
     public function store(VisitRequest $request)
     {
         $visit = Visit::create($request->all());
+        if($request->has('income')) {
+            return redirect()->route('clients.income.create', $visit->client);
+        }
         return redirect()->route('visits.requests.create', $visit);
 
     }

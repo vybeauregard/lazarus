@@ -7,6 +7,6 @@
     {{ csrf_field() }}
     {{ method_field('PUT') }}
     @include('clients.income.form', ['income_id' => $income->id])
-    <input type="submit" name="submit" value="Save Income Data" class="btn btn-primary" />
+    <input type="submit" name="submit" value="Save Income Data" class="btn btn-success" />
 </form>
 @endsection

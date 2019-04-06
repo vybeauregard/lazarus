@@ -6,6 +6,6 @@
 <form style="margin:14px;" class="income-form" method="post" action="{{ route('clients.income.store', $client->id) }}">
     {{ csrf_field() }}
     @include('clients.income.form')
-    <input type="submit" name="submit" value="Add Income Data" class="btn btn-primary" />
+    <input type="submit" name="submit" value="Save Income Data" class="btn btn-success" />
 </form>
 @endsection
