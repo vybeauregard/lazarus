@@ -15,7 +15,7 @@ class ClientTypeahead
      */
     public function compose(View $view)
     {
-        $view->with('clients', Client::typeahead());
+        $view->with('clientsTypeahead', Client::typeahead());
     }
 
 }

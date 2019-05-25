@@ -136,7 +136,7 @@
 <script>
     $(".typeahead[name='client']").typeahead({
         provide: "typeahead",
-        source: {!! $clients !!},
+        source: @json($clientsTypeahead),
         showHintOnFocus: "all",
         autoSelect: false,
         minLength: 2,
