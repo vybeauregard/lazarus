@@ -23,14 +23,25 @@ class FamilyRequest extends FormRequest
             $family = [
                 'relationship' => $this->relationship,
                 'name' => $this->name,
-                'dob' => Carbon::createFromFormat('m/d/Y', "{$this->dob_month}/{$this->dob_day}/{$this->dob_year}"),
                 'sex' => $this->sex,
                 'birth_country' => $this->birth_country,
                 'insurance' => $this->insurance
             ];
+            if($this->formatDOB()) {
+                $family['dob'] = $this->formatDOB();
+            }
+
             $this->merge(['family' => $family]);
         }
 
+    }
+
+    private function formatDOB()
+    {
+        if(!$this->has('dob_month') || !$this->has('dob_day') || !$this->has('dob_year')) {
+            return false;
+        }
+        return Carbon::createFromFormat('m/d/Y', "{$this->dob_month}/{$this->dob_day}/{$this->dob_year}");
     }
 
     /**
