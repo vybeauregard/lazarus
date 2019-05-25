@@ -122,7 +122,12 @@
         <label for="ethnicity">Ethnicity</label>
     </div>
     <div class="col-md-2">
-        <input type="text" class="form-control" id="ethnicity" name="ethnicity" value="{{ old('ethnicity') ?? $client->ethnicity }}" />
+        <select id="ethnicity" name="ethnicity" class="form-control">
+            <option disabled selected>Choose an ethnicity</option>
+            @foreach($ethnicities as $ethnicity)
+            <option value="{{ $ethnicity }}" {{ $ethnicity == $client->ethnicity ? 'selected' : '' }}>{{ $ethnicity }}</option>
+            @endforeach
+        </select>
     </div>
 </div>
 

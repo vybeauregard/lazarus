@@ -45,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             ['visits.form', 'loans.form', 'programs.form', 'clients.index'],
             'App\Http\ViewComposers\ClientTypeahead'
         );
+        View::composer(
+            ['clients.form'],
+            'App\Http\ViewComposers\EthnicitySelect'
+        );
 
         Blade::if('verified', function() {
             if (Auth::user()) {
