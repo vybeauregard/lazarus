@@ -5,6 +5,8 @@ namespace App;
 use App\Traits\HasContact;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 
 class Client extends Model
 {
@@ -100,6 +102,21 @@ class Client extends Model
     public function getTypeaheadNameAttribute()
     {
         return "{$this->name} ({$this->dob->format('m/d/Y')})";
+    }
+
+    public static function getPaginatedSortedList()
+    {
+        $clients = self::with(['contact', 'family'])->get()->sortBy(function($client){
+            return Str::slug($client->contact->last_name) . ',' . Str::slug($client->contact->first_name);
+        });
+        if(request()->has('page')) {
+            $page = request('page');
+        } else {
+            $page = 1;
+        }
+        $clients = new LengthAwarePaginator($clients->forPage($page, 15), $clients->count(), 15);
+
+        return $clients->withPath(route('clients.index'));
     }
 
 }
