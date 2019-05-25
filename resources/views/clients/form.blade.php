@@ -21,10 +21,10 @@
 
 <div class="form-group row">
     <div class="col-md-2">
-        <label for="middle_initial">Middle Initial</label>
+        <label for="middle_name">Middle Name</label>
     </div>
-    <div class="col-md-1">
-        <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" value="{{ old('middle_initial') ?? ($client->contact ? $client->contact->middle_initial : '') }}" />
+    <div class="col-md-2">
+        <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ old('middle_name') ?? ($client->contact ? $client->contact->middle_name : '') }}" />
     </div>
 </div>
 
@@ -152,29 +152,20 @@
     </div>
 </div>
 
+
 <div class="form-group row">
     <div class="col-md-2">
         <label for="insurance">Medical Insurance?</label>
     </div>
-    <div class="col-md-3">
-
-        <input type="text" class="form-control" id="insurance" name="insurance" value="{{ old('insurance') ?? $client->insurance }}" />
+    <div class="col-md-2 btn-group" data-toggle="radio">
+        <label class="btn btn-text">
+            <input type="radio" name="insurance" id="insurance_y" value="y" {{ old('insurance') ?? $client->insurance == 'y' ? 'checked' : '' }}> Yes
+        </label>
+        <label class="btn btn-text">
+            <input type="radio" name="insurance" id="insurance_n" value="n" {{ old('insurance') ?? $client->insurance == 'n' ? 'checked' : '' }}> No
+        </label>
     </div>
 </div>
-
-    <div class="form-group row">
-        <div class="col-md-2">
-            <label for="insurance">Medical Insurance?</label>
-        </div>
-        <div class="col-md-2 btn-group" data-toggle="radio">
-            <label class="btn btn-text">
-                <input type="radio" name="insurance" id="insurance_y" value="y" {{ old('insurance') ?? $client->insurance == 'f' ? 'checked' : '' }}> Yes
-            </label>
-            <label class="btn btn-text">
-                <input type="radio" name="insurance" id="insurance_n" value="n" {{ old('insurance') ?? $client->insurance == 'm' ? 'checked' : '' }}> No
-            </label>
-        </div>
-    </div>
 
 
 <div class="form-group row">

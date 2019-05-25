@@ -109,19 +109,19 @@
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="source">Source</label>
+            <label for="insurance">Medical Insurance?</label>
         </div>
-        <div class="col-md-5">
-            <p>{{ $client->source }}</p>
+        <div class="col-md-3">
+            <p>{{ $client->insurance }}</p>
         </div>
     </div>
 
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="insurance">Medical Insurance?</label>
+            <label for="source">Source</label>
         </div>
-        <div class="col-md-3">
-            <p>{{ $client->insurance }}</p>
+        <div class="col-md-5">
+            <p>{{ $client->source }}</p>
         </div>
     </div>
 

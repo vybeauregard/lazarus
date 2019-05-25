@@ -32,14 +32,19 @@ class ClientRequest extends FormRequest
         $family = [];
         for($i=0;$i<$family_count;$i++){
             if($this['family_name_' . $i]) {
-                $family[] = [
+                $person =  [
                     'relationship' => $this['family_relationship_' . $i],
                     'name' => $this['family_name_' . $i],
-                    'dob' => Carbon::createFromFormat('m/d/Y', "{$this['family_dob_month_' . $i]}/{$this['family_dob_day_' . $i]}/{$this['family_dob_year_' . $i]}"),
                     'sex' => $this['family_sex_' . $i],
                     'birth_country' => $this['family_birth_country_' . $i],
                     'insurance' => $this['family_insurance_' . $i]
                 ];
+                if($this->formatDOB($i)) {
+                    $person['dob'] = $this->formatDOB($i);
+                }
+
+                $family[] = $person;
+
             }
         }
         $this->merge(['family' => $family]);
@@ -52,6 +57,14 @@ class ClientRequest extends FormRequest
 
     }
 
+    private function formatDOB($i)
+    {
+        if(!$this->has('family_dob_month_' . $i) || !$this->has('family_dob_day_' . $i) || !$this->has('family_dob_year_' . $i)) {
+            return false;
+        }
+        return Carbon::createFromFormat('m/d/Y', "{$this['family_dob_month_' . $i]}/{$this['family_dob_day_' . $i]}/{$this['family_dob_year_' . $i]}");
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -61,8 +74,8 @@ class ClientRequest extends FormRequest
     {
         return [
             'first_name'    => 'required|max:255',
+            'middle_name'    => 'alpha|nullable',
             'last_name'    => 'required|max:255',
-            'middle_initial'    => 'alpha|size:1|nullable',
             'address1'    => 'max:255',
             'address2'    => 'max:255',
             'city'    => 'max:255',

@@ -9,10 +9,10 @@
 
 <div class="form-group row">
     <div class="col-md-2">
-        <label for="middle_initial">Middle Initial</label>
+        <label for="middle_name">Middle Name</label>
     </div>
-    <div class="col-md-1">
-        <input type="text" class="form-control" id="middle_initial" name="middle_initial" maxlength="1" value="{{ old('middle_initial') ?? ($counselor->contact ? $counselor->contact->middle_initial : '') }}" />
+    <div class="col-md-2">
+        <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ old('middle_name') ?? ($counselor->contact ? $counselor->contact->middle_name : '') }}" />
     </div>
 </div>
 

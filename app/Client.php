@@ -101,7 +101,10 @@ class Client extends Model
 
     public function getTypeaheadNameAttribute()
     {
-        return "{$this->name} ({$this->dob->format('m/d/Y')})";
+        if($this->dob) {
+            return "{$this->name} ({$this->dob->format('m/d/Y')})";
+        }
+        return $this->name;
     }
 
     public static function getPaginatedSortedList()

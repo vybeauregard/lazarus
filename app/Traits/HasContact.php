@@ -39,7 +39,7 @@ trait HasContact
         if(!$this->contact) {
             return "no name";
         }
-        return "{$this->contact->first_name} {$this->contact->middle_initial} {$this->contact->last_name}";
+        return "{$this->contact->first_name} {$this->contact->middle_name} {$this->contact->last_name}";
     }
 
     public function getFormattedAddressAttribute()

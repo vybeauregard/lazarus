@@ -21,7 +21,7 @@
     </div>
     <div class="form-group row">
         <div class="col-md-2">
-            <label for="middle_initial">Total</label>
+            <label for="total">Total</label>
         </div>
         <div class="col-md-1">
             <input type="text" class="form-control" id="total" name="total" maxlength="1000" value="{{ old('total') ?? ($turn_away->total ? $turn_away->total : '') }}" />

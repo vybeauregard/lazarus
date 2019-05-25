@@ -36,7 +36,7 @@ class CounselorRequest extends FormRequest
         return [
             'first_name'    => 'required|max:255',
             'last_name'    => 'required|max:255',
-            'middle_initial'    => 'alpha|size:1|nullable',
+            'middle_name'    => 'alpha|nullable',
             'address1'    => 'max:255',
             'address2'    => 'max:255',
             'city'    => 'max:255',
