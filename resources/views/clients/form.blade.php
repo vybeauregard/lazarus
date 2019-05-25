@@ -154,18 +154,34 @@
 
 <div class="form-group row">
     <div class="col-md-2">
+        <label for="insurance">Medical Insurance?</label>
+    </div>
+    <div class="col-md-3">
+
+        <input type="text" class="form-control" id="insurance" name="insurance" value="{{ old('insurance') ?? $client->insurance }}" />
+    </div>
+</div>
+
+    <div class="form-group row">
+        <div class="col-md-2">
+            <label for="insurance">Medical Insurance?</label>
+        </div>
+        <div class="col-md-2 btn-group" data-toggle="radio">
+            <label class="btn btn-text">
+                <input type="radio" name="insurance" id="insurance_y" value="y" {{ old('insurance') ?? $client->insurance == 'f' ? 'checked' : '' }}> Yes
+            </label>
+            <label class="btn btn-text">
+                <input type="radio" name="insurance" id="insurance_n" value="n" {{ old('insurance') ?? $client->insurance == 'm' ? 'checked' : '' }}> No
+            </label>
+        </div>
+    </div>
+
+
+<div class="form-group row">
+    <div class="col-md-2">
         <label for="source">Source</label>
     </div>
     <div class="col-md-5">
         <input type="text" class="form-control" id="source" name="source" value="{{ old('source') ?? $client->source }}" />
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-md-2">
-        <label for="insurance">Medical Insurance?</label>
-    </div>
-    <div class="col-md-3">
-        <input type="text" class="form-control" id="insurance" name="insurance" value="{{ old('insurance') ?? $client->insurance }}" />
     </div>
 </div>

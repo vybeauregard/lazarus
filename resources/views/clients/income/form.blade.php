@@ -226,7 +226,7 @@
 
 <div class="form-group row">
     <div class="col-md-2">
-        <label for="applying">Applying for jobs where?</label>
+        <label for="applying">Applying for jobs or benefits</label>
     </div>
     <div class="col-md-5">
         <textarea class="form-control" rows="5" id="applying" name="applying">{{ old('applying') ? old('applying') : ($income ? $income->applying : '') }}</textarea>
