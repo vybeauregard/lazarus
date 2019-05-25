@@ -7,6 +7,7 @@ use App\Contact;
 use App\Income;
 use App\Http\Requests\ClientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
@@ -17,7 +18,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::with(['contact', 'family'])->get()->sortBy('contact.last_name');
+        $clients = Client::with(['contact', 'family'])->get()->sortBy(function($client){
+            return Str::slug($client->contact->last_name) . ',' . Str::slug($client->contact->first_name);
+        });
         return view('clients.index', compact('clients'));
     }
 
