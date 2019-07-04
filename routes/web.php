@@ -27,6 +27,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::resource('actions', 'ActionController')
+        ->except(['update', 'edit', 'show']);
+
+    Route::resource('request-types', 'RequestTypeController')
+        ->except(['update', 'edit', 'show']);
+
     Route::resource('visits', 'VisitController');
 
     Route::resource('visits.requests', 'RequestController')
@@ -62,8 +68,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('reports', "ReportsController@show")->name('reports.show');
 
     Route::group(['middleware' => ['admin']], function(){
-        Route::resource('actions', 'ActionController')
-            ->except(['update', 'edit', 'show']);
         Route::resource('users', 'Auth\UserController')
             ->only(['destroy', 'update', 'index']);
         Route::patch('menus', 'Auth\MenuController@update')->name('menus.update');

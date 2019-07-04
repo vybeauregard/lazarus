@@ -18,24 +18,6 @@ class Request extends Model
         "notes",
     ];
 
-    public $requestTypes = [
-        "0" => "Clothing",
-        "1" => "Clothing Voucher",
-        "2" => "Electric",
-        "3" => "Electric Disconnect",
-        "4" => "Gas",
-        "5" => "Gas Disconnect",
-        "6" => "Water/Sewer",
-        "7" => "Water/Sewer Disconnect",
-        "8" => "Dental",
-        "9" => "Security Deposit",
-        "10" => "Rent",
-        "11" => "Eviction",
-        "12" => "Mortgage",
-        "13" => "Glasses/Contacts",
-        "14" => "Food",
-        "15" => "Medical",
-    ];
 
     public function visit()
     {
@@ -47,9 +29,14 @@ class Request extends Model
         return $this->belongsToMany(Action::class);
     }
 
+    public function requestType()
+    {
+        return $this->belongsTo(RequestType::class, 'type');
+    }
+
     public function getTypesAttribute()
     {
-        return collect($this->requestTypes);
+        return RequestType::all()->pluck('type', 'id');
     }
 
     public function getTypeId($type)
@@ -59,7 +46,7 @@ class Request extends Model
 
     public function getFormattedTypeAttribute()
     {
-        return $this->requestTypes[$this->type];
+        return $this->requestType ? $this->requestType->type : 'unknown request';
     }
 
     public function getFormattedActionsAttribute()
@@ -67,11 +54,6 @@ class Request extends Model
         return $this->actions->pluck('type')->implode(', ');
     }
 
-    public static function getFormattedType($type)
-    {
-        $model = new SELF;
-        return $model->requestTypes[$type];
-    }
 
     /**
      * Set the request action(s).
@@ -85,5 +67,6 @@ class Request extends Model
             $this->actions()->sync($value);
         }
     }
+
 
 }
