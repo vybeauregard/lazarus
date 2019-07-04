@@ -63,6 +63,7 @@
                                 <ul class="dropdown-menu">
                                     @if(Auth::user()->isAdmin())
                                         <li><a href="{{ route('users.index') }}">Admin</a></li>
+                                        <li><a href="{{ route('actions.index') }}">Actions</a></li>
                                     @endif
                                     <li>
                                         <a href="{{ route('logout') }}"

@@ -29,13 +29,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('visits', 'VisitController');
 
-    Route::resource('visits.requests', 'RequestController')->except(['index']);
+    Route::resource('visits.requests', 'RequestController')
+        ->except(['index']);
 
     Route::resource('clients', 'ClientController');
 
-    Route::resource('clients.families', 'FamilyController')->except(['index']);
+    Route::resource('clients.families', 'FamilyController')
+        ->except(['index']);
 
-    Route::resource('clients.income', 'IncomeController')->except(['index']);
+    Route::resource('clients.income', 'IncomeController')
+        ->except(['index']);
 
     Route::resource('programs', 'ProgramController');
 
@@ -43,10 +46,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('parishes', 'ParishController');
 
-    Route::match(['PUT', 'PATCH'], 'counselors/toggle-active/{counselor}', 'CounselorController@toggleActive')->name('counselors.toggle-active');
-    Route::resource('counselors', 'CounselorController')->except('destroy');
+    Route::match(['PUT', 'PATCH'], 'counselors/toggle-active/{counselor}', 'CounselorController@toggleActive')
+        ->name('counselors.toggle-active');
+    Route::resource('counselors', 'CounselorController')
+        ->except('destroy');
 
-    Route::resource('turn-aways', 'TurnAwayController')->except(['edit', 'update', 'show']);
+    Route::resource('turn-aways', 'TurnAwayController')
+        ->except(['edit', 'update', 'show']);
 
     Route::get('load-family-form/{fam_id}', function($fam_id){
         return view("clients.family", compact('fam_id'));
@@ -56,6 +62,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('reports', "ReportsController@show")->name('reports.show');
 
     Route::group(['middleware' => ['admin']], function(){
+        Route::resource('actions', 'ActionController')
+            ->except(['update', 'edit', 'show']);
         Route::resource('users', 'Auth\UserController')
             ->only(['destroy', 'update', 'index']);
         Route::patch('menus', 'Auth\MenuController@update')->name('menus.update');

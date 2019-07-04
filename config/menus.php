@@ -8,4 +8,5 @@ return array (
   'parishes' => false,
   'counselors' => true,
   'reports' => true,
+  'actions' => false,
 );
