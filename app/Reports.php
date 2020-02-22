@@ -319,11 +319,7 @@ class Reports extends Model
             ->whereBetween('v.date', [$this->start_date->startOfDay(), $this->end_date->endOfDay()])
             ->groupBy('r.type')
             ->orderByDesc('count')
-            ->get()
-            ->map(function($row){
-                $row->type = Requests::getFormattedType($row->type);
-                return $row;
-            });
+            ->get();
     }
     public function getAliveReferrals()
     {
