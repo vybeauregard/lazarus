@@ -20,6 +20,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     ], 'public/css/vendor.css')
     .combine([
         'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/disableautofill/src/jquery.disableAutoFill.min.js',
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
         'node_modules/bootstrap-formhelpers/dist/js/bootstrap-formhelpers.min.js',

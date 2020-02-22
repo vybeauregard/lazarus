@@ -28,6 +28,7 @@
         "bootstrap-3-typeahead": "^4.0.2",
         "bootstrap-confirmation2": "^2.4.4",
         "bootstrap-datepicker": "^1.9.0",
-        "bootstrap-formhelpers": "git+https://github.com/vlamanna/BootstrapFormHelpers.git"
+        "bootstrap-formhelpers": "git+https://github.com/vlamanna/BootstrapFormHelpers.git",
+        "disableautofill": "^1.2.8"
     }
 }
