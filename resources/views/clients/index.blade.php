@@ -63,6 +63,7 @@
         source: @json($clientsTypeahead),
         showHintOnFocus: false,
         autoSelect: false,
+        items: 'all',
         minLength: 2,
         afterSelect: function(item) {
             var url = "{{ route('clients.show', 0) }}".replace('/0', '/' + item.id);

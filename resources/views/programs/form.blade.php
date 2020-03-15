@@ -139,6 +139,7 @@
         source: @json($clientsTypeahead),
         showHintOnFocus: "all",
         autoSelect: false,
+        items: 'all',
         minLength: 2,
         afterSelect: function(item) {
             $("input[name='client_id']").val(item.id)

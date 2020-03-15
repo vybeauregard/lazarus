@@ -31,7 +31,11 @@ trait HasContact
         if(!$this->contact) {
             return "no name";
         }
-        return "{$this->contact->first_name} {$this->contact->last_name}";
+        return collect([
+            $this->contact->first_name,
+            substr($this->contact->middle_name, 0, 1),
+            $this->contact->last_name,
+        ])->filter()->implode(" ");
     }
 
     public function getFullNameAttribute()
@@ -39,7 +43,11 @@ trait HasContact
         if(!$this->contact) {
             return "no name";
         }
-        return "{$this->contact->first_name} {$this->contact->middle_name} {$this->contact->last_name}";
+        return collect([
+            $this->contact->first_name,
+            substr($this->contact->middle_name, 0, 1),
+            $this->contact->last_name,
+        ])->filter()->implode(" ");
     }
 
     public function getFormattedAddressAttribute()

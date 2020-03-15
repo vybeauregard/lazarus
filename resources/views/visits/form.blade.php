@@ -95,6 +95,7 @@
         source: @json($clientsTypeahead),
         showHintOnFocus: false,
         autoSelect: false,
+        items: 'all',
         minLength: 2,
         afterSelect: function(item) {
             $("input[name='client_id']").val(item.id)
@@ -112,6 +113,8 @@
             $("input[name='client_id']").val('');
         }
     });
+
+
     $(".typeahead[name='counselor_{{ csrf_token() }}']").typeahead({
         provide: "typeahead",
         source: {!! $counselors !!},

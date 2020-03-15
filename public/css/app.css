@@ -8261,8 +8261,8 @@ button.close {
   color: #2ab27b;
 }
 
-#scrollable-dropdown-menu .tt-menu {
-  max-height: 150px;
-  overflow-y: auto;
+ul.typeahead.dropdown-menu {
+  max-height: 400px;
+  overflow-y: scroll;
 }
 

@@ -90,6 +90,7 @@
         source: {!! $parishes !!},
         showHintOnFocus: "all",
         autoSelect: false,
+        items: 'all',
         minLength: 2,
         afterSelect: function(item) {
             $("input[name='parish_id']").val(item.id)
