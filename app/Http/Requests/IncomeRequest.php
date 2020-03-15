@@ -18,10 +18,10 @@ class IncomeRequest extends FormRequest
         return true;
     }
 
-    private function sanitize()
+    protected function prepareForValidation()
     {
         $input = $this->except(['_token', '_method', 'submit']);
-        $input['date'] = Carbon::createFromFormat("m/d/Y", $input['date']);
+        $input['date'] = Carbon::createFromFormat("m/d/Y", $input['date_' . $this->get('_token')]);
 
         Income::getCheckboxesCollection()->each(function($checkbox_field){
             if(!$this->has($checkbox_field)) {
@@ -50,11 +50,6 @@ class IncomeRequest extends FormRequest
         return [
 //            'name.required' => 'Please enter a name.'
         ];
-    }
-
-    public function getValidatorInstance() {
-        $this->sanitize();
-        return parent::getValidatorInstance();
     }
 
 }

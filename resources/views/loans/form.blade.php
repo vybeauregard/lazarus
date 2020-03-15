@@ -3,7 +3,7 @@
         <label for="request_date">Request Date</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="request_date" name="request_date" data-provide="datepicker" value="{{ old('request_date') ?? ($loan->request_date ? $loan->request_date->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="request_date" name="request_date_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('request_date') ?? ($loan->request_date ? $loan->request_date->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -20,7 +20,7 @@
                data-provide="typeahead"
                autocomplete="off"
                id="client"
-               name="client"
+               name="client_{{ csrf_token() }}"
                placeholder="Type a name or click to select"
                value="{{ old('client') ?? ($loan->client ? $loan->client->name : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -35,7 +35,7 @@
         <label for="date">Loan Date</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ old('date') ?? ($loan->date ? $loan->date->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="date" name="date_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('date') ?? ($loan->date ? $loan->date->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -66,7 +66,7 @@
         <label for="due_date">Due Date</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="due_date" name="due_date" data-provide="datepicker" value="{{ old('due_date') ?? ($loan->due_date ? $loan->due_date->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="due_date" name="due_date_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('due_date') ?? ($loan->due_date ? $loan->due_date->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -106,7 +106,7 @@
         <label for="last_payment">Last Payment</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="last_payment" name="last_payment" data-provide="datepicker" value="{{ old('last_payment') ?? ($loan->last_payment ? $loan->last_payment->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="last_payment" name="last_payment_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('last_payment') ?? ($loan->last_payment ? $loan->last_payment->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -148,7 +148,7 @@
         <label for="budget_date">Budget Date</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="budget_date" name="budget_date" data-provide="datepicker" value="{{ old('budget_date') ?? ($loan->budget_date ? $loan->budget_date->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="budget_date" name="budget_date_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('budget_date') ?? ($loan->budget_date ? $loan->budget_date->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -158,7 +158,7 @@
 
 @section('custom-js')
 <script>
-    $(".typeahead[name='client']").typeahead({
+    $(".typeahead[name='client_{{ csrf_token() }}']").typeahead({
         provide: "typeahead",
         source: @json($clientsTypeahead),
         showHintOnFocus: "all",

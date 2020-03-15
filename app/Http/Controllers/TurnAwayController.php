@@ -39,6 +39,7 @@ class TurnAwayController extends Controller
      */
     public function store(Request $request, TurnAways $turn_away)
     {
+        $request->merge(['date' => $request->get('date_' . $request->get('_token'))]);
         $request->validate([
             'date' => 'required|date_format:m/d/Y',
             'total' => 'required|numeric'

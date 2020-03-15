@@ -18,10 +18,11 @@ class ClientRequest extends FormRequest
         return true;
     }
 
-    private function sanitize()
+    protected function prepareForValidation()
     {
-        if ($this->has('date')) {
-            $date = Carbon::createFromFormat('m/d/Y', $this->date);
+        $token = $this->get('_token');
+        if ($this->has('date_' . $token)) {
+            $date = Carbon::createFromFormat('m/d/Y', $this->get('date_' . $token));
             $this->merge(['date' => $date]);
         }
         if ($this->has('dob_year') && $this->has('dob_month') && $this->has('dob_day')) {
@@ -96,10 +97,4 @@ class ClientRequest extends FormRequest
             'dob_day.between'   => 'Birth day must be between :min and :max'
         ];
     }
-
-    public function getValidatorInstance() {
-        $this->sanitize();
-        return parent::getValidatorInstance();
-    }
-
 }

@@ -21,7 +21,7 @@
                     <label for="start_date" class="pull-right">Start Date</label>
                 </div>
                 <div class="col-md-2 input-group">
-                    <input type="text" class="form-control datepicker" id="start_date" name="start_date" data-provide="datepicker" value="{{ old('start_date') ? old('start_date') : isset($reports) ? $reports->start_date->format('m/d/Y') : Carbon\Carbon::now()->startOfMonth()->format('m/d/Y') }}" />
+                    <input type="text" class="form-control datepicker" id="start_date" name="start_date_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('start_date') ?? isset($reports) ? $reports->start_date->format('m/d/Y') : Carbon\Carbon::now()->startOfMonth()->format('m/d/Y') }}" />
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     <label for="end_date" class="pull-right">End Date</label>
                 </div>
                 <div class="col-md-2 input-group">
-                    <input type="text" class="form-control datepicker" id="end_date" name="end_date" data-provide="datepicker" value="{{ old('end_date') ? old('end_date') : isset($reports) ? $reports->end_date->format('m/d/Y') : Carbon\Carbon::now()->format('m/d/Y') }}" />
+                    <input type="text" class="form-control datepicker" id="end_date" name="end_date_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('end_date') ?? isset($reports) ? $reports->end_date->format('m/d/Y') : Carbon\Carbon::now()->format('m/d/Y') }}" />
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </div>

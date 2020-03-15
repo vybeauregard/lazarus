@@ -18,11 +18,13 @@ class ProgramRequest extends FormRequest
         return true;
     }
 
-    private function sanitize()
+    protected function prepareForValidation()
     {
+        $token = $this->get('_token');
+
         Program::getDatesCollection()->each(function($date){
-            if ($this->has($date) && $this->$date != "") {
-                $this->merge([$date => Carbon::createFromFormat('m/d/Y', $this->$date)]);
+            if ($this->has($date . "_" . $token) && $this->get($date . "_" . $token) != "") {
+                $this->merge([$date => Carbon::createFromFormat('m/d/Y', $this->get($date . "_" . $token))]);
             }
         });
 
@@ -52,10 +54,4 @@ class ProgramRequest extends FormRequest
             'client_id.required' => 'Please specify a client. If the client is unavailable, please <a href="' . route('clients.create') .'">add them</a>.',
         ];
     }
-
-    public function getValidatorInstance() {
-        $this->sanitize();
-        return parent::getValidatorInstance();
-    }
-
 }

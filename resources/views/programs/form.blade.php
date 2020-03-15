@@ -8,7 +8,7 @@
                data-provide="typeahead"
                autocomplete="off"
                id="client"
-               name="client"
+               name="client_{{ csrf_token() }}"
                placeholder="Type a name or click to select"
                value="{{ old('client') ?? ($program->client ? $program->client->name : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -32,7 +32,7 @@
         <label for="given_info">Client Given Info On</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="given_info" name="given_info" data-provide="datepicker" value="{{ old('given_info') ?? ($program->given_info ? $program->given_info->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="given_info" name="given_info_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('given_info') ?? ($program->given_info ? $program->given_info->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -44,7 +44,7 @@
         <label for="application_submitted">Application Submission Date</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="application_submitted" name="application_submitted" data-provide="datepicker" value="{{ old('application_submitted') ?? ($program->application_submitted ? $program->application_submitted->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="application_submitted" name="application_submitted_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('application_submitted') ?? ($program->application_submitted ? $program->application_submitted->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -56,7 +56,7 @@
         <label for="application_approved">Application Approval Date</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="application_approved" name="application_approved" data-provide="datepicker" value="{{ old('application_approved') ?? ($program->application_approved ? $program->application_approved->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="application_approved" name="application_approved_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('application_approved') ?? ($program->application_approved ? $program->application_approved->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -68,7 +68,7 @@
         <label for="program_start">Program Start Date</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="program_start" name="program_start" data-provide="datepicker" value="{{ old('program_start') ?? ($program->program_start ? $program->program_start->format('m/d/Y') : '') }}" />
+        <input type="text" class="form-control datepicker" id="program_start" name="program_start_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('program_start') ?? ($program->program_start ? $program->program_start->format('m/d/Y') : '') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -134,7 +134,7 @@
 
 @section('custom-js')
 <script>
-    $(".typeahead[name='client']").typeahead({
+    $(".typeahead[name='client_{{ csrf_token() }}']").typeahead({
         provide: "typeahead",
         source: @json($clientsTypeahead),
         showHintOnFocus: "all",

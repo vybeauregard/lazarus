@@ -59,6 +59,11 @@ class Reports extends Model
 
     public function validateDates()
     {
+        $token = request()->get('_token');
+        request()->merge([
+            'start_date' => request()->get('start_date_' . $token),
+            'end_date' => request()->get('end_date_' . $token),
+        ]);
         request()->validate([
             'start_date' => 'required|date_format:m/d/Y',
             'end_date' => 'required|date_format:m/d/Y',
