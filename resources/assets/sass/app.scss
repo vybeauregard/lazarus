@@ -26,3 +26,8 @@
 .success {
     color: $brand-success;
 }
+
+#scrollable-dropdown-menu .tt-menu {
+  max-height: 150px;
+  overflow-y: auto;
+}

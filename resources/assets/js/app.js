@@ -14,5 +14,3 @@ $('[data-toggle=confirmation]').confirmation({
 $(".input-group-addon").on('click', function(){
     $(this).prev('input').focus();
 });
-
-$('[autocomplete=off]').disableAutoFill();

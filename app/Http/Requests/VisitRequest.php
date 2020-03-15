@@ -17,11 +17,16 @@ class VisitRequest extends FormRequest
         return true;
     }
 
-    private function sanitize()
+    protected function prepareForValidation()
     {
+        $token = $this->get('_token');
+        if($this->has('date_' . $token)) {
+            $this->merge(['date' => $this->get('date_' . $token)]);
+        }
         $this->merge([
             'date' => Carbon::createFromFormat('m/d/Y', $this->date)
         ]);
+
 
     }
 
@@ -45,10 +50,4 @@ class VisitRequest extends FormRequest
             'counselor_id.required' => 'Please specify a counselor. If the counselor is unavailable, please <a href="' . route('counselors.create') .'">add them</a>.',
         ];
     }
-
-    public function getValidatorInstance() {
-        $this->sanitize();
-        return parent::getValidatorInstance();
-    }
-
 }

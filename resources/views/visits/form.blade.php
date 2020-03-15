@@ -3,7 +3,7 @@
         <label for="date">Date</label>
     </div>
     <div class="col-md-2 input-group">
-        <input type="text" class="form-control datepicker" id="date" name="date" data-provide="datepicker" value="{{ old('date') ?? $visit->date->format('m/d/Y') }}" />
+        <input type="text" class="form-control datepicker" id="date" name="date_{{ csrf_token() }}" data-provide="datepicker" value="{{ old('date') ?? $visit->date->format('m/d/Y') }}" />
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
     </div>
     <div class="col-md-2">
@@ -19,9 +19,8 @@
             <input type="text"
                    class="form-control typeahead"
                    data-provide="typeahead"
-                   autocomplete="off"
                    id="client"
-                   name="client"
+                   name="client_{{ csrf_token() }}"
                    placeholder="Type a name"
                    value="{{ old('client') ?? ($visit->client ? $visit->client->name : '') }}" />
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -42,9 +41,8 @@
             <input type="text"
                    class="form-control typeahead"
                    data-provide="typeahead"
-                   autocomplete="off"
                    id="counselor"
-                   name="counselor"
+                   name="counselor_{{ csrf_token() }}"
                    placeholder="Type a name or click to select"
                    value="{{ old('counselor') ?? ($visit->counselor ? $visit->counselor->name : '') }}" />
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -92,7 +90,7 @@
 
 @section('custom-js')
 <script>
-    $(".typeahead[name='client']").typeahead({
+    $(".typeahead[name='client_{{ csrf_token() }}']").typeahead({
         provide: "typeahead",
         source: @json($clientsTypeahead),
         showHintOnFocus: false,
@@ -114,7 +112,7 @@
             $("input[name='client_id']").val('');
         }
     });
-    $(".typeahead[name='counselor']").typeahead({
+    $(".typeahead[name='counselor_{{ csrf_token() }}']").typeahead({
         provide: "typeahead",
         source: {!! $counselors !!},
         showHintOnFocus: false,
@@ -138,9 +136,10 @@
         }
     });
 
+
 function removeRequest() {
     var request_id = $(this).closest('tr').attr('data-request-id');
-    var url = "{{ route('visits.requests.destroy', [$visit->id, 0]) }}";
+    var url = "{{ route('visits.requests.destroy', [$visit->exists ? $visit->id : 0, 0]) }}";
     var ajax = {
         data: {
             _token: $("input[name='_token']").val(),
