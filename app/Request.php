@@ -36,7 +36,7 @@ class Request extends Model
 
     public function getTypesAttribute()
     {
-        return RequestType::all()->pluck('type', 'id');
+        return RequestType::all()->sortBy('type')->pluck('type', 'id');
     }
 
     public function getTypeId($type)
