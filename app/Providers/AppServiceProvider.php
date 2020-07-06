@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App;
 use Auth;
 use View;
 use Illuminate\Support\Facades\Blade;
@@ -66,6 +67,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // 
     }
 }

@@ -115,7 +115,7 @@
     @foreach($client->family as $family)
             <tr data-family-id="{{ $family->id }}">
                 <td><a href="{{ route('clients.families.edit', [$client->id, $family->id]) }}">{{ $family->name }}</a></td>
-                <td>{{ str_replace("_", " ", title_case($family->relationship)) }}</td>
+                <td>{{ str_replace("_", " ", Str::title($family->relationship)) }}</td>
                 <td><a class="btn btn-link glyphicon glyphicon-trash no-underline"
                             data-toggle="confirmation"
                             data-title="Remove this Family member?"
