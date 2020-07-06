@@ -48,7 +48,11 @@ class ImportVisits extends Command
      */
     public function handle()
     {
-        $this->year = $this->choice('What year do you need to import?', [2017, 2018, 2019], 0);
+        $files = File::glob(storage_path('app/import/visits_*'));
+        $years = collect($files)->map(function($file){
+            return str_replace([storage_path('app/import/visits_'), '.csv'], '', $file);
+        })->sort()->toArray();
+        $this->year = $this->choice('What year do you need to import?', $years, 0);
         $file = storage_path('app/import/visits_' . $this->year . '.csv');
         $data = explode("\n", File::get($file));
         $header = str_getcsv(array_shift($data));
